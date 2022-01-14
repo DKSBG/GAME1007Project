@@ -1,0 +1,13 @@
+﻿  canvas.cpp
+D:\GitHub\GAME1007Project\Game1007Project\Game1007Project\source\canvas.cpp(64,39): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\GitHub\GAME1007Project\Game1007Project\Game1007Project\source\canvas.cpp(65,39): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\GitHub\GAME1007Project\Game1007Project\Game1007Project\source\canvas.cpp(66,37): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+D:\GitHub\GAME1007Project\Game1007Project\Game1007Project\source\canvas.cpp(67,37): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+  game.cpp
+  gameObject.cpp
+  gameVector.cpp
+  image.cpp
+  main.cpp
+  resource.cpp
+  Generating Code...
+  Game1007Project.vcxproj -> D:\GitHub\GAME1007Project\Game1007Project\x64\Debug\Game1007Project.exe
