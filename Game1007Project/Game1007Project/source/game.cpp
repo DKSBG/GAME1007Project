@@ -18,6 +18,8 @@ SDL_Renderer* Game::GetRenderer()
 {
 	return m_pRenderer;
 }
+
+int Game::deltaTime = 0;
 bool Game::m_running = false;
 SDL_Window* Game::m_pWindow = 0;
 SDL_Renderer* Game::m_pRenderer = 0;
@@ -62,7 +64,11 @@ bool MainGame::Init(const char* title,
 
 	return true;
 }
-void MainGame::Update() {}
+void MainGame::Update() 
+{
+	GameObjectManager::GetInstance()->UpdateAllGameObject();
+}
+
 void MainGame::Render()
 {
 	SDL_RenderClear(m_pRenderer);

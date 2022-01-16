@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\animation.cpp" />
     <ClCompile Include="source\canvas.cpp" />
     <ClCompile Include="source\game.cpp" />
     <ClCompile Include="source\gameObject.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="source\resource.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\animation.h" />
     <ClInclude Include="include\canvas.h" />
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\gameObject.h" />

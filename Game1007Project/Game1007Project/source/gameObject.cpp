@@ -1,5 +1,6 @@
 #include"gameObject.h"
 #include"image.h"
+#include"animation.h"
 #include <exception>
 
 using namespace std;
@@ -92,6 +93,7 @@ T* GameObject::AddComponent(T* t)
 }
 
 template Image* GameObject::AddComponent(Image* t);
+template Animation* GameObject::AddComponent(Animation* t);
 
 GameObject::GameObject()
 {

@@ -51,24 +51,14 @@ void Canvas::Draw()
 	while (m_drawUnitList.size() > 0)
 	{
 		DrawingUnit* unit = m_drawUnitList.back();
-		TextureResource* pResource = unit->resource;
-		SDL_Rect srcRect;
-		SDL_Rect dstRect;
-		SDL_Texture* pTexture = pResource->pTexture;
-		SDL_QueryTexture(pTexture, NULL, NULL, &srcRect.w, &srcRect.h);
-		srcRect.x = 0;
-		srcRect.y = 0;
-		dstRect.w = srcRect.w;
-		dstRect.h = srcRect.h;
-		//float f = unit->tranform->scale->x;
-		dstRect.x = unit->tranform->position->x;
-		dstRect.y = unit->tranform->position->y;
-		dstRect.w *= unit->tranform->scale->x;
-		dstRect.h *= unit->tranform->scale->y;
-		//dstRect.h *= unit->tranform->scale.y;
-		SDL_RenderCopy(Game::GetInstance()->GetRenderer(), pTexture, &srcRect, &dstRect);
+		SDL_Rect* dstRect = new SDL_Rect();
+		SDL_Texture* pTexture = unit->pTexture;
+		dstRect->x = unit->pTranform->position->x;
+		dstRect->y = unit->pTranform->position->y;
+		dstRect->w = unit->srcRect.w * unit->pTranform->scale->x;
+		dstRect->h = unit->srcRect.h * unit->pTranform->scale->y;
+		SDL_RenderCopy(Game::GetInstance()->GetRenderer(), pTexture, &unit->srcRect, dstRect);
 		m_drawUnitList.pop_back();
 	}
-
 }
 #pragma endregion

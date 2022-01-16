@@ -16,6 +16,7 @@ public:
 	virtual bool IsRunning() = NULL;
 	SDL_Renderer* GetRenderer();
 	static Game* GetInstance();
+	static int deltaTime;
 protected:
 	static bool m_running;
 	static SDL_Window* m_pWindow;

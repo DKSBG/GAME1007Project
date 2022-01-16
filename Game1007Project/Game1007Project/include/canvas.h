@@ -10,8 +10,9 @@ using namespace std;
 
 class DrawingUnit {
 public:
-	TextureResource* resource;
-	Transform* tranform;
+	Transform* pTranform;
+	SDL_Texture* pTexture;
+	SDL_Rect srcRect;
 };
 
 class Canvas {
