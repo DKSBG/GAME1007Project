@@ -5,6 +5,7 @@
 #include "image.h"
 #include "animation.h"
 
+// Marcos Comment to try if it work
 int main(int argc, char* argv[])
 {
 	MainGame *pGame = new MainGame();
