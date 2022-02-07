@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 	GameObject* go2 = new GameObject();
 	AtlasResource* atlas = ResourceManager::GetInstance()->LoadAtlasResource("flybat.png");
 	atlas->AutoSplite(4, 4);
-	Animation* animExample = new Animation("flybat.png", 200, 0, 3, 160);
+	Animation* animExample = new Animation("flybat.png", 200, 1, 3, 160);
 	go2->AddComponent<Animation>(animExample);
 	animExample->transform->scale->x = 3.5;
 	animExample->transform->scale->y = 3.5;
@@ -42,4 +42,3 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
-
