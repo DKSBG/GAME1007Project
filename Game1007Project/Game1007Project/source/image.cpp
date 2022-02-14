@@ -16,3 +16,8 @@ void Image::Draw()
 	unit->srcRect = this->m_pResource->GetRect();
 	m_pCanvas->SetDrawUnit(unit);
 }
+
+void Image::SetNativeSize() 
+{
+	transform->size = new Vector2(m_pResource->GetRect().w, m_pResource->GetRect().h);
+}

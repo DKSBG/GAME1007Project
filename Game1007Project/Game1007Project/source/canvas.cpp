@@ -55,8 +55,8 @@ void Canvas::Draw()
 		SDL_Texture* pTexture = unit->pTexture;
 		dstRect->x = unit->pTranform->position->x;
 		dstRect->y = unit->pTranform->position->y;
-		dstRect->w = unit->srcRect.w * unit->pTranform->scale->x;
-		dstRect->h = unit->srcRect.h * unit->pTranform->scale->y;
+		dstRect->w = unit->pTranform->size->x * unit->pTranform->scale->x;
+		dstRect->h = unit->pTranform->size->y * unit->pTranform->scale->y;
 		SDL_RenderCopy(Game::GetInstance()->GetRenderer(), pTexture, &unit->srcRect, dstRect);
 		m_drawUnitList.pop_back();
 	}

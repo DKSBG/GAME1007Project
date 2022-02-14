@@ -25,6 +25,7 @@ public:
 	Image(string image, int layer);
 	void Update();
 	void Draw();
+	void SetNativeSize();
 private:
 	TextureResource* m_pResource;
 	Canvas* m_pCanvas;

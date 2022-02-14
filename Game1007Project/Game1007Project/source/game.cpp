@@ -42,8 +42,8 @@ bool MainGame::Init(const char* title,
 		"First SDL program",
 		SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED,
-		640,
-		480,
+		w,
+		h,
 		SDL_WINDOW_OPENGL);
 
 	if (m_pWindow != 0)

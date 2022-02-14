@@ -9,6 +9,7 @@ public:
 	Animation(string atlasName, int layer, int startIdx, int endIdx, int interval);
 	void Update();
 	void Draw();
+	void SetNativeSize();
 private:
 	int m_deltaTime;
 	int m_interval;

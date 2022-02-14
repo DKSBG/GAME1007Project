@@ -32,5 +32,9 @@ void Animation::Draw()
 	unit->pTexture = this->m_pResource->GetTexture();
 	unit->srcRect = this->m_pResource->GetSlot(m_currentIdx);
 	m_pCanvas->SetDrawUnit(unit);
+}
 
+void Animation::SetNativeSize()
+{
+	transform->size = new Vector2(m_pResource->GetRect().w, m_pResource->GetRect().h);
 }
