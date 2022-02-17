@@ -126,6 +126,20 @@ int main(int argc, char* argv[])
 	pGoEnemy1Bullet->transform->scale = new Vector2(1.5, 1.5);
 	pGoEnemy1Bullet->transform->position = new Vector2(610, 205);
 
+	GameObject* pGoLargeMeteor = new GameObject();
+	pImg = new Image("LargeM.png", 4);
+	pGoLargeMeteor->AddComponent<Image>(pImg);
+	pGoLargeMeteor->GetComponent<Image>()->SetNativeSize();
+	pGoLargeMeteor->transform->scale = new Vector2(1.5, 1.5);
+	pGoLargeMeteor->transform->position = new Vector2(480, 60);
+
+	GameObject* pGoSmallMeteor = new GameObject();
+	pImg = new Image("SmallM.png", 4);
+	pGoSmallMeteor->AddComponent<Image>(pImg);
+	pGoSmallMeteor->GetComponent<Image>()->SetNativeSize();
+	pGoSmallMeteor->transform->scale = new Vector2(1.5, 1.5);
+	pGoSmallMeteor->transform->position = new Vector2(180, 120);
+
 
 	while(1)
 	{
