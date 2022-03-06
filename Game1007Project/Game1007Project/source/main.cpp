@@ -127,6 +127,8 @@ int main(int argc, char* argv[])
 	pGoEnemy1Bullet->transform->scale = new Vector2(1.5, 1.5);
 	pGoEnemy1Bullet->transform->position = new Vector2(610, 205);
 
+	pGoMainShip->AddComponent<ExampleScript>(new ExampleScript());
+
 
 	while(1)
 	{
