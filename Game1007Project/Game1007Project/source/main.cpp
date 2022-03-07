@@ -4,7 +4,7 @@
 #include "gameObject.h"
 #include "image.h"
 #include "animation.h"
-#include "script.h"
+#include "InputHandler.h"
 //For example.
 
 // Marcos Comment to try if it work
@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
 	pGoMainShip->AddComponent<Image>(pImg);
 	pGoMainShip->GetComponent<Image>()->SetNativeSize();
 	pGoMainShip->transform->scale = new Vector2(2,2);
-	pGoMainShip->transform->position = new Vector2(230, 260);
+	pGoMainShip->transform->position = new Vector2(0, 0);
 
 	GameObject* pGoMainShipBullet = new GameObject();
 	pImg = new Image("MainShipBullet.png", 3);
@@ -127,13 +127,12 @@ int main(int argc, char* argv[])
 	pGoEnemy1Bullet->transform->scale = new Vector2(1.5, 1.5);
 	pGoEnemy1Bullet->transform->position = new Vector2(610, 205);
 
-	pGoMainShip->AddComponent<ExampleScript>(new ExampleScript());
-
+	pGoMainShip->AddComponent<InputHandler>(new InputHandler());
 
 	while(1)
 	{
-		/*pGame->deltaTime = 16;
-		go->transform->position->x += 2;
+		pGame->deltaTime = 16;
+		/*go->transform->position->x += 2;
 		go->transform->position->y += 2;*/
 		pGame->Update();
 		pGame->Render();
