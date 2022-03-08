@@ -52,9 +52,11 @@ public:
 	void PopGameObject(GameObject* go);
 	void UpdateAllGameObject();
 	void PreDrawAllGameObject();
+	void RefleshGameObjectList();
 	static GameObjectManager* GetInstance();
 private:
-	vector<GameObject*> gameObjectList;
+	vector<GameObject*> m_gameObjectList;
+	vector<GameObject*> m_newGameObjectList;
 	static GameObjectManager* s_pInstance;
 };
 

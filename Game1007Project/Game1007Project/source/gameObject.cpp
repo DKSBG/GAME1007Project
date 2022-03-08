@@ -30,31 +30,41 @@ GameObjectManager* GameObjectManager::GetInstance()
 
 void GameObjectManager::PushGameObject(GameObject* go)
 {
-	this->gameObjectList.push_back(go);
+	this->m_newGameObjectList.push_back(go);
 }
 
 void GameObjectManager::PopGameObject(GameObject* go)
 {
-	auto it = std::find(this->gameObjectList.begin(), this->gameObjectList.end(), go);
-	if (it != this->gameObjectList.end()) 
+	auto it = std::find(this->m_gameObjectList.begin(), this->m_gameObjectList.end(), go);
+	if (it != this->m_gameObjectList.end()) 
 	{
-		this->gameObjectList.erase(it);
+		this->m_gameObjectList.erase(it);
 	}
 	delete go;
 }
+
 void GameObjectManager::UpdateAllGameObject() 
 {
-	for (auto go : this->gameObjectList) 
+	for (auto go : this->m_gameObjectList) 
 	{
 		go->Update();
 	}
 }
 void GameObjectManager::PreDrawAllGameObject() 
 {
-	for (auto go : this->gameObjectList)
+	for (auto go : this->m_gameObjectList)
 	{
 		go->Draw();
 	}
+}
+
+void GameObjectManager::RefleshGameObjectList() 
+{
+	for (auto go : m_newGameObjectList) 
+	{
+		m_gameObjectList.push_back(go);
+	}
+	m_newGameObjectList.clear();
 }
 #pragma endregion
 

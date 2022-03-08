@@ -31,6 +31,7 @@ public:
 		int h, Uint32 flags);
 	void Update();
 	void Render();
+	void Reflesh();
 	void HandlerEvent();
 	void Clean();
 	bool IsRunning();

@@ -76,6 +76,12 @@ void MainGame::Render()
 	CanvasManager::GetInstance()->Draw();
 	SDL_RenderPresent(m_pRenderer);
 }
+
+void MainGame::Reflesh() 
+{
+	GameObjectManager::GetInstance()->RefleshGameObjectList();
+}
+
 void MainGame::HandlerEvent() {}
 void MainGame::Clean() {}
 

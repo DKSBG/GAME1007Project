@@ -19,19 +19,6 @@ int main(int argc, char* argv[])
 		432,
 		SDL_WINDOW_OPENGL);
 
-	/*GameObject* go = new GameObject();
-	Image* imgExample = new Image("Flight1.png",100);
-	go->AddComponent<Image>(imgExample);
-
-	GameObject* go2 = new GameObject();
-	AtlasResource* atlas = ResourceManager::GetInstance()->LoadAtlasResource("flybat.png");
-	atlas->AutoSplite(4, 4);
-	Animation* animExample = new Animation("flybat.png", 200, 1, 3, 160);
-	go2->AddComponent<Animation>(animExample);
-	animExample->transform->scale->x = 1;
-	animExample->transform->scale->y = 1;
-	animExample->transform->position->x = 320;
-	animExample->transform->position->y = 240;*/
 	Image* pImg;
 
 	GameObject* pGoBackground = new GameObject();
@@ -85,13 +72,6 @@ int main(int argc, char* argv[])
 	pGoMainShip->transform->scale = new Vector2(2,2);
 	pGoMainShip->transform->position = new Vector2(0, 0);
 
-	GameObject* pGoMainShipBullet = new GameObject();
-	pImg = new Image("MainShipBullet.png", 3);
-	pGoMainShipBullet->AddComponent<Image>(pImg);
-	pGoMainShipBullet->GetComponent<Image>()->SetNativeSize();
-	pGoMainShipBullet->transform->scale = new Vector2(2, 2);
-	pGoMainShipBullet->transform->position = new Vector2(500, 290);
-
 	GameObject* pGoTurret = new GameObject();
 	pImg = new Image("Turret.png", 4);
 	pGoTurret->AddComponent<Image>(pImg);
@@ -136,6 +116,7 @@ int main(int argc, char* argv[])
 		go->transform->position->y += 2;*/
 		pGame->Update();
 		pGame->Render();
+		pGame->Reflesh();
 		SDL_Delay(16);
 	}
 

@@ -1,6 +1,6 @@
 #include"InputHandler.h"
 #include "gameVector.h"
-
+#include "script.h"
 
 // Script component no need to draw.
 void InputHandler::Draw()
@@ -57,5 +57,28 @@ void InputHandler::Update()
 			right->x += 4;
 			transform->position = right;
 		}
+	}
+
+	if (m_KeyboardStates[SDL_SCANCODE_SPACE]) 
+	{
+		Image* pImg;
+		GameObject* pGoMainShipBullet = new GameObject();
+		pImg = new Image("MainShipBullet.png", 3);
+		pGoMainShipBullet->AddComponent<Image>(pImg);
+		pGoMainShipBullet->GetComponent<Image>()->SetNativeSize();
+		Transform* bulletTransform = pGoMainShipBullet->transform;
+		bulletTransform->scale = new Vector2(2, 2);
+		bulletTransform->position->x = this->transform->position->x;
+		bulletTransform->position->y = this->transform->position->y;
+		bulletTransform->position->x += this->transform->size->x * this->transform->scale->x;
+		bulletTransform->position->y += bulletTransform->size->x * bulletTransform->scale->x;
+		bulletTransform->position->y -= (bulletTransform->size->y * bulletTransform->scale->y) / 2;
+		
+		ExampleProjectileScript *pProjectileScrip = new ExampleProjectileScript();
+		Vector2 flyVector;
+		flyVector.x = 10;
+		flyVector.y = 0;
+		pProjectileScrip->SetFlyVector(flyVector);
+		pGoMainShipBullet->AddComponent<ExampleProjectileScript>(pProjectileScrip);
 	}
 }

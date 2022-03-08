@@ -147,13 +147,15 @@
   <ItemGroup>
     <ClCompile Include="source\animation.cpp" />
     <ClCompile Include="source\canvas.cpp" />
-    <ClCompile Include="source\exampleScript.cpp" />
     <ClCompile Include="source\game.cpp" />
     <ClCompile Include="source\gameObject.cpp" />
     <ClCompile Include="source\gameVector.cpp" />
     <ClCompile Include="source\image.cpp" />
+    <ClCompile Include="source\InputHandler.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\resource.cpp" />
+    <ClCompile Include="source\script\exampleProjectileScript.cpp" />
+    <ClCompile Include="source\script\exampleShipScript.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\animation.h" />
@@ -162,6 +164,7 @@
     <ClInclude Include="include\gameObject.h" />
     <ClInclude Include="include\gameVector.h" />
     <ClInclude Include="include\image.h" />
+    <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="include\resource.h" />
     <ClInclude Include="include\script.h" />
   </ItemGroup>
