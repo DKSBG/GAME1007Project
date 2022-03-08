@@ -1,70 +1,61 @@
 #include"InputHandler.h"
+#include "gameVector.h"
+
 
 // Script component no need to draw.
 void InputHandler::Draw()
 {
-	
+
 }
+
+
 // This metherd is called by engine each frame.
 void InputHandler::Update()
 {
-	while (SDL_PollEvent(&event))
-	{
-		switch (event.type)
+	//Handle events on queue
+	while (SDL_PollEvent(&event) != 0)
 		{
-		case SDL_KEYDOWN:
-			if (m_KeyboardStates[SDL_SCANCODE_W])
-			{
-				Vector2* up = transform->position;
-				up->y -= 5;
-				transform->position = up;
-				
-			}
-			if (m_KeyboardStates[SDL_SCANCODE_S])
-			{
-				Vector2* down = transform->position;
-				down->y += 5;
-				transform->position = down;
-				down->y <= 432;
-			}
-			if (m_KeyboardStates[SDL_SCANCODE_A])
-			{
-				Vector2* left = transform->position;
-				left->x -= 5;
-				transform->position = left;
-				left->x >= 0;
-			}
-			if (m_KeyboardStates[SDL_SCANCODE_D])
-			{
-				Vector2* right = transform->position;
-				right->x += 5;
-				transform->position = right;
-				right->x <= 768;
-			}
-			if (m_KeyboardStates[SDL_SCANCODE_SPACE])
-			{
-				Vector2* bullet = transform->position;
-				bullet->x += 5;
-				transform->position = bullet;
-			}
-		case SDL_KEYUP:
-			if (!m_KeyboardStates[SDL_SCANCODE_W])
-			{
-				false;
-			}
-			if (!m_KeyboardStates[SDL_SCANCODE_S])
-			{
-				false;
-			}
-			if (!m_KeyboardStates[SDL_SCANCODE_A])
-			{
-				false;
-			}
-			if (!m_KeyboardStates[SDL_SCANCODE_D])
-			{
-				false;
-			}
-			break;
+		//User requests quit
+		if(event.type == SDL_QUIT)
+		{
+			quit = true;
+		}
+	}
+	const Uint8* m_KeyboardStates = SDL_GetKeyboardState(NULL);
+	if (m_KeyboardStates[SDL_SCANCODE_W])
+	{
+		Vector2* up = transform->position;
+		if (up->y > 0)
+		{
+			up->y -= 4;
+			transform->position = up;
+		}
+	}
+	if (m_KeyboardStates[SDL_SCANCODE_S])
+	{
+		Vector2* down = transform->position;
+		if (down->y < 405)
+		{
+			down->y += 4;
+			transform->position = down;
+		}
+	}
+	if (m_KeyboardStates[SDL_SCANCODE_A])
+	{
+		Vector2* left = transform->position;
+		if (left->x > 0)
+		{
+			left->x -= 4;
+			transform->position = left;
+		}
+	}
+	if (m_KeyboardStates[SDL_SCANCODE_D])
+	{
+		Vector2* right = transform->position;
+		if (right->x < 710)
+		{
+			right->x += 4;
+			transform->position = right;
 		}
 	}
 }
