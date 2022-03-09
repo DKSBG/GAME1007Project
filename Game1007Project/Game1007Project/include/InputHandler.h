@@ -10,4 +10,7 @@ public:
 	void Update();
 	bool quit = false;
 	SDL_Event event;
+private:
+	long m_attackCD = 500;
+	long m_cdTimer = 0;
 };

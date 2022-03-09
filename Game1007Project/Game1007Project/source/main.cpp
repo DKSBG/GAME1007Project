@@ -111,12 +111,10 @@ int main(int argc, char* argv[])
 
 	while(1)
 	{
-		pGame->deltaTime = 16;
-		/*go->transform->position->x += 2;
-		go->transform->position->y += 2;*/
 		pGame->Update();
 		pGame->Render();
 		pGame->Reflesh();
+		pGame->EndOfFrame();
 		SDL_Delay(16);
 	}
 

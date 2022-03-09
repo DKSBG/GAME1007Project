@@ -14,14 +14,17 @@ public:
 	virtual void HandlerEvent() = NULL;
 	virtual void Clean() = NULL;
 	virtual bool IsRunning() = NULL;
+	virtual void EndOfFrame() = NULL;
 	SDL_Renderer* GetRenderer();
 	static Game* GetInstance();
-	static int deltaTime;
+	static long deltaTime;
 protected:
 	static bool m_running;
 	static SDL_Window* m_pWindow;
 	static SDL_Renderer* m_pRenderer;
 	static Game* s_pInstance;
+	long m_lastFrameEndTime;
+
 };
 
 class MainGame : public Game {
@@ -35,4 +38,7 @@ public:
 	void HandlerEvent();
 	void Clean();
 	bool IsRunning();
+	void EndOfFrame();
+private:
+	long m_fixedTimer = 0;
 };
