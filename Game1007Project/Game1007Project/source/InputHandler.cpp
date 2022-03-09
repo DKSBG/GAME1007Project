@@ -75,7 +75,7 @@ void InputHandler::Update()
 	{
 		Image* pImg;
 		GameObject* pGoMainShipBullet = new GameObject();
-		pImg = new Image("MainShipBullet.png", 3);
+		pImg = new Image("MainShipBullet.png", 4);
 		pGoMainShipBullet->AddComponent<Image>(pImg);
 		pGoMainShipBullet->GetComponent<Image>()->SetNativeSize();
 		Transform* bulletTransform = pGoMainShipBullet->transform;

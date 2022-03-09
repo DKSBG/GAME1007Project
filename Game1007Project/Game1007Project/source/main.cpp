@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 	pGoMountain->transform->scale = new Vector2(2, 2);
 
 	GameObject* pGoCloud = new GameObject();
-	pImg = new Image("Cloud.png", 4);
+	pImg = new Image("Cloud.png", 5);
 	pGoCloud->AddComponent<Image>(pImg);
 	pGoCloud->GetComponent<Image>()->SetNativeSize();
 	pGoCloud->transform->scale = new Vector2(2, 2);
@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 	pGoEndGrond->transform->position = new Vector2(-4, 280);
 
 	GameObject* pGoMainShip = new GameObject();
-	pImg = new Image("MainShip.png", 3);
+	pImg = new Image("MainShip.png", 4);
 	pGoMainShip->AddComponent<Image>(pImg);
 	pGoMainShip->GetComponent<Image>()->SetNativeSize();
 	pGoMainShip->transform->scale = new Vector2(2,2);
