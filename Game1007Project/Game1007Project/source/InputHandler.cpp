@@ -13,6 +13,10 @@ void InputHandler::Draw()
 // This metherd is called by engine each frame.
 void InputHandler::Update()
 {
+	for (int i = 0; i < 322; i++) 
+	{ // init them all to false
+		KEYS[i] = false;
+	}
 	//Handle events on queue
 	while (SDL_PollEvent(&event) != 0)
 	{

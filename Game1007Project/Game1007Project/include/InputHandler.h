@@ -11,4 +11,6 @@ public:
 	bool quit = false;
 private:
 	SDL_Event event;
+	const Uint8* m_KeyboardStates = SDL_GetKeyboardState(0);
+	bool KEYS[];
 };
