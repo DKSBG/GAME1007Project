@@ -13,6 +13,8 @@ void InputHandler::Draw()
 // This metherd is called by engine each frame.
 void InputHandler::Update()
 {
+	m_cdTimer -= Game::GetInstance()->deltaTime;
+
 	//Handle events on queue
 	while (SDL_PollEvent(&event) != 0)
 	{
