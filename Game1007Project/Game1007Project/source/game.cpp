@@ -1,6 +1,7 @@
 #include <iostream>
 #include "game.h"
 #include "canvas.h"
+#include "SDL.h"
 
 using namespace std;
 
@@ -19,7 +20,7 @@ SDL_Renderer* Game::GetRenderer()
 	return m_pRenderer;
 }
 
-int Game::deltaTime = 0;
+long Game::deltaTime = 0;
 bool Game::m_running = false;
 SDL_Window* Game::m_pWindow = 0;
 SDL_Renderer* Game::m_pRenderer = 0;
@@ -87,6 +88,17 @@ void MainGame::Clean() {}
 
 bool MainGame::IsRunning() {
 	return m_running;
+}
+
+void MainGame::EndOfFrame() {
+	long current = SDL_GetTicks();
+	deltaTime = current - m_lastFrameEndTime;
+	m_lastFrameEndTime = current;
+
+	if (m_fixedTimer != 0) 
+	{
+		SDL_Delay(deltaTime);
+	}
 }
 #pragma endregion
 

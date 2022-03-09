@@ -11,7 +11,4 @@ public:
 	bool quit = false;
 private:
 	SDL_Event event;
-	const Uint8* m_KeyboardStates = SDL_GetKeyboardState(NULL);
-	bool KEYS[];  // 322 is the number of SDLK_DOWN events
-
 };
