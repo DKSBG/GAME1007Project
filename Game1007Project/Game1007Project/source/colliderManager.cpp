@@ -16,12 +16,14 @@ void GetEdge(CollideInfo* collider,float* top, float* bottom, float* right, floa
 
 void CollideManager::AddCollider(CollideInfo* collider)
 {
-	m_newColliderList.push_back(collider);
+	if (find(m_removeColliderList.begin(), m_removeColliderList.end(), collider) == m_removeColliderList.end())
+		m_newColliderList.push_back(collider);
 }
 
 void CollideManager::RemoveCollider(CollideInfo* collider)
 {
-	m_removeColliderList.push_back(collider);
+	if(find(m_removeColliderList.begin(), m_removeColliderList.end(),collider) == m_removeColliderList.end())
+		m_removeColliderList.push_back(collider);
 }
 
 void CollideManager::DetectColliding()
@@ -32,6 +34,7 @@ void CollideManager::DetectColliding()
 	{
 		for (int tarIdx = srcIdx + 1; tarIdx < m_colliderList.size(); tarIdx++) 
 		{
+			collide = false;
 			float srcTop, srcBottom, srcLeft, srcRight;
 			float tarTop, tarBottom, tarLeft, tarRight;
 			GetEdge(m_colliderList[srcIdx], &srcTop, &srcBottom, &srcLeft, &srcRight);

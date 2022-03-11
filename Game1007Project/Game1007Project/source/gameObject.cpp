@@ -32,18 +32,22 @@ GameObjectManager* GameObjectManager::GetInstance()
 
 void GameObjectManager::PushGameObject(GameObject* go)
 {
-	this->m_newGameObjectList.push_back(go);
+	if (find(m_newGameObjectList.begin(), m_newGameObjectList.end(), go) == m_newGameObjectList.end())
+		this->m_newGameObjectList.push_back(go);
 }
 
 void GameObjectManager::PopGameObject(GameObject* go)
 {
-	m_deleteGameObjectList.push_back(go);
-	try 
+	if (find(m_deleteGameObjectList.begin(), m_deleteGameObjectList.end(), go) == m_deleteGameObjectList.end())
 	{
-		Collider *collider = go->GetComponent<Collider>();
-		CollideManager::GetInstanse()->RemoveCollider(collider->colliderInfo);
+		m_deleteGameObjectList.push_back(go);
+		try
+		{
+			Collider* collider = go->GetComponent<Collider>();
+			CollideManager::GetInstanse()->RemoveCollider(collider->colliderInfo);
+		}
+		catch (exception e) {}
 	}
-	catch (exception e) {}
 }
 
 void GameObjectManager::UpdateAllGameObject() 
