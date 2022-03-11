@@ -1,8 +1,5 @@
 #include"Script.h"
 
-// Script component no need to draw.
-void ExampleProjectileScript::Draw() {}
-
 // This metherd is called by engine each frame.
 void ExampleProjectileScript::Update()
 {

@@ -6,9 +6,7 @@ Image::Image(string filename, int layer)
 	m_pCanvas = CanvasManager::GetInstance()->TryGetCanvas(layer);
 }
 
-void Image::Update() {}
-
-void Image::Draw() 
+void Image::Draw()
 {
 	DrawingUnit* unit = new DrawingUnit();
 	unit->pTranform = this->transform;

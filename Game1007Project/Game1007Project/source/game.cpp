@@ -2,6 +2,7 @@
 #include "game.h"
 #include "canvas.h"
 #include "SDL.h"
+#include "colliderManager.h"
 
 using namespace std;
 
@@ -80,10 +81,17 @@ void MainGame::Render()
 
 void MainGame::Reflesh() 
 {
+	CollideManager::GetInstanse()->RefleshCollideList();
 	GameObjectManager::GetInstance()->RefleshGameObjectList();
 }
 
-void MainGame::HandlerEvent() {}
+void MainGame::EventHandler() 
+{
+	//Handle events on queue
+	SDL_Event event;
+	while (SDL_PollEvent(&event) != 0) {}
+}
+
 void MainGame::Clean() {}
 
 bool MainGame::IsRunning() {

@@ -1,6 +1,8 @@
 #include"gameObject.h"
 #include"image.h"
 #include"animation.h"
+#include"collider.h"
+#include"colliderManager.h"
 #include <exception>
 
 using namespace std;
@@ -35,12 +37,13 @@ void GameObjectManager::PushGameObject(GameObject* go)
 
 void GameObjectManager::PopGameObject(GameObject* go)
 {
-	auto it = std::find(this->m_gameObjectList.begin(), this->m_gameObjectList.end(), go);
-	if (it != this->m_gameObjectList.end()) 
+	m_deleteGameObjectList.push_back(go);
+	try 
 	{
-		this->m_gameObjectList.erase(it);
+		Collider *collider = go->GetComponent<Collider>();
+		CollideManager::GetInstanse()->RemoveCollider(collider->colliderInfo);
 	}
-	delete go;
+	catch (exception e) {}
 }
 
 void GameObjectManager::UpdateAllGameObject() 
@@ -64,6 +67,15 @@ void GameObjectManager::RefleshGameObjectList()
 	{
 		m_gameObjectList.push_back(go);
 	}
+
+	for (int index = m_deleteGameObjectList.size() - 1; index >= 0; index --)
+	{
+		auto it = std::find(m_gameObjectList.begin(), m_gameObjectList.end(), m_deleteGameObjectList[index]);
+		m_gameObjectList.erase(it);
+		delete m_deleteGameObjectList[index];
+	}
+
+	m_deleteGameObjectList.clear();
 	m_newGameObjectList.clear();
 }
 #pragma endregion
@@ -90,6 +102,15 @@ void GameObject::Update()
 	{
 		GOComponent* goComponent = (GOComponent*)componentPair.second;
 		goComponent->Update();
+	}
+}
+
+void GameObject::OnCollide(GameObject* go)
+{
+	for (auto componentPair : m_componentMap)
+	{
+		GOComponent* goComponent = (GOComponent*)componentPair.second;
+		goComponent->OnCollide(go);
 	}
 }
 #pragma endregion

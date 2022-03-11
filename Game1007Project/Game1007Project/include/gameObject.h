@@ -4,6 +4,7 @@
 #include <string>
 #include <exception>
 #include "gameVector.h"
+
 using namespace std;
 
 class Transform {
@@ -32,18 +33,31 @@ public:
 
 	void Update();
 	void Draw();
+	void OnCollide(GameObject* go);
 	Transform* transform;
 private:
 	std::map<size_t, void*> m_componentMap;
+	std::map<size_t, void*> m_collideHandlerMap;
 };
 
-class GOComponent 
+class Component 
 {
 public:
+	virtual void Init() = 0;
 	virtual void Draw() = 0;
 	virtual void Update() = 0;
+	virtual void OnCollide(GameObject* go) = 0;
 	GameObject* gameObject;
 	Transform* transform;
+};
+
+class GOComponent : public Component
+{
+public:
+	void Init() {};
+	void OnCollide(GameObject* go) {};
+	void Draw() {};
+	void Update() {};
 };
 
 class GameObjectManager {
@@ -57,6 +71,7 @@ public:
 private:
 	vector<GameObject*> m_gameObjectList;
 	vector<GameObject*> m_newGameObjectList;
+	vector<GameObject*> m_deleteGameObjectList;
 	static GameObjectManager* s_pInstance;
 };
 
@@ -90,5 +105,6 @@ T* GameObject::AddComponent(T* t)
 	GOComponent* goComponent = (GOComponent*)t;
 	goComponent->gameObject = this;
 	goComponent->transform = this->transform;
+	goComponent->Init();
 	return t;
 }

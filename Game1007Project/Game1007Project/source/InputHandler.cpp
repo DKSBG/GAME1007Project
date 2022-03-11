@@ -2,28 +2,33 @@
 #include "gameVector.h"
 #include "game.h"
 #include "script.h"
+#include "colliderManager.h"
 
-
-// Script component no need to draw.
-void InputHandler::Draw()
+void InputHandler::OnCollide(GameObject* go) 
 {
+	Image* pImg;
+	GameObject* pGoExplosion = new GameObject();
+	pImg = new Image("Explosion1.png", 4);
+	pGoExplosion->AddComponent<Image>(pImg);
+	pGoExplosion->GetComponent<Image>()->SetNativeSize();
 
+	Transform* explosionTrs = pGoExplosion->transform;
+	explosionTrs->scale = new Vector2(2, 2);
+
+	explosionTrs->position->x = this->transform->position->x;
+	explosionTrs->position->y = this->transform->position->y;
+	explosionTrs->position->x += this->transform->size->x * this->transform->scale->x / 2;
+	explosionTrs->position->x -= explosionTrs->size->x * explosionTrs->scale->x / 2;
+	explosionTrs->position->y += this->transform->size->y * this->transform->scale->y / 2;
+	explosionTrs->position->y -= explosionTrs->size->y * explosionTrs->scale->y / 2;
+	
+	GameObjectManager::GetInstance()->PopGameObject(this->gameObject);
 }
 
 // This metherd is called by engine each frame.
 void InputHandler::Update()
 {
 	m_cdTimer -= Game::GetInstance()->deltaTime;
-
-	//Handle events on queue
-	while (SDL_PollEvent(&event) != 0)
-	{
-		//User requests quit
-		if (event.type == SDL_QUIT)
-		{
-			quit = true;
-		}
-	}
 
 	if (m_KeyboardStates[SDL_SCANCODE_W])
 	{

@@ -11,7 +11,7 @@ public:
 		int h, Uint32 flags) = NULL;
 	virtual void Update() = NULL;
 	virtual void Render() = NULL;
-	virtual void HandlerEvent() = NULL;
+	virtual void EventHandler() = NULL;
 	virtual void Clean() = NULL;
 	virtual bool IsRunning() = NULL;
 	virtual void EndOfFrame() = NULL;
@@ -35,7 +35,7 @@ public:
 	void Update();
 	void Render();
 	void Reflesh();
-	void HandlerEvent();
+	void EventHandler();
 	void Clean();
 	bool IsRunning();
 	void EndOfFrame();

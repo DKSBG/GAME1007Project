@@ -147,6 +147,8 @@
   <ItemGroup>
     <ClCompile Include="source\animation.cpp" />
     <ClCompile Include="source\canvas.cpp" />
+    <ClCompile Include="source\collider.cpp" />
+    <ClCompile Include="source\colliderManager.cpp" />
     <ClCompile Include="source\game.cpp" />
     <ClCompile Include="source\gameObject.cpp" />
     <ClCompile Include="source\gameVector.cpp" />
@@ -160,9 +162,13 @@
   <ItemGroup>
     <ClInclude Include="include\animation.h" />
     <ClInclude Include="include\canvas.h" />
+    <ClInclude Include="include\collideInfo.h" />
+    <ClInclude Include="include\collider.h" />
+    <ClInclude Include="include\colliderManager.h" />
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\gameObject.h" />
     <ClInclude Include="include\gameVector.h" />
+    <ClInclude Include="include\Header.h" />
     <ClInclude Include="include\image.h" />
     <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="include\resource.h" />

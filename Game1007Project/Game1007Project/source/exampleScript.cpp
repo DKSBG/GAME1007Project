@@ -1,10 +1,10 @@
 #include"Script.h"
 
 // Script component no need to draw.
-void ExampleScript::Draw() {}
+void ExampleShipScript::Draw() {}
 
 // This metherd is called by engine each frame.
-void ExampleScript::Update()
+void ExampleShipScript::Update()
 {
 	Vector2* pps = transform->position;
 	pps->x += 1;

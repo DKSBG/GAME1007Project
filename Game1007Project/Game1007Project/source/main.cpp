@@ -5,6 +5,8 @@
 #include "image.h"
 #include "animation.h"
 #include "InputHandler.h"
+#include "colliderManager.h"
+#include "collider.h"
 //For example.
 
 // Marcos Comment to try if it work
@@ -109,8 +111,14 @@ int main(int argc, char* argv[])
 
 	pGoMainShip->AddComponent<InputHandler>(new InputHandler());
 
+	Collider *collider = pGoMainShip->AddComponent<Collider>(new Collider());
+	collider->colliderInfo->detectRange = new Vector2(0.8, 0.5);
+	pGoEnemy1Bullet->AddComponent<Collider>(new Collider());
+
 	while(1)
 	{
+		CollideManager::GetInstanse()->DetectColliding();
+		pGame->EventHandler();
 		pGame->Update();
 		pGame->Render();
 		pGame->Reflesh();

@@ -23,7 +23,6 @@ private:
 class Image : public GOComponent{
 public:
 	Image(string image, int layer);
-	void Update();
 	void Draw();
 	void SetNativeSize();
 private:
