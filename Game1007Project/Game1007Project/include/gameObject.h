@@ -80,7 +80,7 @@ T* GameObject::GetComponent()
 {
 	size_t componentHash = (typeid(T*).hash_code());
 	if (m_componentMap.find(componentHash) == m_componentMap.end())
-		throw GameObjectException("Cannot find the component from object");
+		return NULL;
 	else
 		return (T*)m_componentMap[componentHash];
 }
