@@ -18,6 +18,7 @@ public:
 	SDL_Renderer* GetRenderer();
 	static Game* GetInstance();
 	static long deltaTime;
+	static int screenH, screenW;
 protected:
 	static bool m_running;
 	static SDL_Window* m_pWindow;

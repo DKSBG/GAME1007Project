@@ -41,12 +41,11 @@ void GameObjectManager::PopGameObject(GameObject* go)
 	if (find(m_deleteGameObjectList.begin(), m_deleteGameObjectList.end(), go) == m_deleteGameObjectList.end())
 	{
 		m_deleteGameObjectList.push_back(go);
-		try
-		{
-			Collider* collider = go->GetComponent<Collider>();
+		Collider* collider = go->GetComponent<Collider>();
+
+		if(collider!= NULL)
 			CollideManager::GetInstanse()->RemoveCollider(collider->colliderInfo);
-		}
-		catch (exception e) {}
+
 	}
 }
 

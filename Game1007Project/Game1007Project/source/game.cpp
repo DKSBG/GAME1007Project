@@ -21,6 +21,9 @@ SDL_Renderer* Game::GetRenderer()
 	return m_pRenderer;
 }
 
+int Game::screenH = 0;
+int Game::screenW = 0;
+
 long Game::deltaTime = 0;
 bool Game::m_running = false;
 SDL_Window* Game::m_pWindow = 0;
@@ -63,6 +66,9 @@ bool MainGame::Init(const char* title,
 		cout << "Create renderer fail";
 		return false;
 	}
+
+	screenH = h;
+	screenW = w;
 
 	return true;
 }
