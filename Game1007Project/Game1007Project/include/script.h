@@ -2,6 +2,8 @@
 #include"game.h"
 #include"gameObject.h"
 #include"math.h"
+#include"image.h"
+
 class ExampleShipScript : GOComponent
 {
 public:
@@ -44,6 +46,7 @@ private:
 	const Uint8* m_KeyboardStates = SDL_GetKeyboardState(NULL);
 	long m_attackCD = 250;
 	long m_cdTimer = 0;
+	Image* m_pImg;
 };
 
 class PlayerShipProjectile : public Ally
