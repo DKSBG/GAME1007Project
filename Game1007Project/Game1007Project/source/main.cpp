@@ -7,7 +7,8 @@
 #include "InputHandler.h"
 #include "colliderManager.h"
 #include "collider.h"
-#include "script.h"
+#include "reactableItem.h"
+//#include "script.h"
 //For example.
 
 // Marcos Comment to try if it work
@@ -110,13 +111,14 @@ int main(int argc, char* argv[])
 	pGoEnemy1Bullet->transform->scale = new Vector2(1.5, 1.5);
 	pGoEnemy1Bullet->transform->position = new Vector2(610, 205);
 
-	pGoMainShip->AddComponent<Ally>(new PlayerShip());
+	ReactableItem* mainShip = new PlayerShip(); 
+	mainShip->Init();
+	pGoMainShip->AddComponent<ReactableItem>(mainShip);
+	pGoMainShip->AddComponent<Collider>(new Collider());
 
-	Collider *collider = pGoMainShip->AddComponent<Collider>(new Collider());
-	collider->colliderInfo->detectRange = new Vector2(0.8, 0.5);
-	pGoEnemy1Bullet->AddComponent<Collider>(new Collider());
-
-	pGoEnemy1->AddComponent<Enemy>(new ExampleEnemyShip());
+	ReactableItem* enemy1Ship = new Enemy1Ship();
+	enemy1Ship->Init();
+	pGoEnemy1->AddComponent<ReactableItem>(enemy1Ship);
 	pGoEnemy1->AddComponent<Collider>(new Collider());
 
 	while(1)
