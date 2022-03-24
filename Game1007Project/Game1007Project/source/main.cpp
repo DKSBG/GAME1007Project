@@ -83,19 +83,19 @@ int main(int argc, char* argv[])
 	pGoTurret->transform->scale = new Vector2(2, 2);
 	pGoTurret->transform->position = new Vector2(545, 260);
 
-	GameObject* pGoTurretBullet = new GameObject();
-	pImg = new Image("TurretBullet.png", 4);
-	pGoTurretBullet->AddComponent<Image>(pImg);
-	pGoTurretBullet->GetComponent<Image>()->SetNativeSize();
-	pGoTurretBullet->transform->scale = new Vector2(2, 2);
-	pGoTurretBullet->transform->position = new Vector2(480, 220);
+	//GameObject* pGoTurretBullet = new GameObject();
+	//pImg = new Image("TurretBullet.png", 4);
+	//pGoTurretBullet->AddComponent<Image>(pImg);
+	//pGoTurretBullet->GetComponent<Image>()->SetNativeSize();
+	//pGoTurretBullet->transform->scale = new Vector2(2, 2);
+	//pGoTurretBullet->transform->position = new Vector2(480, 220);
 	
-	GameObject* pGoExplosion1 = new GameObject();
-	pImg = new Image("Explosion1.png", 4);
-	pGoExplosion1->AddComponent<Image>(pImg);
-	pGoExplosion1->GetComponent<Image>()->SetNativeSize();
-	pGoExplosion1->transform->scale = new Vector2(2, 2);
-	pGoExplosion1->transform->position = new Vector2(320, 150);
+	//GameObject* pGoExplosion1 = new GameObject();
+	//pImg = new Image("Explosion1.png", 4);
+	//pGoExplosion1->AddComponent<Image>(pImg);
+	//pGoExplosion1->GetComponent<Image>()->SetNativeSize();
+	//pGoExplosion1->transform->scale = new Vector2(2, 2);
+	//pGoExplosion1->transform->position = new Vector2(320, 150);
 
 	GameObject* pGoEnemy1 = new GameObject();
 	pImg = new Image("Enemy1.png", 4);
@@ -104,12 +104,12 @@ int main(int argc, char* argv[])
 	pGoEnemy1->transform->scale = new Vector2(1.5, 1.5);
 	pGoEnemy1->transform->position = new Vector2(700, 190);
 	
-	GameObject* pGoEnemy1Bullet = new GameObject();
-	pImg = new Image("Enemy1bullet.png", 4);
-	pGoEnemy1Bullet->AddComponent<Image>(pImg);
-	pGoEnemy1Bullet->GetComponent<Image>()->SetNativeSize();
-	pGoEnemy1Bullet->transform->scale = new Vector2(1.5, 1.5);
-	pGoEnemy1Bullet->transform->position = new Vector2(610, 205);
+	//GameObject* pGoEnemy1Bullet = new GameObject();
+	//pImg = new Image("Enemy1bullet.png", 4);
+	//pGoEnemy1Bullet->AddComponent<Image>(pImg);
+	//pGoEnemy1Bullet->GetComponent<Image>()->SetNativeSize();
+	//pGoEnemy1Bullet->transform->scale = new Vector2(1.5, 1.5);
+	//pGoEnemy1Bullet->transform->position = new Vector2(610, 205);
 
 	ReactableItem* mainShip = new PlayerShip(); 
 	pGoMainShip->AddComponent<ReactableItem>(mainShip);
@@ -120,6 +120,16 @@ int main(int argc, char* argv[])
 	pGoEnemy1->AddComponent<ReactableItem>(enemy1Ship);
 	enemy1Ship->Init();
 	pGoEnemy1->AddComponent<Collider>(new Collider());
+
+	ReactableItem* startGroundObstacle = new Obstacle();
+	pGoStartGrond->AddComponent<ReactableItem>(startGroundObstacle);
+	startGroundObstacle->Init();
+	pGoStartGrond->AddComponent<Collider>(new Collider());
+
+	ReactableItem* endGroundObstacle = new Obstacle();
+	pGoEndGrond->AddComponent<ReactableItem>(endGroundObstacle);
+	endGroundObstacle->Init();
+	pGoEndGrond->AddComponent<Collider>(new Collider());
 	
 	//Collider *collider = pGoMainShip->AddComponent<Collider>(new Collider());
 	//collider->colliderInfo->detectRange = new Vector2(0.8, 0.5);

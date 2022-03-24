@@ -10,7 +10,7 @@ void Enemy1Ship::Update()
 	transform->position->x += moveX;
 
 	if (transform->position->y + moveY <= 0 ||
-		transform->position->y + moveY + (transform->size->y * transform->scale->y) >= Game::screenH)
+		transform->position->y + moveY + (transform->size->y * transform->scale->y) >= Game::screenH/2)
 	{
 		moveY = -moveY;
 		attribute.vector->y = -attribute.vector->y;
@@ -40,10 +40,11 @@ void Enemy1Ship::Init()
 {
 	attribute.hp = 1;
 	attribute.speed = 200;
-	attribute.vector = new Vector2(0, 1);
+	attribute.atk = 1;
+	attribute.vector = new Vector2(0, -1);
 
 	reactAttrbute.camp = Camp::Enemy;
-	reactAttrbute.reactValue = -1;
+	reactAttrbute.reactValue = - attribute.atk;
 	reactAttrbute.target = ReactCamp::EnemyOnly;
 	reactAttrbute.type = ReactType::HP;
 

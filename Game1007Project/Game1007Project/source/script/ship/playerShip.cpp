@@ -5,10 +5,11 @@ void PlayerShip::Init()
 {
 	attribute.hp = 1;
 	attribute.speed = 200;
+	attribute.atk = 1;
 	attribute.vector = new Vector2(0, 0);
 
 	reactAttrbute.camp = Camp::Ally;
-	reactAttrbute.reactValue = -1;
+	reactAttrbute.reactValue = - attribute.atk;
 	reactAttrbute.target = ReactCamp::EnemyOnly;
 	reactAttrbute.type = ReactType::HP;
 

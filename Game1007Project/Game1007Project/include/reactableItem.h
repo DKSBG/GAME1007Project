@@ -93,7 +93,6 @@ private:
 	const Uint8* m_KeyboardStates = SDL_GetKeyboardState(NULL);
 };
 
-
 class Enemy1Ship : public Ship
 {
 public:
@@ -101,4 +100,11 @@ public:
 	void Init();
 private:
 	Vector2 m_moveVector;
+};
+
+class Obstacle : public ReactableItem
+{
+	void Init();
+	void OnDie();
+	void SpecificReact(ReactAttribute giverAttr);
 };

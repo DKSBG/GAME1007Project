@@ -157,6 +157,7 @@
     <ClCompile Include="source\InputHandler.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\resource.cpp" />
+    <ClCompile Include="source\script\obstacle\obstacleBase.cpp" />
     <ClCompile Include="source\script\projectile\projectileBase.cpp" />
     <ClCompile Include="source\script\projectile\straightProjectile.cpp" />
     <ClCompile Include="source\script\ship\enemy1Ship.cpp" />

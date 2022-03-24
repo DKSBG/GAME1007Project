@@ -72,6 +72,9 @@
     <ClCompile Include="source\shootingStrategy\SingleLineShootingStrategy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\script\obstacle\obstacleBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\canvas.h">
