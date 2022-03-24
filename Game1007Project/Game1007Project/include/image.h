@@ -9,20 +9,10 @@
 #include <map>
 
 using namespace std;
-/*
-class ImageResource
-{
-public:
-	bool LoadImage(string id);
-	bool GetImage(string id);
-private:
-	map<string, SDL_Texture*> m_imageMap;
-};
-*/
-
 class Image : public GOComponent{
 public:
 	Image(string image, int layer);
+	void ChangeSprite(string image);
 	void Draw();
 	void SetNativeSize();
 private:

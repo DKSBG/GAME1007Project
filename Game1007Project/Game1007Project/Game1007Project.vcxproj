@@ -145,8 +145,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\reactableItemBase.cpp" />
+    <ClCompile Include="include\Source.cpp" />
     <ClCompile Include="source\animation.cpp" />
-    <ClCompile Include="source\basicUnitScript.cpp" />
     <ClCompile Include="source\canvas.cpp" />
     <ClCompile Include="source\collider.cpp" />
     <ClCompile Include="source\colliderManager.cpp" />
@@ -156,14 +157,15 @@
     <ClCompile Include="source\image.cpp" />
     <ClCompile Include="source\InputHandler.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\PlayerShip.cpp" />
     <ClCompile Include="source\resource.cpp" />
-    <ClCompile Include="source\script\exampleEnemy.cpp" />
-    <ClCompile Include="source\script\exampleShipScript.cpp" />
+    <ClCompile Include="source\script\ship\enemy1Ship.cpp" />
+    <ClCompile Include="source\script\ship\playerShip.cpp" />
+    <ClCompile Include="source\script\ship\shipBase.cpp" />
     <ClCompile Include="source\tools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\animation.h" />
+    <ClInclude Include="include\attack.h" />
     <ClInclude Include="include\canvas.h" />
     <ClInclude Include="include\collideInfo.h" />
     <ClInclude Include="include\collider.h" />
@@ -171,9 +173,9 @@
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\gameObject.h" />
     <ClInclude Include="include\gameVector.h" />
-    <ClInclude Include="include\Header.h" />
     <ClInclude Include="include\image.h" />
     <ClInclude Include="include\InputHandler.h" />
+    <ClInclude Include="include\reactableItem.h" />
     <ClInclude Include="include\resource.h" />
     <ClInclude Include="include\script.h" />
     <ClInclude Include="include\tools.h" />

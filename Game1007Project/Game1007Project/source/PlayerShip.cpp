@@ -10,6 +10,7 @@
 void PlayerShip::Init() 
 {
 	speed = 400;
+	m_pImg = gameObject->GetComponent<Image>();
 }
 
 void PlayerShip::UnderAttack() 
@@ -36,12 +37,12 @@ void PlayerShip::UnderAttack()
 void PlayerShip::Update() 
 {
 	m_cdTimer -= Game::GetInstance()->deltaTime;
-
+	string spriteName;
 	int moveX, moveY;
 	moveVector.y = 0;
 	moveVector.x = 0;
 
-	if (m_KeyboardStates[SDL_SCANCODE_W])
+	if (m_KeyboardStates[SDL_SCANCODE_W]) 
 		moveVector.y = -1;
 	if (m_KeyboardStates[SDL_SCANCODE_S])
 		moveVector.y = 1;
@@ -50,6 +51,25 @@ void PlayerShip::Update()
 	if (m_KeyboardStates[SDL_SCANCODE_D])
 		moveVector.x = 1;
 
+	spriteName = "MainShip.png";
+
+	if (moveVector.x <= 0)
+	{
+		if (moveVector.y > 0)
+			spriteName = "MainShipUp.png";
+		if (moveVector.y < 0)
+			spriteName = "MainShipDown.png";
+	}
+	else 
+	{
+		if (moveVector.y > 0)
+			spriteName = "MainShipUpForward.png";
+		if (moveVector.y < 0)
+			spriteName = "MainShipDownForward.png";
+	}
+
+	m_pImg->ChangeSprite(spriteName);
+		
 	GetMovePixel(&moveVector, speed, &moveX, &moveY);
 
 	this->transform->position->y += moveY;

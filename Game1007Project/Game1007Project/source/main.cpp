@@ -112,13 +112,13 @@ int main(int argc, char* argv[])
 	pGoEnemy1Bullet->transform->position = new Vector2(610, 205);
 
 	ReactableItem* mainShip = new PlayerShip(); 
-	mainShip->Init();
 	pGoMainShip->AddComponent<ReactableItem>(mainShip);
+	mainShip->Init();
 	pGoMainShip->AddComponent<Collider>(new Collider());
 
 	ReactableItem* enemy1Ship = new Enemy1Ship();
-	enemy1Ship->Init();
 	pGoEnemy1->AddComponent<ReactableItem>(enemy1Ship);
+	enemy1Ship->Init();
 	pGoEnemy1->AddComponent<Collider>(new Collider());
 	
 	//Collider *collider = pGoMainShip->AddComponent<Collider>(new Collider());

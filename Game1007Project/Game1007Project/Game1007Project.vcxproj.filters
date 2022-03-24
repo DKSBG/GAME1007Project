@@ -42,25 +42,28 @@
     <ClCompile Include="source\InputHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\script\exampleShipScript.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\colliderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\PlayerShip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\basicUnitScript.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\script\exampleEnemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\tools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\reactableItemBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\script\ship\playerShip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\script\ship\enemy1Ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\script\ship\shipBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,13 +101,16 @@
     <ClInclude Include="include\collider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Header.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\collideInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\tools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\attack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\reactableItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

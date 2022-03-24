@@ -6,6 +6,12 @@ Image::Image(string filename, int layer)
 	m_pCanvas = CanvasManager::GetInstance()->TryGetCanvas(layer);
 }
 
+void Image::ChangeSprite(string filename) 
+{
+	m_pResource = ResourceManager::GetInstance()->LoadTextureResource(filename);
+}
+
+
 void Image::Draw()
 {
 	DrawingUnit* unit = new DrawingUnit();
