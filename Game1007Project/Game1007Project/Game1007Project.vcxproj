@@ -158,9 +158,12 @@
     <ClCompile Include="source\InputHandler.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\resource.cpp" />
+    <ClCompile Include="source\script\projectile\projectileBase.cpp" />
+    <ClCompile Include="source\script\projectile\straightProjectile.cpp" />
     <ClCompile Include="source\script\ship\enemy1Ship.cpp" />
     <ClCompile Include="source\script\ship\playerShip.cpp" />
     <ClCompile Include="source\script\ship\shipBase.cpp" />
+    <ClCompile Include="source\shootingStrategy\SingleLineShootingStrategy.cpp" />
     <ClCompile Include="source\tools.cpp" />
   </ItemGroup>
   <ItemGroup>
