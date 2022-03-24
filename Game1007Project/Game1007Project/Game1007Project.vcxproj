@@ -146,7 +146,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\reactableItemBase.cpp" />
-    <ClCompile Include="include\Source.cpp" />
     <ClCompile Include="source\animation.cpp" />
     <ClCompile Include="source\canvas.cpp" />
     <ClCompile Include="source\collider.cpp" />

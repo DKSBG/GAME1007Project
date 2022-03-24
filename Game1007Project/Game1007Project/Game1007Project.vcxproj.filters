@@ -51,9 +51,6 @@
     <ClCompile Include="source\tools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="include\reactableItemBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
