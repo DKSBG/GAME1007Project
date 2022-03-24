@@ -60,14 +60,14 @@ int main(int argc, char* argv[])
 	pGoStartGrond->AddComponent<Image>(pImg);
 	pGoStartGrond->GetComponent<Image>()->SetNativeSize();
 	pGoStartGrond->transform->scale = new Vector2(2, 2);
-	pGoStartGrond->transform->position = new Vector2(516, 280);
+	pGoStartGrond->transform->position = new Vector2(516, 278);
 
 	GameObject* pGoEndGrond = new GameObject();
 	pImg = new Image("EndGround.png", 3);
 	pGoEndGrond->AddComponent<Image>(pImg);
 	pGoEndGrond->GetComponent<Image>()->SetNativeSize();
 	pGoEndGrond->transform->scale = new Vector2(2, 2);
-	pGoEndGrond->transform->position = new Vector2(-4, 280);
+	pGoEndGrond->transform->position = new Vector2(0, 284);
 
 	GameObject* pGoMainShip = new GameObject();
 	pImg = new Image("MainShip.png", 4);
@@ -81,14 +81,14 @@ int main(int argc, char* argv[])
 	pGoTurret->AddComponent<Image>(pImg);
 	pGoTurret->GetComponent<Image>()->SetNativeSize();
 	pGoTurret->transform->scale = new Vector2(2, 2);
-	pGoTurret->transform->position = new Vector2(545, 280);
+	pGoTurret->transform->position = new Vector2(545, 260);
 
 	GameObject* pGoTurretBullet = new GameObject();
 	pImg = new Image("TurretBullet.png", 4);
 	pGoTurretBullet->AddComponent<Image>(pImg);
 	pGoTurretBullet->GetComponent<Image>()->SetNativeSize();
 	pGoTurretBullet->transform->scale = new Vector2(2, 2);
-	pGoTurretBullet->transform->position = new Vector2(480, 240);
+	pGoTurretBullet->transform->position = new Vector2(480, 220);
 	
 	GameObject* pGoExplosion1 = new GameObject();
 	pImg = new Image("Explosion1.png", 4);
@@ -120,6 +120,17 @@ int main(int argc, char* argv[])
 	enemy1Ship->Init();
 	pGoEnemy1->AddComponent<ReactableItem>(enemy1Ship);
 	pGoEnemy1->AddComponent<Collider>(new Collider());
+	
+	//Collider *collider = pGoMainShip->AddComponent<Collider>(new Collider());
+	//collider->colliderInfo->detectRange = new Vector2(0.8, 0.5);
+	//pGoEnemy1->AddComponent<Collider>(new Collider());
+	//pGoTurret->AddComponent<Collider>(new Collider());
+	//pGoEnemy1Bullet->AddComponent<Collider>(new Collider());
+	//pGoTurretBullet->AddComponent<Collider>(new Collider());
+	//pGoStartGrond->AddComponent<Collider>(new Collider());
+	//pGoEndGrond->AddComponent<Collider>(new Collider());
+
+
 
 	while(1)
 	{
