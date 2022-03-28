@@ -4,13 +4,13 @@
 #include"resource.h"
 #include"gameVector.h"
 #include"gameObject.h"
-
+#include"camera.h"
 
 using namespace std;
 
 class DrawingUnit {
 public:
-	Transform* pTranform;
+	Transform tranform;
 	SDL_Texture* pTexture;
 	SDL_Rect srcRect;
 };
@@ -18,9 +18,12 @@ public:
 class Canvas {
 public:
 	void SetDrawUnit(DrawingUnit* unit);
+	void SetCamera(Camera* pCam);
+	Camera* GetCamera();
 	void Draw();
 private:
 	vector<DrawingUnit*> m_drawUnitList;
+	Camera* m_pCamera;
 };
 
 class CanvasManager {

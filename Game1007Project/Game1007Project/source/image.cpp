@@ -15,10 +15,15 @@ void Image::ChangeSprite(string filename)
 void Image::Draw()
 {
 	DrawingUnit* unit = new DrawingUnit();
-	unit->pTranform = this->transform;
+	unit->tranform.Clone(*this->transform);
 	unit->pTexture = this->m_pResource->GetTexture();
 	unit->srcRect = this->m_pResource->GetRect();
 	m_pCanvas->SetDrawUnit(unit);
+}
+
+Canvas* Image::GetCanvas() 
+{
+	return m_pCanvas;
 }
 
 void Image::SetNativeSize() 

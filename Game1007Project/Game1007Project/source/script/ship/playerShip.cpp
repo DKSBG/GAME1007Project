@@ -15,6 +15,7 @@ void PlayerShip::Init()
 
 	m_shooting = (ShootStrategy*) new SingleLineShooting();
 	m_pImg = this->gameObject->GetComponent<Image>();
+	m_pCam = m_pImg->GetCanvas()->GetCamera();
 }
 
 void PlayerShip::Update()
@@ -67,29 +68,37 @@ void PlayerShip::Update()
 
 	GetMovePixel(attribute.vector, attribute.speed, &moveX, &moveY);
 
-	this->transform->position->y += moveY;
-	this->transform->position->x += moveX;
+	Transform camPos;
+	GetCamPosition(m_pCam, *this->transform->position, camPos.position);
 
-	if (this->transform->position->y < 0)
+	camPos.position->x += moveX + (m_lastCamPosX - camPos.position->x);
+	camPos.position->y += moveY;
+
+	m_lastCamPosX = camPos.position->x;
+
+	if (camPos.position->x < 0)
 	{
-		this->transform->position->y = 0;
+		camPos.position->x = 0;
 	}
 
-	if (this->transform->position->y + transform->size->y * transform->scale->y > Game::screenH)
+	if (camPos.position->y + transform->size->y * transform->scale->y > Game::screenH)
 	{
-		this->transform->position->y = Game::screenH - transform->size->y * transform->scale->y;
+		camPos.position->y = Game::screenH - transform->size->y * transform->scale->y;
 	}
 
-	if (transform->position->x < 0)
+	if (camPos.position->x < 0)
 	{
-		transform->position->x = 0;
+		camPos.position->x = 0;
 	}
 
-	if (transform->position->x + transform->size->x * transform->scale->x > Game::screenW)
+	if (camPos.position->x + transform->size->x * transform->scale->x > Game::screenW)
 	{
-		transform->position->x = Game::screenW - transform->size->x * transform->scale->x;
+		camPos.position->x = Game::screenW - transform->size->x * transform->scale->x;
 	}
 
+	GetRealPosition(m_pCam, *camPos.position, this->transform->position);
+
+	cout << this->transform->position->x << endl;
 	if (m_KeyboardStates[SDL_SCANCODE_SPACE])
 	{
 		if (m_cdTimer <= 0)

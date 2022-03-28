@@ -17,7 +17,7 @@ void SingleLineShooting::Fire(Transform* attacker, ItemAttribute attr, ReactAttr
 	if (attr.vector->x > 0)
 		bulletTransform->position->x += attacker->size->x * attacker->scale->x;
 	else
-		bulletTransform->position->x -= attacker->size->x * attacker->scale->x;
+		bulletTransform->position->x -= bulletTransform->size->x * bulletTransform->scale->x;
 	bulletTransform->position->y += attacker->size->y * attacker->scale->y / 2;
 	bulletTransform->position->y -= bulletTransform->size->y * bulletTransform->scale->y / 2;
 

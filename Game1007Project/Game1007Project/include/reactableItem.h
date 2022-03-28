@@ -9,18 +9,16 @@ enum Camp {Ally, Enemy, ThridPart};
 enum ReactCamp { Both, AllyOnly, EnemyOnly };
 enum ReactType { HP, Speed, Atk };
 
-class ReactAttribute
+struct ReactAttribute
 {
-public:
 	Camp camp = Ally;
 	ReactCamp target = Both;
 	ReactType type = HP;
 	int reactValue;
 };
 
-class ItemAttribute
+struct ItemAttribute
 {
-public:
 	int hp;
 	// Speed unit is pixels per second.
 	int speed;
@@ -91,6 +89,8 @@ public:
 	void Init();
 private:
 	const Uint8* m_KeyboardStates = SDL_GetKeyboardState(NULL);
+	float m_lastCamPosX;
+	Camera* m_pCam;
 };
 
 class Enemy1Ship : public Ship

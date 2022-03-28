@@ -28,7 +28,7 @@ void Animation::Update()
 void Animation::Draw()
 {
 	DrawingUnit* unit = new DrawingUnit();
-	unit->pTranform = this->transform;
+	unit->tranform.Clone(*this->transform);
 	unit->pTexture = this->m_pResource->GetTexture();
 	unit->srcRect = this->m_pResource->GetSlot(m_currentIdx);
 	m_pCanvas->SetDrawUnit(unit);

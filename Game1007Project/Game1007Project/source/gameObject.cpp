@@ -1,11 +1,32 @@
-#include"gameObject.h"
-#include"image.h"
-#include"animation.h"
-#include"collider.h"
-#include"colliderManager.h"
+#include "gameObject.h"
+#include "image.h"
+#include "animation.h"
+#include "collider.h"
+#include "colliderManager.h"
+#include "transform.h""
 #include <exception>
 
 using namespace std;
+
+Transform::~Transform()
+{
+	//if (position != NULL)
+	//	delete position;
+	//if (size != NULL)
+	//	delete size;
+	//if (scale != NULL)
+	//	delete scale;
+}
+
+void Transform::Clone(const Transform target)
+{
+	position->x = target.position->x;
+	position->y = target.position->y;
+	size->x = target.size->x;
+	size->y = target.size->y;
+	scale->x = target.scale->x;
+	scale->y = target.scale->y;
+}
 
 #pragma region Exception
 GameObjectException::GameObjectException(string reason)

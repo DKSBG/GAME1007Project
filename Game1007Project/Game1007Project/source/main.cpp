@@ -8,6 +8,8 @@
 #include "colliderManager.h"
 #include "collider.h"
 #include "reactableItem.h"
+#include "camera.h"
+#include "infinityScrollMap.h"
 //#include "script.h"
 //For example.
 
@@ -23,7 +25,30 @@ int main(int argc, char* argv[])
 		432,
 		SDL_WINDOW_OPENGL);
 
+	Transform trs;
+	trs.position = new Vector2(0, 0);
+	trs.size = new Vector2(768,432);
+	trs.scale = new Vector2(1, 1);
+	CameraManager::GetInstance()->CreateCamera("MainCam", trs);
+	CameraManager::GetInstance()->CreateCamera("BackgroundCam", trs);
+	CameraManager::GetInstance()->CreateCamera("CloudCam", trs);
+	CameraManager::GetInstance()->CreateCamera("MountCam", trs);
+
+
+	Camera* pMainCam = CameraManager::GetInstance()->GetCamera("MainCam");
+	Camera* pBackgroudCam = CameraManager::GetInstance()->GetCamera("BackgroundCam");
+	Camera* pCloudCam = CameraManager::GetInstance()->GetCamera("CloudCam");
+	Camera* pMountainCam = CameraManager::GetInstance()->GetCamera("MountCam");
+
+	CanvasManager::GetInstance()->TryGetCanvas(0)->SetCamera(pBackgroudCam);
+	CanvasManager::GetInstance()->TryGetCanvas(1)->SetCamera(pCloudCam);
+	CanvasManager::GetInstance()->TryGetCanvas(2)->SetCamera(pMountainCam);
+	CanvasManager::GetInstance()->TryGetCanvas(3)->SetCamera(pMainCam);
+	CanvasManager::GetInstance()->TryGetCanvas(4)->SetCamera(pMainCam);
+	CanvasManager::GetInstance()->TryGetCanvas(5)->SetCamera(pMainCam);
+
 	Image* pImg;
+	InfinityScrollMap* pInfinityScrollMap;
 
 	GameObject* pGoBackground = new GameObject();
 	pImg = new Image("Background.png", 0);
@@ -32,22 +57,55 @@ int main(int argc, char* argv[])
 	pGoBackground->transform->scale = new Vector2(2,2);
 
 	GameObject* pGoMoon = new GameObject();
-	pImg = new Image("Moon.png", 1);
+	pImg = new Image("Moon.png", 0);
 	pGoMoon->AddComponent<Image>(pImg);
 	pImg->SetNativeSize();
 	pGoMoon->transform->scale = new Vector2(2, 2);
 
-	GameObject* pGoBackgroundCloud = new GameObject();
+	GameObject* pGoBackgroundCloudL = new GameObject();
 	pImg = new Image("BackgroundCloud.png", 1);
-	pGoBackgroundCloud->AddComponent<Image>(pImg);
+	pGoBackgroundCloudL->AddComponent<Image>(pImg);
 	pImg->SetNativeSize();
-	pGoBackgroundCloud->transform->scale = new Vector2(2, 2);
+	pGoBackgroundCloudL->transform->scale = new Vector2(2, 2);
 
-	GameObject* pGoMountain = new GameObject();
-	pImg = new Image("Mountain.png", 2);
-	pGoMountain->AddComponent<Image>(pImg);
+	GameObject* pGoBackgroundCloudR = new GameObject();
+	pImg = new Image("BackgroundCloud.png", 1);
+	pGoBackgroundCloudR->AddComponent<Image>(pImg);
 	pImg->SetNativeSize();
-	pGoMountain->transform->scale = new Vector2(2, 2);
+	pGoBackgroundCloudR->transform->scale = new Vector2(2, 2);
+	pGoBackgroundCloudR->transform->position = new Vector2(pGoBackgroundCloudR->transform->size->x * 2, 0);
+
+	GameObject* pScrollCloud = new GameObject();
+	pInfinityScrollMap = new InfinityScrollMap();
+	pInfinityScrollMap->mapCam = &pCloudCam->trs;
+	pInfinityScrollMap->mapL = pGoBackgroundCloudL->transform;
+	pInfinityScrollMap->mapR = pGoBackgroundCloudR->transform;
+	pInfinityScrollMap->moveSpeed = 20;
+	pScrollCloud->AddComponent<InfinityScrollMap>(pInfinityScrollMap);
+
+
+	GameObject* pBackgroundMountainL = new GameObject();
+	pImg = new Image("Mountain.png", 2);
+	pBackgroundMountainL->AddComponent<Image>(pImg);
+	pImg->SetNativeSize();
+	pBackgroundMountainL->transform->scale = new Vector2(2, 2);
+
+
+	GameObject* pBackgroundMountainR = new GameObject();
+	pImg = new Image("Mountain.png", 2);
+	pBackgroundMountainR->AddComponent<Image>(pImg);
+	pImg->SetNativeSize();
+	pBackgroundMountainR->transform->scale = new Vector2(2, 2);
+	pBackgroundMountainR->transform->position = new Vector2(pBackgroundMountainR->transform->size->x * 2, 0);
+
+	GameObject* pScollMountain= new GameObject();
+	pInfinityScrollMap = new InfinityScrollMap();
+	pInfinityScrollMap->mapCam = &pMountainCam->trs;
+	pInfinityScrollMap->mapL = pBackgroundMountainL->transform;
+	pInfinityScrollMap->mapR = pBackgroundMountainR->transform;
+	pInfinityScrollMap->moveSpeed = 50;
+	pScollMountain->AddComponent<InfinityScrollMap>(pInfinityScrollMap);
+
 
 	GameObject* pGoCloud = new GameObject();
 	pImg = new Image("Cloud.png", 5);
@@ -140,10 +198,11 @@ int main(int argc, char* argv[])
 	//pGoStartGrond->AddComponent<Collider>(new Collider());
 	//pGoEndGrond->AddComponent<Collider>(new Collider());
 
-
+	int index = 20;
 
 	while(1)
 	{
+		pMainCam->trs.position->x += (float)100 / 1000 * MainGame::deltaTime;;
 		CollideManager::GetInstanse()->DetectColliding();
 		pGame->EventHandler();
 		pGame->Update();

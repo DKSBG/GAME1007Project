@@ -15,6 +15,7 @@ public:
 	void ChangeSprite(string image);
 	void Draw();
 	void SetNativeSize();
+	Canvas* GetCanvas();
 private:
 	TextureResource* m_pResource;
 	Canvas* m_pCanvas;

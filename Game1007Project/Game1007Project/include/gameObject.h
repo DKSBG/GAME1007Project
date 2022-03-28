@@ -4,16 +4,9 @@
 #include <string>
 #include <exception>
 #include "gameVector.h"
+#include "transform.h"
 
 using namespace std;
-
-class Transform {
-public:
-	Transform();
-	Vector2* position;
-	Vector2* size;
-	Vector2* scale;
-};
 
 class GameObjectException : public exception {
 public:
