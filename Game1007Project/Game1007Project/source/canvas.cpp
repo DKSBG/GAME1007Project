@@ -66,9 +66,9 @@ Camera* Canvas::GetCamera()
 
 void Canvas::Draw()
 {
-	while (m_drawUnitList.size() > 0)
+	for(int index = 0; index < m_drawUnitList.size(); index++)
 	{
-		DrawingUnit* unit = m_drawUnitList.back();
+		DrawingUnit* unit = m_drawUnitList[index];
 		SDL_Rect* dstRect = new SDL_Rect();
 		SDL_Texture* pTexture = unit->pTexture;
 		dstRect->x = unit->tranform.position->x;
@@ -76,7 +76,8 @@ void Canvas::Draw()
 		dstRect->w = unit->tranform.size->x * unit->tranform.scale->x;
 		dstRect->h = unit->tranform.size->y * unit->tranform.scale->y;
 		SDL_RenderCopy(Game::GetInstance()->GetRenderer(), pTexture, &unit->srcRect, dstRect);
-		m_drawUnitList.pop_back();
+		delete m_drawUnitList[index];
 	}
+	m_drawUnitList.clear();
 }
 #pragma endregion
