@@ -27,7 +27,7 @@ public:
 	void Update();
 	void Draw();
 	void OnCollide(GameObject* go);
-	Transform* transform;
+	Transform transform;
 private:
 	std::map<size_t, void*> m_componentMap;
 	std::map<size_t, void*> m_collideHandlerMap;
@@ -97,7 +97,7 @@ T* GameObject::AddComponent(T* t)
 
 	GOComponent* goComponent = (GOComponent*)t;
 	goComponent->gameObject = this;
-	goComponent->transform = this->transform;
+	goComponent->transform = &this->transform;
 	goComponent->Init();
 	return t;
 }

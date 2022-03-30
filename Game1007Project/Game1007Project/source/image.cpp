@@ -28,5 +28,5 @@ Canvas* Image::GetCanvas()
 
 void Image::SetNativeSize() 
 {
-	transform->size = new Vector2(m_pResource->GetRect().w, m_pResource->GetRect().h);
+	transform->size.Set(m_pResource->GetRect().w, m_pResource->GetRect().h);
 }

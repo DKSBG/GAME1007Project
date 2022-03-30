@@ -10,4 +10,5 @@ public:
 
 	Vector2 operator+(const Vector2& obj);
 	Vector2 operator*(const int& obj);
+	void Set(float x, float y);
 };

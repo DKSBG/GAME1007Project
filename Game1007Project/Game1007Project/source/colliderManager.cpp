@@ -3,11 +3,13 @@
 
 void GetEdge(CollideInfo* collider,float* top, float* bottom, float* right, float* left)
 {
-	Transform* trs = collider->pGameObject->transform;
-	float centerX = trs->position->x + (trs->size->x * trs->scale->x /2);
-	float centerY = trs->position->y + (trs->size->y * trs->scale->y / 2);
-	float detectH = trs->size->y * trs->scale->y * collider->detectRange->y / 2;
-	float detectW = trs->size->x * trs->scale->x * collider->detectRange->x / 2;
+	Transform trs;
+	trs.Clone(collider->pGameObject->transform);
+
+	float centerX = trs.position.x + (trs.size.x * trs.scale.x /2);
+	float centerY = trs.position.y + (trs.size.y * trs.scale.y / 2);
+	float detectH = trs.size.y * trs.scale.y * collider->detectRange->y / 2;
+	float detectW = trs.size.x * trs.scale.x * collider->detectRange->x / 2;
 	*top = centerY - detectH;
 	*bottom = centerY + detectH;
 	*right = centerX - detectW;

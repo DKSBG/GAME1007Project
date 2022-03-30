@@ -7,15 +7,15 @@ void Enemy1Ship::Update()
 
 	int moveX, moveY;
 	GetMovePixel(attribute.vector, attribute.speed, &moveX, &moveY);
-	transform->position->x += moveX;
+	transform->position.x += moveX;
 
-	if (transform->position->y + moveY <= 0 ||
-		transform->position->y + moveY + (transform->size->y * transform->scale->y) >= Game::screenH/2)
+	if (transform->position.y + moveY <= 0 ||
+		transform->position.y + moveY + (transform->size.y * transform->scale.y) >= Game::screenH/2)
 	{
 		moveY = -moveY;
 		attribute.vector->y = -attribute.vector->y;
 	}
-	transform->position->y += moveY;
+	transform->position.y += moveY;
 
 	if (m_cdTimer <= 0)
 	{

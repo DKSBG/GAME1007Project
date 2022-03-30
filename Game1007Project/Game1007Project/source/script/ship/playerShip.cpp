@@ -69,36 +69,35 @@ void PlayerShip::Update()
 	GetMovePixel(attribute.vector, attribute.speed, &moveX, &moveY);
 
 	Transform camPos;
-	GetCamPosition(m_pCam, *this->transform->position, camPos.position);
+	GetCamPosition(m_pCam, this->transform->position, &camPos.position);
 
-	camPos.position->x += moveX + (m_lastCamPosX - camPos.position->x);
-	camPos.position->y += moveY;
+	camPos.position.x += moveX + (m_lastCamPosX - camPos.position.x);
+	camPos.position.y += moveY;
 
-	m_lastCamPosX = camPos.position->x;
+	m_lastCamPosX = camPos.position.x;
 
-	if (camPos.position->x < 0)
+	if (camPos.position.x < 0)
 	{
-		camPos.position->x = 0;
+		camPos.position.x = 0;
 	}
 
-	if (camPos.position->y + transform->size->y * transform->scale->y > Game::screenH)
+	if (camPos.position.y + transform->size.y * transform->scale.y > Game::screenH)
 	{
-		camPos.position->y = Game::screenH - transform->size->y * transform->scale->y;
+		camPos.position.y = Game::screenH - transform->size.y * transform->scale.y;
 	}
 
-	if (camPos.position->x < 0)
+	if (camPos.position.x < 0)
 	{
-		camPos.position->x = 0;
+		camPos.position.x = 0;
 	}
 
-	if (camPos.position->x + transform->size->x * transform->scale->x > Game::screenW)
+	if (camPos.position.x + transform->size.x * transform->scale.x > Game::screenW)
 	{
-		camPos.position->x = Game::screenW - transform->size->x * transform->scale->x;
+		camPos.position.x = Game::screenW - transform->size.x * transform->scale.x;
 	}
 
-	GetRealPosition(m_pCam, *camPos.position, this->transform->position);
+	GetRealPosition(m_pCam, camPos.position, &this->transform->position);
 
-	cout << this->transform->position->x << endl;
 	if (m_KeyboardStates[SDL_SCANCODE_SPACE])
 	{
 		if (m_cdTimer <= 0)

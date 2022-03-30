@@ -29,3 +29,9 @@ Vector2 Vector2::operator* (const int& obj)
 	vector2.x = this->y * obj;
 	return vector2;
 }
+
+void Vector2::Set(float x, float y)
+{
+	this->x = x;
+	this->y = y;
+}

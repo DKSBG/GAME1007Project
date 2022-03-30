@@ -20,12 +20,12 @@ Transform::~Transform()
 
 void Transform::Clone(const Transform target)
 {
-	position->x = target.position->x;
-	position->y = target.position->y;
-	size->x = target.size->x;
-	size->y = target.size->y;
-	scale->x = target.scale->x;
-	scale->y = target.scale->y;
+	position.x = target.position.x;
+	position.y = target.position.y;
+	size.x = target.size.x;
+	size.y = target.size.y;
+	scale.x = target.scale.x;
+	scale.y = target.scale.y;
 }
 
 #pragma region Exception
@@ -107,7 +107,6 @@ void GameObjectManager::RefleshGameObjectList()
 #pragma region GameObject Implement
 GameObject::GameObject()
 {
-	this->transform = new Transform();
 	GameObjectManager::GetInstance()->PushGameObject(this);
 }
 
@@ -142,9 +141,9 @@ void GameObject::OnCollide(GameObject* go)
 #pragma region Transform Implement
 Transform::Transform()
 {
-	this->position = new Vector2(0, 0);
-	this->scale = new Vector2(1, 1);
-	this->size = new Vector2(10, 10);
+	this->position.Set(0, 0);
+	this->scale.Set(1, 1);
+	this->size.Set(10, 10);
 }
 #pragma endregion
 

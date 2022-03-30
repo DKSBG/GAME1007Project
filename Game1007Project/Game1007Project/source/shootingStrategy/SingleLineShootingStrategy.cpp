@@ -10,16 +10,16 @@ void SingleLineShooting::Fire(Transform* attacker, ItemAttribute attr, ReactAttr
 	bullet->AddComponent<Image>(pImg);
 	bullet->GetComponent<Image>()->SetNativeSize();
 
-	Transform* bulletTransform = bullet->transform;
-	bulletTransform->scale = new Vector2(2, 2);
-	bulletTransform->position->x = attacker->position->x;
-	bulletTransform->position->y = attacker->position->y;
+	Transform* pBulletTransform = &bullet->transform;
+	pBulletTransform->scale.Set(2, 2);
+	pBulletTransform->position.x = attacker->position.x;
+	pBulletTransform->position.y = attacker->position.y;
 	if (attr.vector->x > 0)
-		bulletTransform->position->x += attacker->size->x * attacker->scale->x;
+		pBulletTransform->position.x += attacker->size.x * attacker->scale.x;
 	else
-		bulletTransform->position->x -= bulletTransform->size->x * bulletTransform->scale->x;
-	bulletTransform->position->y += attacker->size->y * attacker->scale->y / 2;
-	bulletTransform->position->y -= bulletTransform->size->y * bulletTransform->scale->y / 2;
+		pBulletTransform->position.x -= pBulletTransform->size.x * pBulletTransform->scale.x;
+	pBulletTransform->position.y += attacker->size.y * attacker->scale.y / 2;
+	pBulletTransform->position.y -= pBulletTransform->size.y * pBulletTransform->scale.y / 2;
 
 	StraightProjectile* bulletScript = new StraightProjectile();
 	bulletScript->attribute.atk = attr.atk;

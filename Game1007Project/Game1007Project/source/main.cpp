@@ -26,9 +26,9 @@ int main(int argc, char* argv[])
 		SDL_WINDOW_OPENGL);
 
 	Transform trs;
-	trs.position = new Vector2(0, 0);
-	trs.size = new Vector2(768,432);
-	trs.scale = new Vector2(1, 1);
+	trs.position.Set(0, 0);
+	trs.size.Set(MainGame::screenW, MainGame::screenH);
+	trs.scale.Set(1, 1);
 	CameraManager::GetInstance()->CreateCamera("MainCam", trs);
 	CameraManager::GetInstance()->CreateCamera("BackgroundCam", trs);
 	CameraManager::GetInstance()->CreateCamera("CloudCam", trs);
@@ -54,32 +54,32 @@ int main(int argc, char* argv[])
 	pImg = new Image("Background.png", 0);
 	pGoBackground->AddComponent<Image>(pImg);
 	pImg->SetNativeSize();
-	pGoBackground->transform->scale = new Vector2(2,2);
+	pGoBackground->transform.scale.Set(2,2);
 
 	GameObject* pGoMoon = new GameObject();
 	pImg = new Image("Moon.png", 0);
 	pGoMoon->AddComponent<Image>(pImg);
 	pImg->SetNativeSize();
-	pGoMoon->transform->scale = new Vector2(2, 2);
+	pGoMoon->transform.scale.Set(2, 2);
 
 	GameObject* pGoBackgroundCloudL = new GameObject();
 	pImg = new Image("BackgroundCloud.png", 1);
 	pGoBackgroundCloudL->AddComponent<Image>(pImg);
 	pImg->SetNativeSize();
-	pGoBackgroundCloudL->transform->scale = new Vector2(2, 2);
+	pGoBackgroundCloudL->transform.scale.Set(2, 2);
 
 	GameObject* pGoBackgroundCloudR = new GameObject();
 	pImg = new Image("BackgroundCloud.png", 1);
 	pGoBackgroundCloudR->AddComponent<Image>(pImg);
 	pImg->SetNativeSize();
-	pGoBackgroundCloudR->transform->scale = new Vector2(2, 2);
-	pGoBackgroundCloudR->transform->position = new Vector2(pGoBackgroundCloudR->transform->size->x * 2, 0);
+	pGoBackgroundCloudR->transform.scale.Set(2, 2);;
+	pGoBackgroundCloudR->transform.position.Set(pGoBackgroundCloudR->transform.size.x * 2, 0);
 
 	GameObject* pScrollCloud = new GameObject();
 	pInfinityScrollMap = new InfinityScrollMap();
 	pInfinityScrollMap->mapCam = &pCloudCam->trs;
-	pInfinityScrollMap->mapL = pGoBackgroundCloudL->transform;
-	pInfinityScrollMap->mapR = pGoBackgroundCloudR->transform;
+	pInfinityScrollMap->mapL = &pGoBackgroundCloudL->transform;
+	pInfinityScrollMap->mapR = &pGoBackgroundCloudR->transform;
 	pInfinityScrollMap->moveSpeed = 20;
 	pScrollCloud->AddComponent<InfinityScrollMap>(pInfinityScrollMap);
 
@@ -88,21 +88,21 @@ int main(int argc, char* argv[])
 	pImg = new Image("Mountain.png", 2);
 	pBackgroundMountainL->AddComponent<Image>(pImg);
 	pImg->SetNativeSize();
-	pBackgroundMountainL->transform->scale = new Vector2(2, 2);
+	pBackgroundMountainL->transform.scale.Set(2, 2);
 
 
 	GameObject* pBackgroundMountainR = new GameObject();
 	pImg = new Image("Mountain.png", 2);
 	pBackgroundMountainR->AddComponent<Image>(pImg);
 	pImg->SetNativeSize();
-	pBackgroundMountainR->transform->scale = new Vector2(2, 2);
-	pBackgroundMountainR->transform->position = new Vector2(pBackgroundMountainR->transform->size->x * 2, 0);
+	pBackgroundMountainR->transform.scale.Set(2, 2);
+	pBackgroundMountainR->transform.position.Set(pBackgroundMountainR->transform.size.x * 2, 0);
 
 	GameObject* pScollMountain= new GameObject();
 	pInfinityScrollMap = new InfinityScrollMap();
 	pInfinityScrollMap->mapCam = &pMountainCam->trs;
-	pInfinityScrollMap->mapL = pBackgroundMountainL->transform;
-	pInfinityScrollMap->mapR = pBackgroundMountainR->transform;
+	pInfinityScrollMap->mapL = &pBackgroundMountainL->transform;
+	pInfinityScrollMap->mapR = &pBackgroundMountainR->transform;
 	pInfinityScrollMap->moveSpeed = 50;
 	pScollMountain->AddComponent<InfinityScrollMap>(pInfinityScrollMap);
 
@@ -111,35 +111,35 @@ int main(int argc, char* argv[])
 	pImg = new Image("Cloud.png", 5);
 	pGoCloud->AddComponent<Image>(pImg);
 	pGoCloud->GetComponent<Image>()->SetNativeSize();
-	pGoCloud->transform->scale = new Vector2(2, 2);
+	pGoCloud->transform.scale.Set(2, 2);
 
 	GameObject* pGoStartGrond = new GameObject();
 	pImg = new Image("StartGround.png", 3);
 	pGoStartGrond->AddComponent<Image>(pImg);
 	pGoStartGrond->GetComponent<Image>()->SetNativeSize();
-	pGoStartGrond->transform->scale = new Vector2(2, 2);
-	pGoStartGrond->transform->position = new Vector2(516, 278);
+	pGoStartGrond->transform.scale.Set(2, 2);
+	pGoStartGrond->transform.position.Set(516, 278);
 
 	GameObject* pGoEndGrond = new GameObject();
 	pImg = new Image("EndGround.png", 3);
 	pGoEndGrond->AddComponent<Image>(pImg);
 	pGoEndGrond->GetComponent<Image>()->SetNativeSize();
-	pGoEndGrond->transform->scale = new Vector2(2, 2);
-	pGoEndGrond->transform->position = new Vector2(0, 284);
+	pGoEndGrond->transform.scale.Set(2, 2);
+	pGoEndGrond->transform.position.Set(0, 284);
 
 	GameObject* pGoMainShip = new GameObject();
 	pImg = new Image("MainShip.png", 4);
 	pGoMainShip->AddComponent<Image>(pImg);
 	pGoMainShip->GetComponent<Image>()->SetNativeSize();
-	pGoMainShip->transform->scale = new Vector2(2,2);
-	pGoMainShip->transform->position = new Vector2(0, 0);
+	pGoMainShip->transform.scale.Set(2,2);
+	pGoMainShip->transform.position.Set(0, 0);
 
 	GameObject* pGoTurret = new GameObject();
 	pImg = new Image("Turret.png", 4);
 	pGoTurret->AddComponent<Image>(pImg);
 	pGoTurret->GetComponent<Image>()->SetNativeSize();
-	pGoTurret->transform->scale = new Vector2(2, 2);
-	pGoTurret->transform->position = new Vector2(545, 260);
+	pGoTurret->transform.scale.Set(2, 2);
+	pGoTurret->transform.position.Set(545, 260);
 
 	//GameObject* pGoTurretBullet = new GameObject();
 	//pImg = new Image("TurretBullet.png", 4);
@@ -159,8 +159,8 @@ int main(int argc, char* argv[])
 	pImg = new Image("Enemy1.png", 4);
 	pGoEnemy1->AddComponent<Image>(pImg);
 	pGoEnemy1->GetComponent<Image>()->SetNativeSize();
-	pGoEnemy1->transform->scale = new Vector2(1.5, 1.5);
-	pGoEnemy1->transform->position = new Vector2(700, 190);
+	pGoEnemy1->transform.scale.Set(1.5, 1.5);
+	pGoEnemy1->transform.position.Set(700, 190);
 	
 	//GameObject* pGoEnemy1Bullet = new GameObject();
 	//pImg = new Image("Enemy1bullet.png", 4);
@@ -202,7 +202,7 @@ int main(int argc, char* argv[])
 
 	while(1)
 	{
-		pMainCam->trs.position->x += (float)100 / 1000 * MainGame::deltaTime;;
+		pMainCam->trs.position.x += (float)100 / 1000 * MainGame::deltaTime;;
 		CollideManager::GetInstanse()->DetectColliding();
 		pGame->EventHandler();
 		pGame->Update();
