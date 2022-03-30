@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- Our to do list data -->
+<GameObject>
+	<Transform>
+		<Scale x="2" y="2"></Scale>
+	</Transform>
+	<Components>
+		<Image layer="0" SetNativeSize="true">Moon.png</Image>
+	</Components>
+</GameObject>

@@ -10,12 +10,6 @@ using namespace std;
 
 Transform::~Transform()
 {
-	//if (position != NULL)
-	//	delete position;
-	//if (size != NULL)
-	//	delete size;
-	//if (scale != NULL)
-	//	delete scale;
 }
 
 void Transform::Clone(const Transform target)

@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\SDL2-devel-2.0.18-VC\SDL2-2.0.18\include;$(ProjectDir)\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\SDL2-devel-2.0.18-VC\SDL2-2.0.18\include;$(ProjectDir)\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\include;$(ProjectDir)\ThirdPart\tinyxml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,7 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\SDL2-devel-2.0.18-VC\SDL2-2.0.18\include;$(ProjectDir)\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\SDL2-devel-2.0.18-VC\SDL2-2.0.18\include;$(ProjectDir)\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\include;$(ProjectDir)\tinyxml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\camera.cpp" />
+    <ClCompile Include="include\dataParser.cpp" />
     <ClCompile Include="include\reactableItemBase.cpp" />
     <ClCompile Include="source\animation.cpp" />
     <ClCompile Include="source\canvas.cpp" />
@@ -167,6 +168,10 @@
     <ClCompile Include="source\script\ship\shipBase.cpp" />
     <ClCompile Include="source\shootingStrategy\singleLineShootingStrategy.cpp" />
     <ClCompile Include="source\tools.cpp" />
+    <ClCompile Include="ThirdPart\tinyxml\tinystr.cpp" />
+    <ClCompile Include="ThirdPart\tinyxml\tinyxml.cpp" />
+    <ClCompile Include="ThirdPart\tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="ThirdPart\tinyxml\tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\animation.h" />
@@ -176,6 +181,7 @@
     <ClInclude Include="include\collideInfo.h" />
     <ClInclude Include="include\collider.h" />
     <ClInclude Include="include\colliderManager.h" />
+    <ClInclude Include="include\dataParser.h" />
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\gameObject.h" />
     <ClInclude Include="include\gameVector.h" />
@@ -187,6 +193,8 @@
     <ClInclude Include="include\script.h" />
     <ClInclude Include="include\tools.h" />
     <ClInclude Include="include\transform.h" />
+    <ClInclude Include="ThirdPart\tinyxml\tinystr.h" />
+    <ClInclude Include="ThirdPart\tinyxml\tinyxml.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

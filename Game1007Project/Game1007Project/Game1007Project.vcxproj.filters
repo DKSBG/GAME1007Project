@@ -81,6 +81,21 @@
     <ClCompile Include="source\infinityScrollMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\dataParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPart\tinyxml\tinystr.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPart\tinyxml\tinyxml.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPart\tinyxml\tinyxmlerror.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPart\tinyxml\tinyxmlparser.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\canvas.h">
@@ -136,6 +151,15 @@
     </ClInclude>
     <ClInclude Include="include\infinityScrollMap.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dataParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPart\tinyxml\tinystr.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPart\tinyxml\tinyxml.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
