@@ -5,15 +5,15 @@
 #include "image.h"
 
 
-enum Camp {Ally, Enemy, ThridPart};
-enum ReactCamp { Both, AllyOnly, EnemyOnly };
-enum ReactType { HP, Speed, Atk };
+enum class Fiction {Ally, Enemy, ThridPart};
+enum class ReactTarget { Both, AllyOnly, EnemyOnly };
+enum class ReactType { HP, Speed, Atk };
 
 struct ReactAttribute
 {
-	Camp camp = Ally;
-	ReactCamp target = Both;
-	ReactType type = HP;
+	Fiction camp = Fiction::Ally;
+	ReactTarget target = ReactTarget::Both;
+	ReactType type = ReactType::HP;
 	int reactValue;
 };
 

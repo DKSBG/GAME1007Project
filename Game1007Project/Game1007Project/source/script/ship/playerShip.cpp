@@ -8,9 +8,9 @@ void PlayerShip::Init()
 	attribute.atk = 1;
 	attribute.vector = new Vector2(0, 0);
 
-	reactAttrbute.camp = Camp::Ally;
+	reactAttrbute.camp = Fiction::Ally;
 	reactAttrbute.reactValue = - attribute.atk;
-	reactAttrbute.target = ReactCamp::EnemyOnly;
+	reactAttrbute.target = ReactTarget::EnemyOnly;
 	reactAttrbute.type = ReactType::HP;
 
 	m_shooting = (ShootStrategy*) new SingleLineShooting();
@@ -109,9 +109,9 @@ void PlayerShip::Update()
 			attr.hp = 1;
 			attr.speed = 400;
 			attr.vector = new Vector2(1, 0);
-			rectAttr.camp = Camp::Ally;
+			rectAttr.camp = Fiction::Ally;
 			rectAttr.reactValue = -attr.atk;
-			rectAttr.target = ReactCamp::EnemyOnly;
+			rectAttr.target = ReactTarget::EnemyOnly;
 			rectAttr.type = ReactType::HP;
 
 			m_shooting->Fire(this->transform, attr, rectAttr);

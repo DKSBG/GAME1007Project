@@ -26,9 +26,9 @@ void Enemy1Ship::Update()
 		attr.hp = 1;
 		attr.speed = 400;
 		attr.vector = new Vector2(-1, 0);
-		rectAttr.camp = Camp::Enemy;
+		rectAttr.camp = Fiction::Enemy;
 		rectAttr.reactValue = -attr.atk;
-		rectAttr.target = ReactCamp::EnemyOnly;
+		rectAttr.target = ReactTarget::EnemyOnly;
 		rectAttr.type = ReactType::HP;
 
 		m_shooting->Fire(this->transform, attr, rectAttr);
@@ -43,9 +43,9 @@ void Enemy1Ship::Init()
 	attribute.atk = 1;
 	attribute.vector = new Vector2(0, -1);
 
-	reactAttrbute.camp = Camp::Enemy;
+	reactAttrbute.camp = Fiction::Enemy;
 	reactAttrbute.reactValue = - attribute.atk;
-	reactAttrbute.target = ReactCamp::EnemyOnly;
+	reactAttrbute.target = ReactTarget::EnemyOnly;
 	reactAttrbute.type = ReactType::HP;
 
 	m_shooting = (ShootStrategy*) new SingleLineShooting();

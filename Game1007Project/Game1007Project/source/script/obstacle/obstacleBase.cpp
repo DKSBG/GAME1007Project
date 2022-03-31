@@ -9,9 +9,9 @@ void Obstacle::Init()
 	attribute.speed = 0;
 	attribute.atk = 1000;
 
-	reactAttrbute.camp = Camp::ThridPart;
+	reactAttrbute.camp = Fiction::ThridPart;
 	reactAttrbute.reactValue = -attribute.atk;
-	reactAttrbute.target = ReactCamp::Both;
+	reactAttrbute.target = ReactTarget::Both;
 	reactAttrbute.type = ReactType::HP;
 }
 
