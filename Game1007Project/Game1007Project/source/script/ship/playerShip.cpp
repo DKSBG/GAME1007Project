@@ -76,9 +76,9 @@ void PlayerShip::Update()
 
 	m_lastCamPosX = camPos.position.x;
 
-	if (camPos.position.x < 0)
+	if (camPos.position.y < 0)
 	{
-		camPos.position.x = 0;
+		camPos.position.y = 0;
 	}
 
 	if (camPos.position.y + transform->size.y * transform->scale.y > Game::screenH)
