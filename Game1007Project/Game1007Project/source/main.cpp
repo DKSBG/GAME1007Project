@@ -8,6 +8,7 @@
 #include "colliderManager.h"
 #include "collider.h"
 #include "reactableItem.h"
+#include "gameController.h"
 #include "camera.h"
 #include "infinityScrollMap.h"
 #include "dataParser.h"
@@ -24,11 +25,9 @@ int main(int argc, char* argv[])
 		SDL_WINDOW_OPENGL);
 
 	SceneLoader::GetInstance()->Load("Scene1.xml");
-	Camera* pMainCam = CameraManager::GetInstance()->GetCamera("MainCam");
-	
+
 	while(1)
 	{
-		pMainCam->transform.position.x += (float)100 / 1000 * MainGame::deltaTime;
 		CollideManager::GetInstanse()->DetectColliding();
 		pGame->EventHandler();
 		pGame->Update();

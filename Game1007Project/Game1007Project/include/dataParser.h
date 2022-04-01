@@ -35,6 +35,12 @@ public:
 	bool Parse(GameObject* go, TiXmlElement* componentNode);
 };
 
+class GameControllerParser : public ComponentParser
+{
+public:
+	bool Parse(GameObject* go, TiXmlElement* componentNode);
+};
+
 class PrefabParser 
 {
 public:

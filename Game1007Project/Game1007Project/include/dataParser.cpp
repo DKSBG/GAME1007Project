@@ -1,5 +1,6 @@
 #include<iostream>
 #include "image.h"
+#include "gameController.h"
 #include "collider.h"
 #include "reactableItem.h"
 #include "infinityScrollMap.h"
@@ -14,15 +15,16 @@ ComponentParser* PrefabParser::GetComponentParser(std::string componentName)
 	{
 		if (componentName == "Image")
 			parser = new ImageParser();
-
-		if (componentName == "Collider")
-			parser =  new ColliderParser();
-
-		if (componentName == "ReactableItem")
-			parser =  new ReactableItemParser();
-
-		if (componentName == "InfinityScrollMap")
+		else if (componentName == "Collider")
+			parser = new ColliderParser();
+		else if (componentName == "ReactableItem")
+			parser = new ReactableItemParser();
+		else if (componentName == "InfinityScrollMap")
 			parser = new InfinityScrollMapParser();
+		else if (componentName == "GameController")
+			parser = new GameControllerParser();
+		else
+			std::cout << "Load Component Error: Loader doen't support component " << componentName << std::endl;
 
 		if (parser != NULL) 
 			m_componentMap.insert(std::pair<std::string, ComponentParser*>(componentName, parser));
@@ -273,6 +275,14 @@ bool InfinityScrollMapParser::Parse(GameObject* go, TiXmlElement* componentEleme
 			std::cout << "InfinityScrollMap Component Error: speed format is wrong." << std::endl;
 		}
 	}
+}
+
+bool GameControllerParser::Parse(GameObject* go, TiXmlElement* componentElement) 
+{
+	if (go == NULL)
+		return false;
+	go->AddComponent(new GameController())->Init();
+	return true;
 }
 
 CameraParser* CameraParser::m_instance = NULL;
