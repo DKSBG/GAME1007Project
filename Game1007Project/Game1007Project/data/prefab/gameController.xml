@@ -2,6 +2,6 @@
 <!-- Our to do list data -->
 <GameObject>
 	<Components>
-		<GameController></GameController>>
+		<GameController></GameController>
 	</Components>
 </GameObject>
