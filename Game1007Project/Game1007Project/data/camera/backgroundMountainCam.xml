@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- Our to do list data -->
+<Camera>
+	<Name>BackgroundMountainCam</Name>
+	<Layer>2</Layer>
+	<FullScreen></FullScreen>
+</Camera>
+

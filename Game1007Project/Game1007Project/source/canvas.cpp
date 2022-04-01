@@ -46,7 +46,7 @@ void Canvas::SetDrawUnit(DrawingUnit* unit)
 {
 	if(m_pCamera != NULL)
 	{
-		Transform camTrs = m_pCamera->trs;
+		Transform camTrs = m_pCamera->transform;
 		unit->tranform.position.x -= camTrs.position.x;
 		unit->tranform.position.y -= camTrs.position.y;
 		this->m_drawUnitList.push_back(unit);

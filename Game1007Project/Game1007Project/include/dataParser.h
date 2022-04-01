@@ -3,6 +3,8 @@
 #include "tinyxml.h"
 #include <map>
 
+bool TransformHandler(Transform* transform, TiXmlElement* pComponentsRoot);
+
 class ComponentParser
 {
 public:
@@ -27,6 +29,11 @@ public:
 	bool Parse(GameObject * go, TiXmlElement * componentNode);
 };
 
+class InfinityScrollMapParser : public ComponentParser
+{
+public:
+	bool Parse(GameObject* go, TiXmlElement* componentNode);
+};
 
 class PrefabParser 
 {
@@ -34,10 +41,28 @@ public:
 	GameObject* Parser(std::string prefabName);
 	ComponentParser* GetComponentParser(std::string componentName);
 	bool ComponentsHandler(GameObject* go, TiXmlElement* pComponentsRoot);
-	bool TransformHandler(GameObject* go, TiXmlElement* pComponentsRoot);
 	static PrefabParser* GetInstance();
 private:
 	std::map<std::string, ComponentParser*> m_componentMap;
 	static PrefabParser* m_instance;
+};
+
+class CameraParser 
+{
+public:
+	Camera* Parser(std::string cameraName);
+	static CameraParser* GetInstance();
+private:
+	static CameraParser* m_instance;
+};
+
+class SceneLoader
+{
+public:
+	void Load(std::string sceneName);
+	void ObjectChildHandler(TiXmlElement* childElement, Transform* trs);
+	static SceneLoader* GetInstance();
+private:
+	static SceneLoader* m_instance;
 };
 

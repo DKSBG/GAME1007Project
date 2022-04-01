@@ -1,8 +1,9 @@
-#include<dataParser.h>
 #include<iostream>
 #include "image.h"
 #include "collider.h"
 #include "reactableItem.h"
+#include "infinityScrollMap.h"
+#include "dataParser.h"
 
 ComponentParser* PrefabParser::GetComponentParser(std::string componentName)
 {
@@ -19,6 +20,9 @@ ComponentParser* PrefabParser::GetComponentParser(std::string componentName)
 
 		if (componentName == "ReactableItem")
 			parser =  new ReactableItemParser();
+
+		if (componentName == "InfinityScrollMap")
+			parser = new InfinityScrollMapParser();
 
 		if (parser != NULL) 
 			m_componentMap.insert(std::pair<std::string, ComponentParser*>(componentName, parser));
@@ -54,9 +58,9 @@ bool PrefabParser::ComponentsHandler(GameObject* go, TiXmlElement* pComponentsRo
 	return true;
 }
 
-bool PrefabParser::TransformHandler(GameObject* go, TiXmlElement* pComponentsRoot)
+bool TransformHandler(Transform* transform, TiXmlElement* pComponentsRoot)
 {
-	if(go == NULL)
+	if(transform == NULL)
 		return false;
 	if (pComponentsRoot == NULL)
 		return true;
@@ -68,11 +72,11 @@ bool PrefabParser::TransformHandler(GameObject* go, TiXmlElement* pComponentsRoo
 		string value = element->Value();
 
 		if (value == "Scale")
-			targetVector = &go->transform.scale;
+			targetVector = &transform->scale;
 		else if (value == "Position")
-			targetVector = &go->transform.position;
+			targetVector = &transform->position;
 		else if (value == "Size")
-			targetVector = &go->transform.size;
+			targetVector = &transform->size;
 		else
 			targetVector = NULL;
 
@@ -113,7 +117,7 @@ GameObject* PrefabParser::Parser(std::string prefabName)
 		std::string value = elememt->Value()==0 ? "" : elememt->Value();
 		if (value == "")
 		{
-			std::cout << "Load Prefab Wrong: compenent name not found" << std::endl;
+			std::cout << "Load Prefab Wrong: Element name not found" << std::endl;
 			continue;
 		}
 
@@ -131,7 +135,7 @@ GameObject* PrefabParser::Parser(std::string prefabName)
 		return NULL;
 	}
 
-	if (TransformHandler(go, pTrsElement) == false)
+	if (TransformHandler(&go->transform, pTrsElement) == false)
 	{
 		if (go != NULL)
 			delete go;
@@ -151,7 +155,7 @@ PrefabParser* PrefabParser::GetInstance()
 
 PrefabParser* PrefabParser::m_instance = NULL;
 
-bool ColliderParser::Parse(GameObject* go, TiXmlElement* componentNode) 
+bool ColliderParser::Parse(GameObject* go, TiXmlElement* componentElement)
 {
 	if (go == NULL)
 		return false;
@@ -159,19 +163,19 @@ bool ColliderParser::Parse(GameObject* go, TiXmlElement* componentNode)
 	return true;
 }
 
-bool ImageParser::Parse(GameObject* go, TiXmlElement* componentNode)
+bool ImageParser::Parse(GameObject* go, TiXmlElement* componentElement)
 {
 	std::string layer,texture, nativeSize;
 	int layerIndex;
 
-	if (componentNode->Attribute("layer") == NULL)
+	if (componentElement->Attribute("layer") == NULL)
 	{
 		std::cout << "Image Component Error: layer attribute not found." << std::endl;
 		return false;
 	}
 	else 
 	{
-		layer = componentNode->Attribute("layer");
+		layer = componentElement->Attribute("layer");
 		try
 		{
 			layerIndex = std::stoi(layer);
@@ -183,14 +187,14 @@ bool ImageParser::Parse(GameObject* go, TiXmlElement* componentNode)
 		}
 	}
 
-	if(componentNode->GetText() == NULL)
+	if(componentElement->GetText() == NULL)
 	{
 		std::cout << "Image Component Error: texture resource not found" << std::endl;
 		return false;
 	}
 	else 
 	{
-		texture = componentNode->GetText();
+		texture = componentElement->GetText();
 	}
 
 	for (auto c : layer) 
@@ -204,7 +208,7 @@ bool ImageParser::Parse(GameObject* go, TiXmlElement* componentNode)
 
 	Image* img = new Image(texture, layerIndex);
 	go->AddComponent<Image>(img);
-	nativeSize = componentNode->Attribute("SetNativeSize");
+	nativeSize = componentElement->Attribute("SetNativeSize");
 	if (nativeSize == "true")
 	{
 		img->SetNativeSize();
@@ -224,6 +228,8 @@ bool ReactableItemParser::Parse(GameObject* go, TiXmlElement* componentElement)
 		item = new Enemy1Ship();
 	else if (text == "Obstacle")
 		item = new Obstacle();
+	else
+		std::cout << "Load ReactablrItem Wrong: Not handle attribute" << text << std::endl;
 
 	if (item == NULL) 
 	{
@@ -234,3 +240,186 @@ bool ReactableItemParser::Parse(GameObject* go, TiXmlElement* componentElement)
 	go->AddComponent<ReactableItem>(item);
 	item->Init();
 }
+
+bool InfinityScrollMapParser::Parse(GameObject* go, TiXmlElement* componentElement) 
+{
+	if (componentElement->Attribute("map") == NULL)
+	{
+		std::cout << "InfinityScrollMap Component Error: map attribute not found." << std::endl;
+		return false;
+	}
+
+	InfinityScrollMap* scrollMap = new InfinityScrollMap(componentElement->Attribute("map"));
+	go->AddComponent<InfinityScrollMap>(scrollMap);
+
+	if (componentElement->Attribute("camera") != NULL) 
+	{
+		Camera* p_Cam = CameraManager::GetInstance()->GetCamera(componentElement->Attribute("camera"));
+		if (p_Cam != NULL) 
+		{
+			scrollMap->mapCam = &p_Cam->transform;
+		}
+	}
+	if (componentElement->Attribute("speed") != NULL)
+	{
+		int speed;
+		try
+		{
+			speed = std::stoi(componentElement->Attribute("speed"));
+			scrollMap->moveSpeed = speed;
+		}
+		catch (exception e)
+		{
+			std::cout << "InfinityScrollMap Component Error: speed format is wrong." << std::endl;
+		}
+	}
+}
+
+CameraParser* CameraParser::m_instance = NULL;
+CameraParser* CameraParser::GetInstance()
+{
+	if (m_instance == NULL)
+	{
+		m_instance = new CameraParser();
+	}
+	return m_instance;
+}
+
+Camera* CameraParser::Parser(std::string cameraName)
+{
+	TiXmlDocument xmlDoc;
+	string filePath = "data/camera/" + cameraName;
+	if (!xmlDoc.LoadFile(filePath.c_str()))
+	{
+		cout << xmlDoc.ErrorDesc() << "(" << cameraName << ")";
+		return NULL;
+	}
+
+	TiXmlElement* pRoot = xmlDoc.RootElement();
+	string name;
+	Transform transform;
+	std::vector<int> layerVector;
+
+	for (TiXmlElement* element = pRoot->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
+	{
+		std::string value = element->Value() == 0 ? "" : element->Value();
+		if (value == "")
+		{
+			std::cout << "Load Camera Wrong: Element name not found" << std::endl;
+			continue;
+		}
+
+		if (value == "Name") 
+		{
+			name = element->GetText();
+		}
+		else if (value == "Layer") 
+		{
+			try 
+			{
+				layerVector.push_back(std::stoi(element->GetText()));
+			}
+			catch (std::exception e) 
+			{
+				std::cout << "Load Camera Wrong: Layer data format is wrong." << std::endl;
+			}
+		}
+		else if (value == "FullScreen") 
+		{
+			transform.size.Set(MainGame::screenW ,MainGame::screenH);
+		}
+		else if (value == "Transform")
+		{
+			TransformHandler(&transform, element);
+		}
+		else 
+		{
+			std::cout << "Load Camera Wrong: Not handle element " << value << std::endl;
+		}
+	}
+
+	Camera* pCam = CameraManager::GetInstance()->CreateCamera(name, transform);
+	for (int layer : layerVector) 
+	{
+		CanvasManager::GetInstance()->TryGetCanvas(layer)->SetCamera(pCam);
+	}
+	return pCam;
+}
+
+void SceneLoader::ObjectChildHandler(TiXmlElement* childElement, Transform* trs)
+{
+	for (TiXmlElement* element = childElement; element != NULL; element = element->NextSiblingElement())
+	{
+		std::string value = element->Value() == 0 ? "" : element->Value();
+		if (value == "")
+		{
+			std::cout << "Load Scene Wrong: Element name not found" << std::endl;
+			continue;
+		}
+
+		if (value == "Transform")
+		{
+			TransformHandler(trs, element);
+		}
+		else
+		{
+			std::cout << "Load Scene Wrong: Not handle element " << value << " in child element\n";
+		}
+	}
+}
+
+void SceneLoader::Load(std::string sceneName) 
+{
+	TiXmlDocument xmlDoc;
+	string filePath = "data/scene/" + sceneName;
+	if (!xmlDoc.LoadFile(filePath.c_str()))
+	{
+		cout << xmlDoc.ErrorDesc() << "(" << sceneName << ")";
+		return;
+	}
+
+	TiXmlElement* pRoot = xmlDoc.RootElement();
+	for (TiXmlElement* element = pRoot->FirstChildElement(); element != NULL; element = element->NextSiblingElement()) 
+	{
+		std::string value = element->Value() == 0 ? "" : element->Value();
+		if (value == "")
+		{
+			std::cout << "Load Scene Wrong: Element name not found" << std::endl;
+			continue;
+		}
+
+		if (value == "Camera" || value == "Prefab")
+		{
+			Transform *transform = NULL;
+			if (element->Attribute("name")) 
+			{
+				if(value == "Camera")
+					transform = &CameraParser::GetInstance()->Parser(element->Attribute("name"))->transform;
+				if (value == "Prefab")
+					transform = &PrefabParser::GetInstance()->Parser(element->Attribute("name"))->transform;
+				ObjectChildHandler(element->FirstChildElement(), transform);
+			}
+			else 
+			{
+				std::cout << "Load Scene Wrong: "<< value  <<" element doesn't contain name." << std::endl;
+			}
+		}
+		else
+		{
+			std::cout << "Load Scene Wrong: Not handle element " << value << std::endl;
+		}
+
+	}
+}
+
+SceneLoader* SceneLoader::m_instance = NULL;
+SceneLoader* SceneLoader::GetInstance()
+{
+	if (m_instance == NULL)
+	{
+		m_instance = new SceneLoader();
+	}
+	return m_instance;
+}
+
+

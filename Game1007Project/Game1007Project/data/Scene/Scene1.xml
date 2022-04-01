@@ -1,0 +1,57 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- Our to do list data -->
+<Scene>
+	<Camera name="mainCam.xml"></Camera>
+	<Camera name="backgroundCloudCam.xml"></Camera>
+	<Camera name="backgroundMountainCam.xml"></Camera>
+	<Camera name="foregroundCloudCam.xml"></Camera>
+	<Camera name="backgroundCam.xml"></Camera>
+	<Prefab name="background.xml"></Prefab>
+	<Prefab name="backgroundCloud.xml"></Prefab>
+	<Prefab name="backgroundCloudScroll.xml"></Prefab>
+	<Prefab name="backgroundMountain.xml"></Prefab>
+	<Prefab name="backgroundMountainScroll.xml"></Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="500" y="100"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1000" y="150"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1500" y="200"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="foregroundCloud.xml"></Prefab>
+	<Prefab name="foregroundCloudScroll.xml"></Prefab>
+	<Prefab name="mainShip.xml">
+		<Transform>
+			<Position x="50" y="200"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="moon.xml"></Prefab>
+	<Prefab name="snowGround.xml">
+		<Transform>
+			<Position x="516" y="278"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="snowGround.xml">
+		<Transform>
+			<Position x="1516" y="278"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="turret.xml">
+		<Transform>
+			<Position x="545" y="260"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="turret.xml">
+		<Transform>
+			<Position x="1545" y="260"></Position>
+		</Transform>
+	</Prefab>
+</Scene>

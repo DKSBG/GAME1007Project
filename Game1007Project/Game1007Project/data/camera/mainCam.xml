@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- Our to do list data -->
+<Camera>
+	<Name>MainCam</Name>
+	<Layer>3</Layer>
+	<Layer>4</Layer>
+	<FullScreen></FullScreen>
+</Camera>

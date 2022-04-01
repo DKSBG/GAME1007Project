@@ -7,9 +7,9 @@
 class Camera
 {
 public:
-	Camera(std::string name, Transform trs);
+	Camera(std::string name, Transform transform);
 	std::string name;
-	Transform trs;
+	Transform transform;
 
 };
 
@@ -17,7 +17,7 @@ class CameraManager
 {
 public:
 	static CameraManager* GetInstance();
-	void CreateCamera(std::string name, Transform trs);
+	Camera* CreateCamera(std::string name, Transform transform);
 	Camera* GetCamera(std::string name);
 	std::map<std::string, Camera*> GetCameraMap();
 private:

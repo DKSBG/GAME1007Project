@@ -5,11 +5,12 @@
 class InfinityScrollMap : GOComponent
 {
 public:
+	InfinityScrollMap(std::string prefabName);
 	void Update();
 	int moveSpeed;
 	Transform* mapCam;
-	Transform* mapL;
-	Transform* mapR;
 private:
 	float m_accumulateMovePixel;
+	Transform* m_mapL;
+	Transform* m_mapR;
 };

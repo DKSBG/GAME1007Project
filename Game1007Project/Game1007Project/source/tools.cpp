@@ -30,8 +30,8 @@ void GetCamPosition(Camera* pCam, Vector2 realPos, Vector2* camPos)
 	{
 		if (camPos == NULL)
 			camPos = new Vector2();
-		camPos->x = realPos.x - pCam->trs.position.x;
-		camPos->y = realPos.y - pCam->trs.position.y;
+		camPos->x = realPos.x - pCam->transform.position.x;
+		camPos->y = realPos.y - pCam->transform.position.y;
 	}
 }
 
@@ -48,8 +48,8 @@ void GetRealPosition(Camera* pCam, Vector2 camPos, Vector2* realPos)
 	{
 		if (realPos == NULL)
 			realPos = new Vector2();
-		realPos->x = camPos.x + pCam->trs.position.x;
-		realPos->y = camPos.y + pCam->trs.position.y;
+		realPos->x = camPos.x + pCam->transform.position.x;
+		realPos->y = camPos.y + pCam->transform.position.y;
 	}
 }
 

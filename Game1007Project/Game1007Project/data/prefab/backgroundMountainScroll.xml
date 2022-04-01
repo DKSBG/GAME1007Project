@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- Our to do list data -->
+<GameObject>
+	<Transform>
+		<Scale x="2" y="2"></Scale>
+	</Transform>
+	<Components>
+		<InfinityScrollMap map="backgroundMountain.xml" speed="50" camera="BackgroundMountainCam"></InfinityScrollMap>
+	</Components>
+</GameObject>

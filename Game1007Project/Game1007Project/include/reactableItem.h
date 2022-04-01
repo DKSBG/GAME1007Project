@@ -76,7 +76,7 @@ public:
 	void OnDie();
 	void SpecificReact(ReactAttribute giverAttr) {}
 protected:
-	int m_attackCD = 250;
+	int m_attackCD = 500;
 	int m_cdTimer = 0;
 	ShootStrategy *m_shooting = NULL;
 	Image *m_pImg;

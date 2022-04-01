@@ -1,9 +1,9 @@
 #include "camera.h"
 
-Camera::Camera(std::string name, Transform trs)
+Camera::Camera(std::string name, Transform transform)
 {
 	this->name = name;
-	this->trs.Clone(trs);
+	this->transform.Clone(transform);
 }
 
 std::map<std::string, Camera*> CameraManager::GetCameraMap()
@@ -18,14 +18,16 @@ CameraManager* CameraManager::GetInstance()
 	return m_instance;
 }
 
-void CameraManager::CreateCamera(std::string name, Transform trs)
+Camera* CameraManager::CreateCamera(std::string name, Transform transform)
 {
+	Camera* pCamera = NULL;
 	auto it = m_cameraMap.find(name);
 	if (it == m_cameraMap.end())
 	{
-		Camera* pCamera = new Camera(name, trs);
+		pCamera = new Camera(name, transform);
 		m_cameraMap.insert(std::pair<std::string, Camera*>(name, pCamera));
 	}
+	return pCamera;
 }
 
 Camera* CameraManager::GetCamera(std::string name)
