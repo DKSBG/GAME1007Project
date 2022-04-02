@@ -4,14 +4,14 @@
 
 void Obstacle::Init() 
 {
-	attribute.vector = new Vector2(0, 0);
-	attribute.hp = 20000;
-	attribute.speed = 0;
-	attribute.atk = 1000;
+	itemAttribute.vector.Set(0, 0);
+	itemAttribute.hp = 20000;
+	itemAttribute.speed = 0;
+	itemAttribute.atk = 1000;
 
-	reactAttrbute.camp = Fiction::ThridPart;
-	reactAttrbute.reactValue = -attribute.atk;
-	reactAttrbute.target = ReactTarget::Both;
+	reactAttrbute.camp = Fiction::Enemy;
+	reactAttrbute.reactValue = -itemAttribute.atk;
+	reactAttrbute.target = ReactTarget::EnemyOnly;
 	reactAttrbute.type = ReactType::HP;
 }
 

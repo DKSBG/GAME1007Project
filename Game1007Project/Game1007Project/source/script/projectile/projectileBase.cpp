@@ -2,6 +2,11 @@
 #include "tools.h"
 #include "image.h"
 
+void Projectile::Init() 
+{
+	m_pImg = gameObject->GetComponent<Image>();
+}
+
 void Projectile::Update() {}
 
 void Projectile::OnDie()

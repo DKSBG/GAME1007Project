@@ -5,8 +5,8 @@
 		<Scale x="2" y="2"></Scale>
 	</Transform>
 	<Components>
-		<Image layer="4" SetNativeSize="true">Turret.png</Image>
+		<Image layer="4" SetNativeSize="true">MainShipBullet.png</Image>
 		<Collider></Collider>
-		<ReactableItem>Turret</ReactableItem>
+		<ReactableItem>StraightProjectile</ReactableItem>
 	</Components>
 </GameObject>

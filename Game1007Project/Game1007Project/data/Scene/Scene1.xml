@@ -16,7 +16,7 @@
 			<Position x="500" y="100"></Position>
 		</Transform>
 	</Prefab>
-	<Prefab name="enemy1.xml">
+	<Prefab name="boostEnemy.xml">
 		<Transform>
 			<Position x="1000" y="150"></Position>
 		</Transform>

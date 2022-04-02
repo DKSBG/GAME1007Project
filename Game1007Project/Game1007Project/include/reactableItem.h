@@ -23,14 +23,14 @@ struct ItemAttribute
 	// Speed unit is pixels per second.
 	int speed;
 	int atk;
-	Vector2* vector;
+	Vector2 vector;
 };
 
 class ReactableItem : public GOComponent 
 {
 public:
 	ReactAttribute reactAttrbute;
-	ItemAttribute attribute;
+	ItemAttribute itemAttribute;
 	void Init();
 	void Update();
 	void OnCollide(GameObject* go);
@@ -41,32 +41,37 @@ public:
 
 class Projectile : public ReactableItem
 {
+public:
+	void Init();
 	void Update();
 	void OnDie();
 	void SpecificReact(ReactAttribute giverAttr);
+protected:
+	Image* m_pImg;
 };
 
 class StraightProjectile : public Projectile
 {
+public:
 	void Update();
 };
 
 class ShootStrategy
 {
 public:
-	virtual void Fire(Transform* attacker, ItemAttribute attr, ReactAttribute reactAttr) = 0;
+	virtual void Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr, std::string bullet) = 0;
 };
 
 class SingleLineShooting : public ShootStrategy
 {
 public:
-	void Fire(Transform* attacker, ItemAttribute attr, ReactAttribute reactAttr);
+	void Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr, std::string bullet);
 };
 
 class SectorShooting : public ShootStrategy
 {
 public:
-	void Fire(Transform* attacker, ItemAttribute attr, ReactAttribute reactAttr);
+	void Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr, std::string bullet);
 };
 
 class Ship : public ReactableItem
@@ -98,8 +103,23 @@ class Enemy1Ship : public Ship
 public:
 	void Update();
 	void Init();
+};
+
+class BoostEnemyShip : public Ship
+{
+public:
+	void Update();
+	void Init();
 private:
-	Vector2 m_moveVector;
+	float m_acceleration;
+};
+
+
+class Turret : public Ship
+{
+public:
+	void Update();
+	void Init();
 };
 
 class Obstacle : public ReactableItem

@@ -35,3 +35,9 @@ void Vector2::Set(float x, float y)
 	this->x = x;
 	this->y = y;
 }
+
+void Vector2::Set(const Vector2 v)
+{
+	this->x = v.x;
+	this->y = v.y;
+}

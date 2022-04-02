@@ -3,13 +3,13 @@
 
 void PlayerShip::Init()
 {
-	attribute.hp = 1;
-	attribute.speed = 200;
-	attribute.atk = 1;
-	attribute.vector = new Vector2(0, 0);
+	itemAttribute.hp = 1;
+	itemAttribute.speed = 200;
+	itemAttribute.atk = 1;
+	itemAttribute.vector.Set(0, 0);
 
 	reactAttrbute.camp = Fiction::Ally;
-	reactAttrbute.reactValue = - attribute.atk;
+	reactAttrbute.reactValue = - itemAttribute.atk;
 	reactAttrbute.target = ReactTarget::EnemyOnly;
 	reactAttrbute.type = ReactType::HP;
 
@@ -21,34 +21,34 @@ void PlayerShip::Init()
 void PlayerShip::Update()
 {
 	int moveX, moveY;
-	attribute.vector->y = 0;
-	attribute.vector->x = 0;
+	itemAttribute.vector.y = 0;
+	itemAttribute.vector.x = 0;
 
 	m_cdTimer -= Game::deltaTime;
 
 	if (m_KeyboardStates[SDL_SCANCODE_W])
-		attribute.vector->y = -1;
+		itemAttribute.vector.y = -1;
 	if (m_KeyboardStates[SDL_SCANCODE_S])
-		attribute.vector->y = 1;
+		itemAttribute.vector.y = 1;
 	if (m_KeyboardStates[SDL_SCANCODE_A])
-		attribute.vector->x = -1;
+		itemAttribute.vector.x = -1;
 	if (m_KeyboardStates[SDL_SCANCODE_D])
-		attribute.vector->x = 1;
+		itemAttribute.vector.x = 1;
 
 	string spriteName = "MainShip.png";
 
-	if (attribute.vector->x <= 0)
+	if (itemAttribute.vector.x <= 0)
 	{
-		if (attribute.vector->y < 0)
+		if (itemAttribute.vector.y < 0)
 			spriteName = "MainShipUp.png";
-		if (attribute.vector->y > 0)
+		if (itemAttribute.vector.y > 0)
 			spriteName = "MainShipDown.png";
 	}
 	else
 	{
-		if (attribute.vector->y < 0)
+		if (itemAttribute.vector.y < 0)
 			spriteName = "MainShipUpForward.png";
-		if (attribute.vector->y > 0)
+		if (itemAttribute.vector.y > 0)
 			spriteName = "MainShipDownForward.png";
 	}
 
@@ -66,7 +66,7 @@ void PlayerShip::Update()
 		m_shooting = (ShootStrategy*) new SingleLineShooting();
 	}
 
-	GetMovePixel(attribute.vector, attribute.speed, &moveX, &moveY);
+	GetMovePixel(&itemAttribute.vector, itemAttribute.speed, &moveX, &moveY);
 
 	Transform camPos;
 	GetCamPosition(m_pCam, this->transform->position, &camPos.position);
@@ -105,16 +105,19 @@ void PlayerShip::Update()
 			Vector2 pos;
 			ReactAttribute rectAttr;
 			ItemAttribute attr;
+			Transform trs;
 			attr.atk = 1;
 			attr.hp = 1;
 			attr.speed = 400;
-			attr.vector = new Vector2(1, 0);
+			attr.vector.Set(1, 0);
 			rectAttr.camp = Fiction::Ally;
 			rectAttr.reactValue = -attr.atk;
 			rectAttr.target = ReactTarget::EnemyOnly;
 			rectAttr.type = ReactType::HP;
-
-			m_shooting->Fire(this->transform, attr, rectAttr);
+			trs.Clone(*this->transform);
+			trs.position.x += transform->size.x * transform->scale.x;
+			trs.position.x += transform->size.y * transform->scale.y;
+			m_shooting->Fire(trs, attr, rectAttr, "mainShipBullet.xml");
 			m_cdTimer = m_attackCD;
 		}
 	}

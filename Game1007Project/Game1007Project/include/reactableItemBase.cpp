@@ -24,13 +24,13 @@ void ReactableItem::Reacting(ReactAttribute reactAttr)
 	switch (reactAttr.type)
 	{
 	case ReactType::HP:
-		targetValue = &attribute.hp;
+		targetValue = &itemAttribute.hp;
 		break;
 	case ReactType::Speed:
-		targetValue = &attribute.speed;
+		targetValue = &itemAttribute.speed;
 		break;
 	case ReactType::Atk:
-		targetValue = &attribute.atk;
+		targetValue = &itemAttribute.atk;
 		break;
 	default:
 		break;
@@ -39,7 +39,7 @@ void ReactableItem::Reacting(ReactAttribute reactAttr)
 	if (targetValue != NULL)
 		*targetValue += reactAttr.reactValue;
 
-	if (attribute.hp <= 0)
+	if (itemAttribute.hp <= 0)
 		OnDie();
 	SpecificReact(reactAttr);
 }

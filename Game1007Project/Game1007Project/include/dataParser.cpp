@@ -228,8 +228,14 @@ bool ReactableItemParser::Parse(GameObject* go, TiXmlElement* componentElement)
 		item = new PlayerShip();
 	else if (text == "Enemy1Ship")
 		item = new Enemy1Ship();
+	else if (text == "Turret")
+		item = new Turret();
+	else if (text == "BoostEnemyShip")
+		item = new BoostEnemyShip();
 	else if (text == "Obstacle")
 		item = new Obstacle();
+	else if (text == "StraightProjectile")
+		item = new StraightProjectile();
 	else
 		std::cout << "Load ReactablrItem Wrong: Not handle attribute" << text << std::endl;
 
@@ -241,6 +247,14 @@ bool ReactableItemParser::Parse(GameObject* go, TiXmlElement* componentElement)
 
 	go->AddComponent<ReactableItem>(item);
 	item->Init();
+}
+
+// TODO
+bool ReactableItemParser::SubAttributeParse(ReactableItem* item, TiXmlElement* componentElement)
+{
+	if (item == NULL || componentElement == NULL)
+		return false;
+	return true;
 }
 
 bool InfinityScrollMapParser::Parse(GameObject* go, TiXmlElement* componentElement) 

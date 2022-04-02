@@ -1,6 +1,7 @@
 #pragma once
 #include "gameObject.h"
 #include "tinyxml.h"
+#include "reactableItem.h"
 #include <map>
 
 bool TransformHandler(Transform* transform, TiXmlElement* pComponentsRoot);
@@ -27,6 +28,8 @@ class ReactableItemParser: public ComponentParser
 {
 public:
 	bool Parse(GameObject * go, TiXmlElement * componentNode);
+private:
+	bool SubAttributeParse(ReactableItem *item, TiXmlElement* componentNode);
 };
 
 class InfinityScrollMapParser : public ComponentParser
