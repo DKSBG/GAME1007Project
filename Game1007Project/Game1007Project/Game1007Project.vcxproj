@@ -166,6 +166,7 @@
     <ClCompile Include="source\script\projectile\straightProjectile.cpp" />
     <ClCompile Include="source\script\ship\boostEnemyShip.cpp" />
     <ClCompile Include="source\script\ship\enemy1Ship.cpp" />
+    <ClCompile Include="source\script\ship\Enemy2Ship.cpp" />
     <ClCompile Include="source\script\ship\playerShip.cpp" />
     <ClCompile Include="source\script\ship\shipBase.cpp" />
     <ClCompile Include="source\script\ship\turrent.cpp" />
