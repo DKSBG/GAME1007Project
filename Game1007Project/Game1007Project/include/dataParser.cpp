@@ -228,6 +228,8 @@ bool ReactableItemParser::Parse(GameObject* go, TiXmlElement* componentElement)
 		item = new PlayerShip();
 	else if (text == "Enemy1Ship")
 		item = new Enemy1Ship();
+	else if (text == "Enemy2Ship")
+		item = new Enemy2Ship();
 	else if (text == "Turret")
 		item = new Turret();
 	else if (text == "BoostEnemyShip")

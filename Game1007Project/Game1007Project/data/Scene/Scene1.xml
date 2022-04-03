@@ -26,6 +26,16 @@
 			<Position x="1500" y="200"></Position>
 		</Transform>
 	</Prefab>
+	<Prefab name="enemy2.xml">
+		<Transform>
+			<Position x="2000" y="200"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="boostEnemy2.xml">
+		<Transform>
+			<Position x="2200" y="300"></Position>
+		</Transform>
+	</Prefab>
 	<Prefab name="foregroundCloud.xml"></Prefab>
 	<Prefab name="foregroundCloudScroll.xml"></Prefab>
 	<Prefab name="mainShip.xml">
@@ -36,22 +46,22 @@
 	<Prefab name="moon.xml"></Prefab>
 	<Prefab name="snowGround.xml">
 		<Transform>
-			<Position x="516" y="278"></Position>
+			<Position x="516" y="340"></Position>
 		</Transform>
 	</Prefab>
 	<Prefab name="snowGround.xml">
 		<Transform>
-			<Position x="1516" y="278"></Position>
+			<Position x="1516" y="340"></Position>
 		</Transform>
 	</Prefab>
 	<Prefab name="turret.xml">
 		<Transform>
-			<Position x="545" y="260"></Position>
+			<Position x="545" y="317"></Position>
 		</Transform>
 	</Prefab>
 	<Prefab name="turret.xml">
 		<Transform>
-			<Position x="1545" y="260"></Position>
+			<Position x="1545" y="317"></Position>
 		</Transform>
 	</Prefab>
 	<Prefab name="gameController.xml"></Prefab>

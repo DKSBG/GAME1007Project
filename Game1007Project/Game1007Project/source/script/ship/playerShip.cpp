@@ -4,7 +4,7 @@
 void PlayerShip::Init()
 {
 	itemAttribute.hp = 1;
-	itemAttribute.speed = 200;
+	itemAttribute.speed = 350;
 	itemAttribute.atk = 1;
 	itemAttribute.vector.Set(0, 0);
 
@@ -108,15 +108,15 @@ void PlayerShip::Update()
 			Transform trs;
 			attr.atk = 1;
 			attr.hp = 1;
-			attr.speed = 400;
+			attr.speed = 600;
 			attr.vector.Set(1, 0);
 			rectAttr.camp = Fiction::Ally;
 			rectAttr.reactValue = -attr.atk;
 			rectAttr.target = ReactTarget::EnemyOnly;
 			rectAttr.type = ReactType::HP;
 			trs.Clone(*this->transform);
-			trs.position.x += transform->size.x * transform->scale.x;
-			trs.position.x += transform->size.y * transform->scale.y;
+			trs.position.x += (transform->size.x * transform->scale.x);
+			trs.position.x += (transform->size.y * transform->scale.y) -28;
 			m_shooting->Fire(trs, attr, rectAttr, "mainShipBullet.xml");
 			m_cdTimer = m_attackCD;
 		}

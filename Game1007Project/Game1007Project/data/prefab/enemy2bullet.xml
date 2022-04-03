@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- Our to do list data -->
+<GameObject>
+	<Transform>
+		<Scale x="1" y="1"></Scale>
+	</Transform>
+	<Components>
+		<Image layer="4" SetNativeSize="true">Projectile2.png</Image>
+		<Collider></Collider>
+		<ReactableItem>StraightProjectile</ReactableItem>
+	</Components>
+</GameObject>

@@ -81,7 +81,7 @@ public:
 	void OnDie();
 	void SpecificReact(ReactAttribute giverAttr) {}
 protected:
-	int m_attackCD = 500;
+	int m_attackCD = 450;
 	int m_cdTimer = 0;
 	ShootStrategy *m_shooting = NULL;
 	Image *m_pImg;
@@ -99,6 +99,13 @@ private:
 };
 
 class Enemy1Ship : public Ship
+{
+public:
+	void Update();
+	void Init();
+};
+
+class Enemy2Ship : public Ship
 {
 public:
 	void Update();
