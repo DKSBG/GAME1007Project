@@ -124,6 +124,9 @@
       <AdditionalLibraryDirectories>$(ProjectDir)\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\lib\x64;$(ProjectDir)\SDL2-devel-2.0.18-VC\SDL2-2.0.18\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Xdcmake>
+      <OutputFile>$(OutDir)$(TargetName).xml</OutputFile>
+    </Xdcmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -166,6 +169,7 @@
     <ClCompile Include="source\script\projectile\straightProjectile.cpp" />
     <ClCompile Include="source\script\ship\boostEnemyShip.cpp" />
     <ClCompile Include="source\script\ship\enemy1Ship.cpp" />
+    <ClCompile Include="source\script\ship\Enemy2Ship.cpp" />
     <ClCompile Include="source\script\ship\playerShip.cpp" />
     <ClCompile Include="source\script\ship\shipBase.cpp" />
     <ClCompile Include="source\script\ship\turrent.cpp" />
