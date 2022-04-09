@@ -3,6 +3,7 @@
 #include "canvas.h"
 #include "SDL.h"
 #include "colliderManager.h"
+#include "SDL_mixer.h"
 
 using namespace std;
 
@@ -85,6 +86,14 @@ bool MainGame::Init(const char* title,
 
 	screenH = h;
 	screenW = w;
+
+
+	//Initialize SDL_mixer 
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+	{
+		cout << "Create SDL mixer fail";
+		return false;
+	}
 
 	return true;
 }
