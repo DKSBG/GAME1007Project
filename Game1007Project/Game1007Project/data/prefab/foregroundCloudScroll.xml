@@ -5,6 +5,6 @@
 		<Scale x="2" y="2"></Scale>
 	</Transform>
 	<Components>
-		<InfinityScrollMap map="foregroundCloud.xml" speed="150" camera="ForegroundCloudCam"></InfinityScrollMap>
+		<InfinityScrollMap map="foregroundCloud.xml" moveRate="4" targetCam = "MainCam" camera="ForegroundCloudCam"></InfinityScrollMap>
 	</Components>
 </GameObject>

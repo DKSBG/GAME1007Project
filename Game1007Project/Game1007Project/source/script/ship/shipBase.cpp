@@ -1,7 +1,15 @@
 #include "reactableItem.h"
 #include "tools.h"
+#include "audioPlayer.h"
+#include "explode.h"
+#include "audioPlayer.h"
 
 void Ship::OnDie()
+{
+	OnExplode();
+}
+
+void Ship::OnExplode()
 {
 	Image* pImg;
 	GameObject* pGoExplosion = new GameObject();
@@ -20,4 +28,8 @@ void Ship::OnDie()
 	explosionTrs->position.y -= explosionTrs->size.y * explosionTrs->scale.y / 2;
 
 	GameObjectManager::GetInstance()->PopGameObject(this->gameObject);
+
+	Explode *explode = new Explode();
+	pGoExplosion->AddComponent<Explode>(explode);
+	AudioPlayer::GetInstance()->PlaySound("Explosion.wav");
 }

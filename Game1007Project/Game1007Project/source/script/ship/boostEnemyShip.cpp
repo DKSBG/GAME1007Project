@@ -1,22 +1,9 @@
 #include "reactableItem.h"
 #include "tools.h"
 
-void BoostEnemyShip::Update()
+void BoostEnemyShip::Move() 
 {
-	Transform camPos;
-	GetCamPosition(m_pImg->GetCanvas()->GetCamera(), this->transform->position, &camPos.position);
-
-	if (camPos.position.x < -100)
-	{
-		GameObjectManager::GetInstance()->PopGameObject(gameObject);
-	}
-
-	if (camPos.position.x > MainGame::screenW)
-	{
-		return;
-	}
-
-	itemAttribute.speed += m_acceleration * MainGame::deltaTime / 1000;
+	itemAttribute.speed += m_acceleration * MainGame::deltaGameTime / 1000;
 
 	int moveX, moveY;
 	GetMovePixel(&itemAttribute.vector, itemAttribute.speed, &moveX, &moveY);
@@ -37,4 +24,22 @@ void BoostEnemyShip::Init()
 
 	m_acceleration = 500;
 	m_pImg = this->gameObject->GetComponent<Image>();
+}
+
+void BoostEnemyShip::Update()
+{
+	Transform camPos;
+	GetCamPosition(m_pImg->GetCanvas()->GetCamera(), this->transform->position, &camPos.position);
+
+	if (camPos.position.x < -100)
+	{
+		GameObjectManager::GetInstance()->PopGameObject(gameObject);
+	}
+
+	if (camPos.position.x > MainGame::screenW)
+	{
+		return;
+	}
+
+	Move();
 }

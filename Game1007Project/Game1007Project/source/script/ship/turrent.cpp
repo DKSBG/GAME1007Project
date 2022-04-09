@@ -1,22 +1,30 @@
 #include "reactableItem.h"
 #include "tools.h"
+#include "audioPlayer.h"
 
-void Turret::Update()
+void Turret::Init()
 {
-	Transform camPos;
-	GetCamPosition(m_pImg->GetCanvas()->GetCamera(), this->transform->position, &camPos.position);
+	itemAttribute.hp = 1;
+	itemAttribute.speed = 200;
+	itemAttribute.atk = 1;
+	itemAttribute.vector.Set(0, 0);
 
-	if (camPos.position.x < -100)
-	{
-		GameObjectManager::GetInstance()->PopGameObject(gameObject);
-	}
+	reactAttrbute.camp = Fiction::Enemy;
+	reactAttrbute.reactValue = -itemAttribute.atk;
+	reactAttrbute.target = ReactTarget::EnemyOnly;
+	reactAttrbute.type = ReactType::HP;
 
-	if (camPos.position.x > MainGame::screenW)
-	{
-		return;
-	}
+	m_shooting = (ShootStrategy*) new SingleLineShooting();
+	m_shooting->bullet = "turretBullet.xml";
+	m_shooting->fireSound = "EnemyLaser.mp3";
 
-	m_cdTimer -= Game::deltaTime;
+	m_attackCD = 750;
+	m_pImg = this->gameObject->GetComponent<Image>();
+}
+
+void Turret::Attack() 
+{
+	m_cdTimer -= Game::deltaGameTime;
 	if (m_cdTimer <= 0)
 	{
 		Vector2 pos;
@@ -32,24 +40,25 @@ void Turret::Update()
 		rectAttr.target = ReactTarget::EnemyOnly;
 		rectAttr.type = ReactType::HP;
 		trs.position.Set(transform->position);
-		m_shooting->Fire(trs, attr, rectAttr, "turretBullet.xml");
+		m_shooting->Fire(trs, attr, rectAttr);
 		m_cdTimer = m_attackCD;
 	}
 }
 
-void Turret::Init()
+void Turret::Update()
 {
-	itemAttribute.hp = 1;
-	itemAttribute.speed = 200;
-	itemAttribute.atk = 1;
-	itemAttribute.vector.Set(0, 0);
+	Transform camPos;
+	GetCamPosition(m_pImg->GetCanvas()->GetCamera(), this->transform->position, &camPos.position);
+	if (camPos.position.x < -100)
+	{
+		GameObjectManager::GetInstance()->PopGameObject(gameObject);
+	}
 
-	reactAttrbute.camp = Fiction::Enemy;
-	reactAttrbute.reactValue = -itemAttribute.atk;
-	reactAttrbute.target = ReactTarget::EnemyOnly;
-	reactAttrbute.type = ReactType::HP;
+	if (camPos.position.x > MainGame::screenW)
+	{
+		return;
+	}
 
-	m_shooting = (ShootStrategy*) new SingleLineShooting();
-	m_attackCD = 750;
-	m_pImg = this->gameObject->GetComponent<Image>();
+	Attack();
 }
+

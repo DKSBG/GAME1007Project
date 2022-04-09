@@ -2,9 +2,10 @@
 #include "tools.h"
 #include "image.h"
 #include "dataParser.h"
+#include "audioPlayer.h"
 
 
-void SingleLineShooting::Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr, std::string bullet)
+void SingleLineShooting::Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr)
 {
 	Image* pImg;
 	GameObject* bulletObject = PrefabParser::GetInstance()->Parser(bullet);
@@ -19,4 +20,6 @@ void SingleLineShooting::Fire(const Transform attacker, ItemAttribute attr, Reac
 	bulletScript->reactAttrbute.reactValue = reactAttr.reactValue;
 	bulletScript->reactAttrbute.target = reactAttr.target;
 	bulletScript->reactAttrbute.type = reactAttr.type;
+
+	AudioPlayer::GetInstance()->PlaySound(fireSound, 0);
 }

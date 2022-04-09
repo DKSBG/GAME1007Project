@@ -10,8 +10,8 @@ void GetMovePixel(Vector2 *moveVector, int speed, int* x, int* y)
 
 	if (slide != 0) 
 	{
-		moveX = speed * moveVector->x / slide / 1000 * Game::deltaTime;
-		moveY = speed * moveVector->y / slide / 1000 * Game::deltaTime;
+		moveX = speed * moveVector->x / slide / 1000 * Game::deltaGameTime;
+		moveY = speed * moveVector->y / slide / 1000 * Game::deltaGameTime;
 	}
 
 	*x = moveX;

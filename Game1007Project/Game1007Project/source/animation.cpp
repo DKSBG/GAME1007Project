@@ -15,7 +15,7 @@ Animation::Animation(string atlasName, int layer, int startIdx, int endIdx, int 
 
 void Animation::Update()
 {
-	m_deltaTime += Game::GetInstance()->deltaTime;
+	m_deltaTime += Game::GetInstance()->deltaGameTime;
 	if (m_deltaTime > m_interval) 
 	{
 		m_currentIdx++;

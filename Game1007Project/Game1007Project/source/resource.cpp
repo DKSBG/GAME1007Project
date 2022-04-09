@@ -45,7 +45,11 @@ TextureResource* ResourceManager::LoadTextureResource(string texturePath)
 	{
 		SDL_Texture* pTexture = this->LoadTexture(TEXTUREPATH, texturePath);
 		resource = new TextureResource(pTexture);
-		//pTexture->DestroyCallback = TextureResourceCollect;
+		if (resource == NULL)
+		{
+			std::cout << "Resource Error: texture " << texturePath << "not found" << std::endl;
+			return NULL;
+		}
 		m_textureResourceMap.insert(pair<size_t, TextureResource*>(id, resource));
 	}
 	else
@@ -65,6 +69,11 @@ AtlasResource* ResourceManager::LoadAtlasResource(string texturePath)
 	{
 		SDL_Texture* pTexture = this->LoadTexture(ATLASPATH, texturePath);
 		resource = new AtlasResource(pTexture);
+		if (resource == NULL)
+		{
+			std::cout << "Resource Error: Atlas " << resource << "not found" << std::endl;
+			return NULL;
+		}
 		//pTexture->DestroyCallback = TextureResourceCollect;
 		m_atlasResourceMap.insert(pair<size_t, AtlasResource*>(id, resource));
 	}
@@ -75,17 +84,69 @@ AtlasResource* ResourceManager::LoadAtlasResource(string texturePath)
 	return resource;
 }
 
-/*void ResourceManager::TextureResourceCollect(int id)
+SoundResource* ResourceManager::LoadSoundResource(string soundPath)
 {
-	map<size_t, TextureResource*>::iterator it = m_textureResourceMap.find(id);
-	if (it != m_textureResourceMap.end())
+	hash<string> pathHash;
+	size_t id = pathHash(soundPath);
+	SoundResource* resource;
+
+	if (m_soundResoureMap.find(id) == m_soundResoureMap.end())
 	{
-		TextureResource* pTexture = m_textureResourceMap[id];
-		m_textureResourceMap.erase(it);
-		SDL_DestroyTexture(pTexture->m_pTexture);
-		delete pTexture;
+		std::string file = SOUNDPATH + soundPath;
+		Mix_Chunk* pChunk = Mix_LoadWAV(file.c_str());
+		if (pChunk == NULL) 
+		{
+			std::cout << "Resource Error: sound " << soundPath << "not found" << std::endl;
+			return NULL;
+		}
+		resource = new SoundResource(pChunk);
+		m_soundResoureMap.insert(pair<size_t, SoundResource*>(id, resource));
 	}
-}*/
+	else
+	{
+		resource = m_soundResoureMap[id];
+	}
+	return resource;
+}
+
+MusicResource* ResourceManager::LoadMusicResource(string musicPath)
+{
+	hash<string> pathHash;
+	size_t id = pathHash(musicPath);
+	MusicResource* resource;
+
+	if (m_atlasResourceMap.find(id) == m_atlasResourceMap.end())
+	{
+		std::string file = MUSICPATH + musicPath;
+		Mix_Music* pMusic = Mix_LoadMUS(file.c_str());
+
+		if (pMusic == NULL)
+		{
+			std::cout << "Resource Error: music " << musicPath << "not found" << std::endl;
+			return NULL;
+		}
+		resource = new MusicResource(pMusic);
+
+		m_musicResoureMap.insert(pair<size_t, MusicResource*>(id, resource));
+	}
+	else
+	{
+		resource = m_musicResoureMap[id];
+	}
+	return resource;
+}
+
+//void ResourceManager::TextureResourceCollect(int id)
+//{
+//	map<size_t, TextureResource*>::iterator it = m_textureResourceMap.find(id);
+//	if (it != m_textureResourceMap.end())
+//	{
+//		TextureResource* pTexture = m_textureResourceMap[id];
+//		m_textureResourceMap.erase(it);
+//		SDL_DestroyTexture(pTexture->m_pTexture);
+//		delete pTexture;
+//	}
+//}
 
 ResourceManager* ResourceManager::GetInstance() 
 {
@@ -110,7 +171,6 @@ SDL_Rect TextureKindResource::GetRect()
 	return this->m_origRect;
 }
 #pragma endregion
-
 
 #pragma region TextureResource Implement
 TextureResource::TextureResource(SDL_Texture* pTexture) 
@@ -182,6 +242,29 @@ void AtlasResource::AutoSplite(int row, int col, SDL_Rect rect)
 }
 #pragma endregion
 
+#pragma region SoundResource Implement
+Mix_Chunk* SoundResource::GetSoundChunk()
+{
+	return m_pSoundChunk;
+}
+
+SoundResource::SoundResource(Mix_Chunk* pSoundChunk)
+{
+	this->m_pSoundChunk = pSoundChunk;
+}
+#pragma endregion
+
+#pragma region MusicResource Implement
+Mix_Music* MusicResource::GetMusic()
+{
+	return m_pMusic;
+}
+
+MusicResource::MusicResource(Mix_Music* pMusic)
+{
+	this->m_pMusic = pMusic;
+}
+#pragma endregion
 
 
 

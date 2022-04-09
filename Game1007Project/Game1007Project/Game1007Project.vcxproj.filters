@@ -108,6 +108,12 @@
     <ClCompile Include="source\script\ship\Enemy2Ship.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\audioPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\explode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\canvas.h">
@@ -174,6 +180,12 @@
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="include\gameController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\audioPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\explode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

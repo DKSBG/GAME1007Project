@@ -19,6 +19,12 @@ InfinityScrollMap::InfinityScrollMap(std::string prefabName)
 	}
 }
 
+void InfinityScrollMap::SetTargetCam(Camera* cam) 
+{
+	m_targetCam = cam;
+	m_mainCamLastPosX = cam->transform.position.x;
+}
+
 void InfinityScrollMap::Update()
 {
 	if (mapCam == NULL) 
@@ -27,13 +33,22 @@ void InfinityScrollMap::Update()
 		return;
 	}
 
-	float movePixel = (float)moveSpeed / 1000 * MainGame::deltaTime;
-	mapCam->position.x += movePixel;
+	if (m_targetCam == NULL)
+	{
+		cout << "Infinity Scroll Map Error: targetCam is NULL. \n";
+		return;
+	}
+
+	float targetCamMoveDistance = m_targetCam->transform.position.x - m_mainCamLastPosX;
+
+	float movePixel = targetCamMoveDistance * moveRate;
 	m_accumulateMovePixel += movePixel;
 
 	if (m_accumulateMovePixel >= m_mapL->size.x * m_mapL->scale.x)
 	{
 		m_accumulateMovePixel -= m_mapL->size.x * m_mapL->scale.x;
-		mapCam->position.x = m_accumulateMovePixel;
 	}
+
+	mapCam->position.x = m_accumulateMovePixel;
+	m_mainCamLastPosX = m_targetCam->transform.position.x;
 }

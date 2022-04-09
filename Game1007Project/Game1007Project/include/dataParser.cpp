@@ -278,13 +278,23 @@ bool InfinityScrollMapParser::Parse(GameObject* go, TiXmlElement* componentEleme
 			scrollMap->mapCam = &p_Cam->transform;
 		}
 	}
-	if (componentElement->Attribute("speed") != NULL)
+
+	if (componentElement->Attribute("targetCam") != NULL)
 	{
-		int speed;
+		Camera* p_Cam = CameraManager::GetInstance()->GetCamera(componentElement->Attribute("targetCam"));
+		if (p_Cam != NULL)
+		{
+			scrollMap->SetTargetCam(p_Cam);
+		}
+	}
+
+	if (componentElement->Attribute("moveRate") != NULL)
+	{
+		float moveRate;
 		try
 		{
-			speed = std::stoi(componentElement->Attribute("speed"));
-			scrollMap->moveSpeed = speed;
+			moveRate = std::stof(componentElement->Attribute("moveRate"));
+			scrollMap->moveRate = moveRate;
 		}
 		catch (exception e)
 		{

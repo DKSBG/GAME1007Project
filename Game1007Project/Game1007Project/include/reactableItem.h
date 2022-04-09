@@ -59,19 +59,21 @@ public:
 class ShootStrategy
 {
 public:
-	virtual void Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr, std::string bullet) = 0;
+	virtual void Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr) = 0;
+	std::string fireSound;
+	std::string bullet;
 };
 
 class SingleLineShooting : public ShootStrategy
 {
 public:
-	void Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr, std::string bullet);
+	void Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr);
 };
 
 class SectorShooting : public ShootStrategy
 {
 public:
-	void Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr, std::string bullet);
+	void Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr);
 };
 
 class Ship : public ReactableItem
@@ -79,6 +81,9 @@ class Ship : public ReactableItem
 public:
 	ShootStrategy* fire;
 	void OnDie();
+	void Attack();
+	void Move();
+	void OnExplode();
 	void SpecificReact(ReactAttribute giverAttr) {}
 protected:
 	int m_attackCD = 450;
@@ -92,6 +97,8 @@ class PlayerShip : public Ship
 public:
 	void Update();
 	void Init();
+	void Attack();
+	void Move();
 private:
 	const Uint8* m_KeyboardStates = SDL_GetKeyboardState(NULL);
 	float m_lastCamPosX;
@@ -103,6 +110,8 @@ class Enemy1Ship : public Ship
 public:
 	void Update();
 	void Init();
+	void Attack();
+	void Move();
 };
 
 class Enemy2Ship : public Ship
@@ -110,6 +119,9 @@ class Enemy2Ship : public Ship
 public:
 	void Update();
 	void Init();
+	void Explode();
+	void Attack();
+	void Move();
 };
 
 class BoostEnemyShip : public Ship
@@ -117,6 +129,8 @@ class BoostEnemyShip : public Ship
 public:
 	void Update();
 	void Init();
+	void Attack();
+	void Move();
 private:
 	float m_acceleration;
 };
@@ -127,6 +141,7 @@ class Turret : public Ship
 public:
 	void Update();
 	void Init();
+	void Attack();
 };
 
 class Obstacle : public ReactableItem

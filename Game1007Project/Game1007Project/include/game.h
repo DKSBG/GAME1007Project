@@ -17,15 +17,20 @@ public:
 	virtual void EndOfFrame() = NULL;
 	SDL_Renderer* GetRenderer();
 	static Game* GetInstance();
+	static long deltaGameTime;
 	static long deltaTime;
 	static int screenH, screenW;
+	void Pause();
+	void Resume();
+	void Start();
 protected:
 	static bool m_running;
+	bool m_isPause = false;
 	static SDL_Window* m_pWindow;
 	static SDL_Renderer* m_pRenderer;
 	static Game* s_pInstance;
 	long m_lastFrameEndTime;
-
+	long m_accumulateGameTime;
 };
 
 class MainGame : public Game {
@@ -41,5 +46,6 @@ public:
 	bool IsRunning();
 	void EndOfFrame();
 private:
+	long m_fixedFrameTime = 16;
 	long m_fixedTimer = 0;
 };

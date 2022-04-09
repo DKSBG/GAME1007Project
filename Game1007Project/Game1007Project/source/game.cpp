@@ -21,9 +21,25 @@ SDL_Renderer* Game::GetRenderer()
 	return m_pRenderer;
 }
 
+void Game::Pause() 
+{
+	m_isPause = true;
+}
+
+void Game::Resume() 
+{
+	m_isPause = false;
+}
+
+void Game::Start() 
+{
+	m_isPause = false;
+}
+
 int Game::screenH = 0;
 int Game::screenW = 0;
 
+long Game::deltaGameTime = 0;
 long Game::deltaTime = 0;
 bool Game::m_running = false;
 SDL_Window* Game::m_pWindow = 0;
@@ -107,11 +123,18 @@ bool MainGame::IsRunning() {
 void MainGame::EndOfFrame() {
 	long current = SDL_GetTicks();
 	deltaTime = current - m_lastFrameEndTime;
+	if(!m_isPause)
+		deltaGameTime = deltaTime;
+
+	m_accumulateGameTime += deltaGameTime;
 	m_lastFrameEndTime = current;
 
-	if (m_fixedTimer != 0) 
+	m_fixedTimer -= deltaTime;
+
+	if (m_fixedTimer >= 0) 
 	{
-		SDL_Delay(deltaTime);
+		SDL_Delay(m_fixedTimer);
+		m_fixedTimer = m_fixedFrameTime;
 	}
 }
 #pragma endregion

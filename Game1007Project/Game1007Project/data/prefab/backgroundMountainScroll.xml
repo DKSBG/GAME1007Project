@@ -5,6 +5,6 @@
 		<Scale x="2" y="2"></Scale>
 	</Transform>
 	<Components>
-		<InfinityScrollMap map="backgroundMountain.xml" speed="50" camera="BackgroundMountainCam"></InfinityScrollMap>
+		<InfinityScrollMap map="backgroundMountain.xml" moveRate="0.5" targetCam = "MainCam" camera="BackgroundMountainCam"></InfinityScrollMap>
 	</Components>
 </GameObject>

@@ -14,17 +14,63 @@ void PlayerShip::Init()
 	reactAttrbute.type = ReactType::HP;
 
 	m_shooting = (ShootStrategy*) new SingleLineShooting();
+	m_shooting->bullet = "mainShipBullet.xml";
+	m_shooting->fireSound = "MainShipBullet.wav";
 	m_pImg = this->gameObject->GetComponent<Image>();
 	m_pCam = m_pImg->GetCanvas()->GetCamera();
 }
 
-void PlayerShip::Update()
+void PlayerShip::Attack() 
+{
+	if (m_KeyboardStates[SDL_SCANCODE_O])
+	{
+		delete m_shooting;
+		m_shooting = (ShootStrategy*) new SingleLineShooting();
+		m_shooting->bullet = "mainShipBullet.xml";
+		m_shooting->fireSound = "MainShipBullet.wav";
+	}
+
+	if (m_KeyboardStates[SDL_SCANCODE_P])
+	{
+		delete m_shooting;
+		m_shooting = (ShootStrategy*) new SingleLineShooting();
+		m_shooting->bullet = "mainShipBullet.xml";
+		m_shooting->fireSound = "MainShipBullet.wav";
+	}
+
+	if (m_KeyboardStates[SDL_SCANCODE_SPACE])
+	{
+		if (m_cdTimer <= 0)
+		{
+			Vector2 pos;
+			ReactAttribute rectAttr;
+			ItemAttribute attr;
+			Transform trs;
+			attr.atk = 1;
+			attr.hp = 1;
+			attr.speed = 600;
+			attr.vector.Set(1, 0);
+			rectAttr.camp = Fiction::Ally;
+			rectAttr.reactValue = -attr.atk;
+			rectAttr.target = ReactTarget::EnemyOnly;
+			rectAttr.type = ReactType::HP;
+			trs.Clone(*this->transform);
+			trs.position.x += (transform->size.x * transform->scale.x);
+			trs.position.x += (transform->size.y * transform->scale.y) - 28;
+			m_shooting->Fire(trs, attr, rectAttr);
+
+			m_cdTimer = m_attackCD;
+		}
+	}
+}
+
+void PlayerShip::Move() 
 {
 	int moveX, moveY;
 	itemAttribute.vector.y = 0;
 	itemAttribute.vector.x = 0;
 
-	m_cdTimer -= Game::deltaTime;
+	m_cdTimer -= Game::deltaGameTime;
 
 	if (m_KeyboardStates[SDL_SCANCODE_W])
 		itemAttribute.vector.y = -1;
@@ -53,19 +99,6 @@ void PlayerShip::Update()
 	}
 
 	m_pImg->ChangeSprite(spriteName);
-
-	if (m_KeyboardStates[SDL_SCANCODE_O])
-	{
-		delete m_shooting;
-		m_shooting = (ShootStrategy*) new SingleLineShooting();
-	}
-
-	if (m_KeyboardStates[SDL_SCANCODE_P])
-	{
-		delete m_shooting;
-		m_shooting = (ShootStrategy*) new SingleLineShooting();
-	}
-
 	GetMovePixel(&itemAttribute.vector, itemAttribute.speed, &moveX, &moveY);
 
 	Transform camPos;
@@ -97,28 +130,10 @@ void PlayerShip::Update()
 	}
 
 	GetRealPosition(m_pCam, camPos.position, &this->transform->position);
+}
 
-	if (m_KeyboardStates[SDL_SCANCODE_SPACE])
-	{
-		if (m_cdTimer <= 0)
-		{
-			Vector2 pos;
-			ReactAttribute rectAttr;
-			ItemAttribute attr;
-			Transform trs;
-			attr.atk = 1;
-			attr.hp = 1;
-			attr.speed = 600;
-			attr.vector.Set(1, 0);
-			rectAttr.camp = Fiction::Ally;
-			rectAttr.reactValue = -attr.atk;
-			rectAttr.target = ReactTarget::EnemyOnly;
-			rectAttr.type = ReactType::HP;
-			trs.Clone(*this->transform);
-			trs.position.x += (transform->size.x * transform->scale.x);
-			trs.position.x += (transform->size.y * transform->scale.y) -28;
-			m_shooting->Fire(trs, attr, rectAttr, "mainShipBullet.xml");
-			m_cdTimer = m_attackCD;
-		}
-	}
+void PlayerShip::Update()
+{
+	Move();
+	Attack();
 }

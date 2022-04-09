@@ -116,13 +116,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\SDL2-devel-2.0.18-VC\SDL2-2.0.18\include;$(ProjectDir)\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\include;$(ProjectDir)\ThirdPart\tinyxml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)SDL2-devel-2.0.18-VC\SDL2-2.0.18\include;$(ProjectDir)SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\include;$(ProjectDir)ThirdPart\tinyxml;$(ProjectDir)SDL2_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\lib\x64;$(ProjectDir)\SDL2-devel-2.0.18-VC\SDL2-2.0.18\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\lib\x64;$(ProjectDir)SDL2-devel-2.0.18-VC\SDL2-2.0.18\lib\x64;$(ProjectDir)SDL2_mixer\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,9 +149,11 @@
     <ClCompile Include="include\dataParser.cpp" />
     <ClCompile Include="include\reactableItemBase.cpp" />
     <ClCompile Include="source\animation.cpp" />
+    <ClCompile Include="source\audioPlayer.cpp" />
     <ClCompile Include="source\canvas.cpp" />
     <ClCompile Include="source\collider.cpp" />
     <ClCompile Include="source\colliderManager.cpp" />
+    <ClCompile Include="source\explode.cpp" />
     <ClCompile Include="source\game.cpp" />
     <ClCompile Include="source\gameController.cpp" />
     <ClCompile Include="source\gameObject.cpp" />
@@ -180,12 +182,14 @@
   <ItemGroup>
     <ClInclude Include="include\animation.h" />
     <ClInclude Include="include\attack.h" />
+    <ClInclude Include="include\audioPlayer.h" />
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\canvas.h" />
     <ClInclude Include="include\collideInfo.h" />
     <ClInclude Include="include\collider.h" />
     <ClInclude Include="include\colliderManager.h" />
     <ClInclude Include="include\dataParser.h" />
+    <ClInclude Include="include\explode.h" />
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\gameController.h" />
     <ClInclude Include="include\gameObject.h" />
