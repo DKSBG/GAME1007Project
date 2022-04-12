@@ -20,12 +20,12 @@ void Ship::OnExplode()
 	Transform* explosionTrs = &pGoExplosion->transform;
 	explosionTrs->scale.Set(2, 2);
 
-	explosionTrs->position.x = this->transform->position.x;
-	explosionTrs->position.y = this->transform->position.y;
-	explosionTrs->position.x += this->transform->size.x * this->transform->scale.x / 2;
-	explosionTrs->position.x -= explosionTrs->size.x * explosionTrs->scale.x / 2;
-	explosionTrs->position.y += this->transform->size.y * this->transform->scale.y / 2;
-	explosionTrs->position.y -= explosionTrs->size.y * explosionTrs->scale.y / 2;
+	explosionTrs->localPosition.x = this->transform->localPosition.x;
+	explosionTrs->localPosition.y = this->transform->localPosition.y;
+	explosionTrs->localPosition.x += this->transform->size.x * this->transform->scale.x / 2;
+	explosionTrs->localPosition.x -= explosionTrs->size.x * explosionTrs->scale.x / 2;
+	explosionTrs->localPosition.y += this->transform->size.y * this->transform->scale.y / 2;
+	explosionTrs->localPosition.y -= explosionTrs->size.y * explosionTrs->scale.y / 2;
 
 	GameObjectManager::GetInstance()->PopGameObject(this->gameObject);
 

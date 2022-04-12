@@ -15,14 +15,14 @@ InfinityScrollMap::InfinityScrollMap(std::string prefabName)
 	if (map != NULL)
 	{
 		m_mapR = &map->transform;
-		m_mapR->position.Set(m_mapR->size.x * m_mapR->scale.x, 0);
+		m_mapR->globalPosition.Set(m_mapR->size.x * m_mapR->scale.x, 0);
 	}
 }
 
 void InfinityScrollMap::SetTargetCam(Camera* cam) 
 {
 	m_targetCam = cam;
-	m_mainCamLastPosX = cam->transform.position.x;
+	m_mainCamLastPosX = cam->transform.globalPosition.x;
 }
 
 void InfinityScrollMap::Update()
@@ -39,7 +39,7 @@ void InfinityScrollMap::Update()
 		return;
 	}
 
-	float targetCamMoveDistance = m_targetCam->transform.position.x - m_mainCamLastPosX;
+	float targetCamMoveDistance = m_targetCam->transform.globalPosition.x - m_mainCamLastPosX;
 
 	float movePixel = targetCamMoveDistance * moveRate;
 	m_accumulateMovePixel += movePixel;
@@ -49,6 +49,6 @@ void InfinityScrollMap::Update()
 		m_accumulateMovePixel -= m_mapL->size.x * m_mapL->scale.x;
 	}
 
-	mapCam->position.x = m_accumulateMovePixel;
-	m_mainCamLastPosX = m_targetCam->transform.position.x;
+	mapCam->globalPosition.x = m_accumulateMovePixel;
+	m_mainCamLastPosX = m_targetCam->transform.globalPosition.x;
 }

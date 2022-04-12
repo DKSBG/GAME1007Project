@@ -6,7 +6,9 @@
 	</Transform>
 	<Components>
 		<Image layer="3" SetNativeSize="true">SnowGround.png</Image>
-		<Collider></Collider>
-		<ReactableItem>Obstacle</ReactableItem>
+		<Collider>
+			<Range x="0.8" y="0.8"></Range>
+		</Collider>
+		<ReactableItem val="Obstacle"></ReactableItem>
 	</Components>
 </GameObject>

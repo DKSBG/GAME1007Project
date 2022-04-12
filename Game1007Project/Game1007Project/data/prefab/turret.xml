@@ -2,11 +2,20 @@
 <!-- Our to do list data -->
 <GameObject>
 	<Transform>
-		<Scale x="2" y="2"></Scale>
+		<Scale x="3" y="3"></Scale>
 	</Transform>
 	<Components>
 		<Image layer="4" SetNativeSize="true">Turret.png</Image>
-		<Collider></Collider>
-		<ReactableItem>Turret</ReactableItem>
+		<Collider>
+			<Range x="0.7" y="0.7"></Range>
+		</Collider>
+		<ReactableItem val="Turret"></ReactableItem>
 	</Components>
+	<Children>
+		<Prefab name="turretGun1.xml">
+			<Transform>
+				<Position x="-1" y="-1"></Position>
+			</Transform>
+		</Prefab>
+	</Children>
 </GameObject>

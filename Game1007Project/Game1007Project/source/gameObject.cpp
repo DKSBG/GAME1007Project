@@ -7,21 +7,6 @@
 #include <exception>
 
 using namespace std;
-
-Transform::~Transform()
-{
-}
-
-void Transform::Clone(const Transform target)
-{
-	position.x = target.position.x;
-	position.y = target.position.y;
-	size.x = target.size.x;
-	size.y = target.size.y;
-	scale.x = target.scale.x;
-	scale.y = target.scale.y;
-}
-
 #pragma region Exception
 GameObjectException::GameObjectException(string reason)
 {
@@ -33,6 +18,11 @@ const char* GameObjectException::what() const throw()
 	return m_reason.c_str();
 }
 #pragma endregion
+
+CollideInfo::CollideInfo()
+{
+	detectRange.Set(1, 1);
+}
 
 #pragma region  GameObjectManager Implement
 GameObjectManager* GameObjectManager::s_pInstance = nullptr;
@@ -59,37 +49,67 @@ void GameObjectManager::PopGameObject(GameObject* go)
 		Collider* collider = go->GetComponent<Collider>();
 
 		if(collider!= NULL)
-			CollideManager::GetInstanse()->RemoveCollider(collider->colliderInfo);
+			CollideManager::GetInstanse()->RemoveCollider(&collider->colliderInfo);
 
 	}
 }
 
 void GameObjectManager::UpdateAllGameObject() 
 {
-	for (auto go : this->m_gameObjectList) 
+	for (auto go : this->m_gameObjectListRootList) 
 	{
 		go->Update();
 	}
 }
 void GameObjectManager::PreDrawAllGameObject() 
 {
-	for (auto go : this->m_gameObjectList)
+	for (auto go : this->m_gameObjectListRootList)
 	{
 		go->Draw();
 	}
+}
+
+void GameObjectManager::PopGameObjectRoot(GameObject* rootObject)
+{
+	auto it = std::find(m_gameObjectListRootList.begin(), m_gameObjectListRootList.end(), rootObject);
+	if (it != m_gameObjectListRootList.end())
+		m_gameObjectListRootList.erase(it);
+}
+
+void GameObjectManager::ModifiedGameObjectRelationship(ParentModifiedInfo info)
+{
+	m_parentModifiedList.push_back(info);
+}
+
+void GameObjectManager::RefleshGameObjectRelationship()
+{
+	for (auto info : m_parentModifiedList) 
+	{
+		if (info.currentParent != NULL)
+			info.currentParent->_PopChild(info.child);
+		else
+			PopGameObjectRoot(info.child);
+
+		if (info.newParent != NULL)
+			info.newParent->_PushChild(info.child);
+		else
+			m_gameObjectListRootList.push_back(info.child);
+	}
+
+	m_parentModifiedList.clear();
 }
 
 void GameObjectManager::RefleshGameObjectList() 
 {
 	for (auto go : m_newGameObjectList) 
 	{
-		m_gameObjectList.push_back(go);
+		m_gameObjectListRootList.push_back(go);
 	}
 
 	for (int index = m_deleteGameObjectList.size() - 1; index >= 0; index --)
 	{
-		auto it = std::find(m_gameObjectList.begin(), m_gameObjectList.end(), m_deleteGameObjectList[index]);
-		m_gameObjectList.erase(it);
+		auto it = std::find(m_gameObjectListRootList.begin(), m_gameObjectListRootList.end(), m_deleteGameObjectList[index]);
+		m_gameObjectListRootList.erase(it);
 		delete m_deleteGameObjectList[index];
 	}
 
@@ -106,20 +126,103 @@ GameObject::GameObject()
 
 void GameObject::Draw()
 {
+	if (!isActive)
+		return;
+
 	for (auto componentPair : m_componentMap)
 	{
 		GOComponent* goComponent = (GOComponent*)componentPair.second;
 		goComponent->Draw();
 	}
+
+	for (auto child : m_pChildren) 
+	{
+		child->Draw();
+	}
 }
 
 void GameObject::Update()
 {
+	if (!isActive)
+		return;
+
+	m_modifiedPosition.Set(0, 0);
+	if (m_pParent != NULL) 
+	{
+		Vector2 parentMove, parentScaleRate;
+		m_pParent->GetPositionModified(&parentMove);
+		m_pParent->GetScaleModified(&parentScaleRate);
+		transform.ParentUpdatePostion(parentMove);
+		//transform.ParentUpdateScale(parentScaleRate);
+	}
+
+	transform.UpdatePostion(&m_modifiedPosition);
+	//transform.UpdateScale(&m_modifiedScaleRate);
+
 	for (auto componentPair : m_componentMap)
 	{
 		GOComponent* goComponent = (GOComponent*)componentPair.second;
 		goComponent->Update();
 	}
+
+	for (auto child : m_pChildren) 
+	{
+		child->Update();
+	}
+}
+
+void GameObject::GetPositionModified(Vector2* pos)
+{
+	pos->x = m_modifiedPosition.x;
+	pos->y = m_modifiedPosition.y;
+}
+
+void GameObject::GetScaleModified(Vector2* scaleRate)
+{
+	scaleRate->x = m_modifiedScaleRate .x;
+	scaleRate->y = m_modifiedScaleRate.y;
+}
+
+GameObject* GameObject::GetParent() 
+{
+	return m_pParent;
+}
+
+void GameObject::SetParent(GameObject* parent)
+{
+	ParentModifiedInfo info;
+	info.currentParent = m_pParent;
+	info.child = this;
+	info.newParent = parent;
+	GameObjectManager::GetInstance()->ModifiedGameObjectRelationship(info);
+	m_pParent = parent;
+}
+
+GameObject* GameObject::GetChild(std::string childName, GameObject* go) 
+{
+	for (auto go : m_pChildren)
+	{
+		if (go->name == childName)
+			return go;
+	}
+	return NULL;
+}
+
+std::vector<GameObject*> GameObject::GetChildren() 
+{
+	return m_pChildren;
+}
+
+void GameObject::_PushChild(GameObject* child)
+{
+	m_pChildren.push_back(child);
+}
+
+void GameObject::_PopChild(GameObject* child)
+{
+	auto it = std::find(m_pChildren.begin(), m_pChildren.end(), child);
+	if (it != m_pChildren.end())
+		m_pChildren.erase(it);
 }
 
 void GameObject::OnCollide(GameObject* go)
@@ -129,15 +232,6 @@ void GameObject::OnCollide(GameObject* go)
 		GOComponent* goComponent = (GOComponent*)componentPair.second;
 		goComponent->OnCollide(go);
 	}
-}
-#pragma endregion
-
-#pragma region Transform Implement
-Transform::Transform()
-{
-	this->position.Set(0, 0);
-	this->scale.Set(1, 1);
-	this->size.Set(10, 10);
 }
 #pragma endregion
 

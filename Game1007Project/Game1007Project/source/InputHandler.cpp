@@ -16,12 +16,12 @@
 //	Transform* explosionTrs = pGoExplosion->transform;
 //	explosionTrs->scale = new Vector2(2, 2);
 //
-//	explosionTrs->position->x = this->transform->position->x;
-//	explosionTrs->position->y = this->transform->position->y;
-//	explosionTrs->position->x += this->transform->size->x * this->transform->scale->x / 2;
-//	explosionTrs->position->x -= explosionTrs->size->x * explosionTrs->scale->x / 2;
-//	explosionTrs->position->y += this->transform->size->y * this->transform->scale->y / 2;
-//	explosionTrs->position->y -= explosionTrs->size->y * explosionTrs->scale->y / 2;
+//	explosionTrs->localPosition->x = this->transform->localPosition->x;
+//	explosionTrs->localPosition->y = this->transform->localPosition->y;
+//	explosionTrs->localPosition->x += this->transform->size->x * this->transform->scale->x / 2;
+//	explosionTrs->localPosition->x -= explosionTrs->size->x * explosionTrs->scale->x / 2;
+//	explosionTrs->localPosition->y += this->transform->size->y * this->transform->scale->y / 2;
+//	explosionTrs->localPosition->y -= explosionTrs->size->y * explosionTrs->scale->y / 2;
 //	
 //	GameObjectManager::GetInstance()->PopGameObject(this->gameObject);
 //}
@@ -29,42 +29,42 @@
 //// This metherd is called by engine each frame.
 //void InputHandler::Update()
 //{
-//	m_cdTimer -= Game::GetInstance()->deltaTime;
+//	m_cdTimer -= Game::GetInstance()->deltaGameTime;
 //
 //	if (m_KeyboardStates[SDL_SCANCODE_W])
 //	{
-//		Vector2* up = transform->position;
+//		Vector2* up = transform->localPosition;
 //		if (up->y > 0)
 //		{
 //			up->y -= 5;
-//			transform->position = up;
+//			transform->localPosition = up;
 //		}
 //	}
 //	if (m_KeyboardStates[SDL_SCANCODE_S])
 //	{
-//		Vector2* down = transform->position;
+//		Vector2* down = transform->localPosition;
 //		if (down->y < 405)
 //		{
 //			down->y += 5;
-//			transform->position = down;
+//			transform->localPosition = down;
 //		}
 //	}
 //	if (m_KeyboardStates[SDL_SCANCODE_A])
 //	{
-//		Vector2* left = transform->position;
+//		Vector2* left = transform->localPosition;
 //		if (left->x > 0)
 //		{
 //			left->x -= 5;
-//			transform->position = left;
+//			transform->localPosition = left;
 //		}
 //	}
 //	if (m_KeyboardStates[SDL_SCANCODE_D])
 //	{
-//		Vector2* right = transform->position;
+//		Vector2* right = transform->localPosition;
 //		if (right->x < 710)
 //		{
 //			right->x += 5;
-//			transform->position = right;
+//			transform->localPosition = right;
 //		}
 //	}
 //	if (m_KeyboardStates[SDL_SCANCODE_SPACE])
@@ -78,11 +78,11 @@
 //			pGoMainShipBullet->GetComponent<Image>()->SetNativeSize();
 //			Transform* bulletTransform = pGoMainShipBullet->transform;
 //			bulletTransform->scale = new Vector2(2, 2);
-//			bulletTransform->position->x = this->transform->position->x;
-//			bulletTransform->position->y = this->transform->position->y;
-//			bulletTransform->position->x += this->transform->size->x * this->transform->scale->x;
-//			bulletTransform->position->y += bulletTransform->size->x * bulletTransform->scale->x;
-//			bulletTransform->position->y -= (bulletTransform->size->y * bulletTransform->scale->y) / 2;
+//			bulletTransform->localPosition->x = this->transform->localPosition->x;
+//			bulletTransform->localPosition->y = this->transform->localPosition->y;
+//			bulletTransform->localPosition->x += this->transform->size->x * this->transform->scale->x;
+//			bulletTransform->localPosition->y += bulletTransform->size->x * bulletTransform->scale->x;
+//			bulletTransform->localPosition->y -= (bulletTransform->size->y * bulletTransform->scale->y) / 2;
 //
 //			PlayerShipProjectile* bullet = new PlayerShipProjectile();
 //			bullet->moveVector.x = 1;

@@ -10,5 +10,6 @@ void GameController::Init()
 
 void GameController::Update() 
 {
-	m_pMainCam->transform.position.x += (float)100 / 1000 * MainGame::deltaGameTime;
+	m_pMainCam->transform.globalPosition.x += (float)100 / 1000 * MainGame::deltaGameTime;
+	//m_pMainCam->transform.localPosition.x += (float)100 / 1000 * MainGame::deltaGameTime;
 }

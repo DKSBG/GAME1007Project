@@ -2,9 +2,14 @@
 #include "gameObject.h"
 #include "tinyxml.h"
 #include "reactableItem.h"
+#include "gun.h"
 #include <map>
 
 bool TransformHandler(Transform* transform, TiXmlElement* pComponentsRoot);
+bool ReactAttributeHandler(ReactAttribute* attr, TiXmlElement* pComponentsRoot);
+bool ItemAttributeHandler(ItemAttribute* attr, TiXmlElement* pComponentsRoot);
+bool ObjectChildHandler(TiXmlElement* childElement, Transform* trs);
+
 
 class ComponentParser
 {
@@ -13,6 +18,12 @@ public:
 };
 
 class ImageParser : public ComponentParser
+{
+public:
+	bool Parse(GameObject* go, TiXmlElement* componentNode);
+};
+
+class GunParser : public ComponentParser
 {
 public:
 	bool Parse(GameObject* go, TiXmlElement* componentNode);
@@ -50,6 +61,7 @@ public:
 	GameObject* Parser(std::string prefabName);
 	ComponentParser* GetComponentParser(std::string componentName);
 	bool ComponentsHandler(GameObject* go, TiXmlElement* pComponentsRoot);
+	bool ChildHandler(GameObject* go, TiXmlElement* pComponentsRoot);
 	static PrefabParser* GetInstance();
 private:
 	std::map<std::string, ComponentParser*> m_componentMap;
@@ -69,7 +81,6 @@ class SceneLoader
 {
 public:
 	void Load(std::string sceneName);
-	void ObjectChildHandler(TiXmlElement* childElement, Transform* trs);
 	static SceneLoader* GetInstance();
 private:
 	static SceneLoader* m_instance;

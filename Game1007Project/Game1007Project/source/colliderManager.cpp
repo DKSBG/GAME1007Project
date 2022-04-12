@@ -1,15 +1,20 @@
 #include "colliderManager.h"
 #include "iostream"
 
+struct RectInfo
+{
+	float top, down, right, left;
+};
+
 void GetEdge(CollideInfo* collider,float* top, float* bottom, float* right, float* left)
 {
 	Transform transform;
 	transform.Clone(collider->pGameObject->transform);
 
-	float centerX = transform.position.x + (transform.size.x * transform.scale.x /2);
-	float centerY = transform.position.y + (transform.size.y * transform.scale.y / 2);
-	float detectH = transform.size.y * transform.scale.y * collider->detectRange->y / 2;
-	float detectW = transform.size.x * transform.scale.x * collider->detectRange->x / 2;
+	float centerX = transform.globalPosition.x + (transform.GetWidth() / 2);
+	float centerY = transform.globalPosition.y + (transform.GetHeight() / 2);
+	float detectH = transform.GetHeight() * collider->detectRange.y / 2;
+	float detectW = transform.GetWidth() * collider->detectRange.x / 2;
 	*top = centerY - detectH;
 	*bottom = centerY + detectH;
 	*right = centerX - detectW;
@@ -34,21 +39,26 @@ void CollideManager::DetectColliding()
 	int len = m_colliderList.size() - 1;
 	for (int srcIdx = 0; srcIdx < len; srcIdx++)
 	{
+		if (m_colliderList[srcIdx]->pGameObject->isActive == false)
+			continue;
+
 		for (int tarIdx = srcIdx + 1; tarIdx < m_colliderList.size(); tarIdx++) 
 		{
+			if (m_colliderList[tarIdx]->pGameObject->isActive == false)
+				continue;
+
 			collide = false;
-			float srcTop, srcBottom, srcLeft, srcRight;
-			float tarTop, tarBottom, tarLeft, tarRight;
-			GetEdge(m_colliderList[srcIdx], &srcTop, &srcBottom, &srcLeft, &srcRight);
-			GetEdge(m_colliderList[tarIdx], &tarTop, &tarBottom, &tarLeft, &tarRight);
+			RectInfo rect1, rect2, rectVDown, rectVTop, rectHLeft, rectHRight;
+			GetEdge(m_colliderList[srcIdx], &rect1.top, &rect1.down, &rect1.left, &rect1.right);
+			GetEdge(m_colliderList[tarIdx], &rect2.top, &rect2.down, &rect2.left, &rect2.right);
 
-			if ((tarTop <= srcTop && srcTop <= tarBottom) || (tarTop <= srcBottom && srcBottom <= tarBottom))
-				if ((tarLeft <= srcLeft && srcLeft <= tarRight) || (tarLeft <= srcRight && srcRight <= tarRight))
-					collide = true;
+			rectVTop = (rect1.top <= rect2.top) ? rect1 : rect2;
+			rectVDown = (rect1.top > rect2.top) ? rect1 : rect2;
+			rectHLeft = (rect1.left <= rect2.left) ? rect1 : rect2;
+			rectHRight = (rect1.left > rect2.left) ? rect1 : rect2;
 
-			if ((srcTop <= tarTop && tarTop <= srcBottom) || (srcTop <= tarBottom && tarBottom <= srcBottom))
-				if ((srcLeft <= tarLeft && tarLeft <= srcRight) || (srcLeft <= tarRight && tarRight <= srcRight))
-					collide = true;
+			if(rectVTop.down >= rectVDown.top && rectHLeft.right >= rectHRight.left)
+				collide = true;
 
 			if (collide) 
 			{

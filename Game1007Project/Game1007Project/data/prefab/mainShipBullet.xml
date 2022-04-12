@@ -6,7 +6,9 @@
 	</Transform>
 	<Components>
 		<Image layer="4" SetNativeSize="true">MainShipBullet.png</Image>
-		<Collider></Collider>
-		<ReactableItem>StraightProjectile</ReactableItem>
+		<Collider>
+			<Range x="0.9" y="0.9"></Range>
+		</Collider>
+		<ReactableItem val="StraightProjectile"></ReactableItem>
 	</Components>
 </GameObject>

@@ -1,66 +1,30 @@
-#include "reactableItem.h"
+#include "playerShip.h"
 #include "tools.h"
+#include "gun.h"
+#include "dataParser.h"
 
 void PlayerShip::Init()
 {
-	itemAttribute.hp = 1;
-	itemAttribute.speed = 350;
-	itemAttribute.atk = 1;
-	itemAttribute.vector.Set(0, 0);
-
-	reactAttrbute.camp = Fiction::Ally;
-	reactAttrbute.reactValue = - itemAttribute.atk;
-	reactAttrbute.target = ReactTarget::EnemyOnly;
-	reactAttrbute.type = ReactType::HP;
-
-	m_shooting = (ShootStrategy*) new SingleLineShooting();
-	m_shooting->bullet = "mainShipBullet.xml";
-	m_shooting->fireSound = "MainShipBullet.wav";
 	m_pImg = this->gameObject->GetComponent<Image>();
 	m_pCam = m_pImg->GetCanvas()->GetCamera();
 }
 
 void PlayerShip::Attack() 
 {
-	if (m_KeyboardStates[SDL_SCANCODE_O])
-	{
-		delete m_shooting;
-		m_shooting = (ShootStrategy*) new SingleLineShooting();
-		m_shooting->bullet = "mainShipBullet.xml";
-		m_shooting->fireSound = "MainShipBullet.wav";
-	}
-
-	if (m_KeyboardStates[SDL_SCANCODE_P])
-	{
-		delete m_shooting;
-		m_shooting = (ShootStrategy*) new SingleLineShooting();
-		m_shooting->bullet = "mainShipBullet.xml";
-		m_shooting->fireSound = "MainShipBullet.wav";
-	}
-
 	if (m_KeyboardStates[SDL_SCANCODE_SPACE])
 	{
-		if (m_cdTimer <= 0)
+		if (m_pGun == NULL)
 		{
-			Vector2 pos;
-			ReactAttribute rectAttr;
-			ItemAttribute attr;
-			Transform trs;
-			attr.atk = 1;
-			attr.hp = 1;
-			attr.speed = 600;
-			attr.vector.Set(1, 0);
-			rectAttr.camp = Fiction::Ally;
-			rectAttr.reactValue = -attr.atk;
-			rectAttr.target = ReactTarget::EnemyOnly;
-			rectAttr.type = ReactType::HP;
-			trs.Clone(*this->transform);
-			trs.position.x += (transform->size.x * transform->scale.x);
-			trs.position.x += (transform->size.y * transform->scale.y) - 28;
-			m_shooting->Fire(trs, attr, rectAttr);
-
-			m_cdTimer = m_attackCD;
+			for (auto child : gameObject->GetChildren())
+			{
+				m_pGun = child->GetComponent<Gun>();
+				if (m_pGun != NULL)
+					break;
+			}
 		}
+
+		if (m_pGun != NULL)
+			m_pGun->Fire();
 	}
 }
 
@@ -101,35 +65,35 @@ void PlayerShip::Move()
 	m_pImg->ChangeSprite(spriteName);
 	GetMovePixel(&itemAttribute.vector, itemAttribute.speed, &moveX, &moveY);
 
-	Transform camPos;
-	GetCamPosition(m_pCam, this->transform->position, &camPos.position);
+	Vector2 camPos;
+	GetCamPosition(m_pCam, this->transform->localPosition, &camPos);
 
-	camPos.position.x += moveX + (m_lastCamPosX - camPos.position.x);
-	camPos.position.y += moveY;
+	camPos.x += moveX + (m_lastCamPosX - camPos.x);
+	camPos.y += moveY;
 
-	m_lastCamPosX = camPos.position.x;
+	m_lastCamPosX = camPos.x;
 
-	if (camPos.position.y < 0)
+	if (camPos.y < 0)
 	{
-		camPos.position.y = 0;
+		camPos.y = 0;
 	}
 
-	if (camPos.position.y + transform->size.y * transform->scale.y > Game::screenH)
+	if (camPos.y + transform->GetHeight() > Game::screenH)
 	{
-		camPos.position.y = Game::screenH - transform->size.y * transform->scale.y;
+		camPos.y = Game::screenH - transform->GetHeight();
 	}
 
-	if (camPos.position.x < 0)
+	if (camPos.x < 0)
 	{
-		camPos.position.x = 0;
+		camPos.x = 0;
 	}
 
-	if (camPos.position.x + transform->size.x * transform->scale.x > Game::screenW)
+	if (camPos.x + transform->GetWidth() > Game::screenW)
 	{
-		camPos.position.x = Game::screenW - transform->size.x * transform->scale.x;
+		camPos.x = Game::screenW - transform->GetWidth();
 	}
 
-	GetRealPosition(m_pCam, camPos.position, &this->transform->position);
+	GetRealPosition(m_pCam, camPos, &this->transform->localPosition);
 }
 
 void PlayerShip::Update()

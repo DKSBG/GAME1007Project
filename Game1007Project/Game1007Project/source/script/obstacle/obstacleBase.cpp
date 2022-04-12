@@ -9,7 +9,7 @@ void Obstacle::Init()
 	itemAttribute.speed = 0;
 	itemAttribute.atk = 1000;
 
-	reactAttrbute.camp = Fiction::Enemy;
+	reactAttrbute.fiction = Fiction::Enemy;
 	reactAttrbute.reactValue = -itemAttribute.atk;
 	reactAttrbute.target = ReactTarget::EnemyOnly;
 	reactAttrbute.type = ReactType::HP;

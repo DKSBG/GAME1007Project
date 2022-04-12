@@ -26,13 +26,22 @@ int main(int argc, char* argv[])
 		SDL_WINDOW_OPENGL);
 
 	SceneLoader::GetInstance()->Load("Scene1.xml");
-	pGame->Start();
+	//Camera* cam = CameraParser::GetInstance()->Parser("MainCam.xml");
+	//GameObject* go = PrefabParser::GetInstance()->Parser("mainShip.xml");
+	//GameObject* go1 = PrefabParser::GetInstance()->Parser("Turret.xml");
 
+	//go1->SetParent(go);
+	//go1->transform.localPosition.Set(60, 60);
+
+	//go->isActive = false;
+
+	//int count = 0;
+	pGame->Start();
 	while(1)
 	{
-		CollideManager::GetInstanse()->DetectColliding();
 		pGame->EventHandler();
 		pGame->Update();
+		CollideManager::GetInstanse()->DetectColliding();
 		pGame->Render();
 		pGame->Reflesh();
 		pGame->EndOfFrame();

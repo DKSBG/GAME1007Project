@@ -47,8 +47,8 @@ void Canvas::SetDrawUnit(DrawingUnit* unit)
 	if(m_pCamera != NULL)
 	{
 		Transform camTrs = m_pCamera->transform;
-		unit->tranform.position.x -= camTrs.position.x;
-		unit->tranform.position.y -= camTrs.position.y;
+		unit->ScreenPos.x = unit->tranform.globalPosition.x - camTrs.globalPosition.x;
+		unit->ScreenPos.y = unit->tranform.globalPosition.y - camTrs.globalPosition.y;
 		this->m_drawUnitList.push_back(unit);
 	}
 }
@@ -71,8 +71,8 @@ void Canvas::Draw()
 		DrawingUnit* unit = m_drawUnitList[index];
 		SDL_Rect* dstRect = new SDL_Rect();
 		SDL_Texture* pTexture = unit->pTexture;
-		dstRect->x = unit->tranform.position.x;
-		dstRect->y = unit->tranform.position.y;
+		dstRect->x = unit->ScreenPos.x;
+		dstRect->y = unit->ScreenPos.y;
 		dstRect->w = unit->tranform.size.x * unit->tranform.scale.x;
 		dstRect->h = unit->tranform.size.y * unit->tranform.scale.y;
 		SDL_RenderCopy(Game::GetInstance()->GetRenderer(), pTexture, &unit->srcRect, dstRect);

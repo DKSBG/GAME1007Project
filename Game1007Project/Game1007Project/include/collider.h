@@ -6,6 +6,6 @@
 class Collider : GOComponent
 {
 public:
-	CollideInfo* colliderInfo;
+	CollideInfo colliderInfo;
 	void Init();
 };

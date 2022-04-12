@@ -6,7 +6,29 @@
 	</Transform>
 	<Components>
 		<Image layer="4" SetNativeSize="true">MainShip.png</Image>
-		<Collider></Collider>
-		<ReactableItem>PlayerShip</ReactableItem>
+		<Collider>
+			<Range x="0.8" y="0.3"></Range>
+		</Collider>
+		<ReactableItem val='PlayerShip'>
+			<ReactAttribute>
+				<Fiction val="Ally"></Fiction>
+				<ReactTarget val="EnemyOnly"></ReactTarget>
+				<ReactType val="HP"></ReactType>
+				<ReactValue val="-1"></ReactValue>
+			</ReactAttribute>
+			<ItemAttribute>
+				<Atk val="1"></Atk>
+				<Speed val="350"></Speed>
+				<Hp val="1"></Hp>
+				<Vector x="0" y="0"></Vector>
+			</ItemAttribute>
+		</ReactableItem>
 	</Components>
+	<Children>
+		<Prefab name="playerShipBasicGun.xml">
+			<Transform>
+				<Position x="24" y="5"></Position>
+			</Transform>
+		</Prefab>
+	</Children>
 </GameObject>

@@ -11,6 +11,7 @@ using namespace std;
 class DrawingUnit {
 public:
 	Transform tranform;
+	Vector2 ScreenPos;
 	SDL_Texture* pTexture;
 	SDL_Rect srcRect;
 };

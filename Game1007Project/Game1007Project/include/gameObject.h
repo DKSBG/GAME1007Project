@@ -27,10 +27,36 @@ public:
 	void Update();
 	void Draw();
 	void OnCollide(GameObject* go);
+	void GetPositionModified(Vector2* pos);
+	void GetScaleModified(Vector2* scaleRate);
+
+	GameObject* GetParent();
+	void SetParent(GameObject* parent);
+	GameObject* GetChild(std::string, GameObject* go);
+	std::vector<GameObject*> GetChildren();
+
+	// PushChild and PopChild only for GameObjectMamager use.
+	void _PushChild(GameObject* child);
+	void _PopChild(GameObject* parent);
+
 	Transform transform;
+	std::string name;
+	bool isActive = true;
+
 private:
 	std::map<size_t, void*> m_componentMap;
 	std::map<size_t, void*> m_collideHandlerMap;
+	GameObject* m_pParent = NULL;
+	std::vector<GameObject*> m_pChildren;
+	Vector2 m_modifiedPosition;
+	Vector2 m_modifiedScaleRate;
+};
+
+struct ParentModifiedInfo
+{
+	GameObject* currentParent;
+	GameObject* newParent;
+	GameObject* child;
 };
 
 class Component 
@@ -60,11 +86,15 @@ public:
 	void UpdateAllGameObject();
 	void PreDrawAllGameObject();
 	void RefleshGameObjectList();
+	void ModifiedGameObjectRelationship(ParentModifiedInfo info);
+	void RefleshGameObjectRelationship();
 	static GameObjectManager* GetInstance();
 private:
-	vector<GameObject*> m_gameObjectList;
+	vector<GameObject*> m_gameObjectListRootList;
 	vector<GameObject*> m_newGameObjectList;
 	vector<GameObject*> m_deleteGameObjectList;
+	vector<ParentModifiedInfo> m_parentModifiedList;
+	void PopGameObjectRoot(GameObject* rootObject);
 	static GameObjectManager* s_pInstance;
 };
 

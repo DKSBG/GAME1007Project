@@ -51,13 +51,10 @@
     <ClCompile Include="source\tools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\reactableItemBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\script\ship\playerShip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\script\ship\enemy1Ship.cpp">
+    <ClCompile Include="source\script\ship\basicShootEnemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\script\ship\shipBase.cpp">
@@ -75,13 +72,7 @@
     <ClCompile Include="source\script\obstacle\obstacleBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\infinityScrollMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\dataParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ThirdPart\tinyxml\tinystr.cpp">
@@ -99,19 +90,31 @@
     <ClCompile Include="source\gameController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\script\ship\turrent.cpp">
+    <ClCompile Include="source\script\ship\turret.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\script\ship\boostEnemyShip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\script\ship\Enemy2Ship.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\audioPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\explode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\dataParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gun.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\reactableItemBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -186,6 +189,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\explode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gun.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playerShip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\basicShootEnemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\boostEnemyShip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\enemyShip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\turret.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

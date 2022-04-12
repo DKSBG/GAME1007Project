@@ -6,7 +6,9 @@
 	</Transform>
 	<Components>
 		<Image layer="4" SetNativeSize="true">Enemy1bullet.png</Image>
-		<Collider></Collider>
-		<ReactableItem>StraightProjectile</ReactableItem>
+		<Collider>
+			<Range x="0.8" y="0.8"></Range>
+		</Collider>
+		<ReactableItem val="StraightProjectile"></ReactableItem>
 	</Components>
 </GameObject>

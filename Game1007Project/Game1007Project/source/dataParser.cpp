@@ -3,6 +3,8 @@
 #include "gameController.h"
 #include "collider.h"
 #include "reactableItem.h"
+#include "playerShip.h"
+#include "enemyShip.h"
 #include "infinityScrollMap.h"
 #include "dataParser.h"
 
@@ -23,6 +25,8 @@ ComponentParser* PrefabParser::GetComponentParser(std::string componentName)
 			parser = new InfinityScrollMapParser();
 		else if (componentName == "GameController")
 			parser = new GameControllerParser();
+		else if (componentName == "Gun")
+			parser = new GunParser();
 		else
 			std::cout << "Load Component Error: Loader doen't support component " << componentName << std::endl;
 
@@ -35,6 +39,35 @@ ComponentParser* PrefabParser::GetComponentParser(std::string componentName)
 	{
 		return m_componentMap[componentName];
 	}
+}
+
+bool PrefabParser::ChildHandler(GameObject* go, TiXmlElement* pComponentsRoot) 
+{
+	if (go == NULL)
+		return false;
+	if (pComponentsRoot == NULL)
+		return true;
+
+	for (TiXmlElement* element = pComponentsRoot->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
+	{
+
+		std::string value = element->Value() == 0 ? "" : element->Value();
+		if (value == "")
+		{
+			std::cout << "Load Scene Wrong: Element name not found" << std::endl;
+			continue;
+		}
+
+		if (value == "Prefab")
+		{
+			GameObject* child = PrefabParser::GetInstance()->Parser(element->Attribute("name"));
+			Transform* transform = &child->transform;
+ 			ObjectChildHandler(element->FirstChildElement(), transform);
+			child->SetParent(go);
+		}
+	}
+
+	return true;
 }
 
 bool PrefabParser::ComponentsHandler(GameObject* go, TiXmlElement* pComponentsRoot)
@@ -76,7 +109,7 @@ bool TransformHandler(Transform* transform, TiXmlElement* pComponentsRoot)
 		if (value == "Scale")
 			targetVector = &transform->scale;
 		else if (value == "Position")
-			targetVector = &transform->position;
+			targetVector = &transform->localPosition;
 		else if (value == "Size")
 			targetVector = &transform->size;
 		else
@@ -99,6 +132,165 @@ bool TransformHandler(Transform* transform, TiXmlElement* pComponentsRoot)
 	return true;
 }
 
+bool ReactAttributeHandler(ReactAttribute* attr, TiXmlElement* pComponentsRoot)
+{
+	if (attr == NULL)
+		return false;
+	if (pComponentsRoot == NULL)
+		return true;
+
+	ReactAttribute result;
+
+	for (TiXmlElement* element = pComponentsRoot->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
+	{
+		string value = element->Value();
+
+		if (!element->Attribute("val"))
+			return false;
+
+		string text = element->Attribute("val");
+
+		if (value == "Fiction") 
+		{
+			if (text == "Ally")
+				result.fiction = Fiction::Ally;
+			if (text == "Enemy")
+				result.fiction = Fiction::Enemy;
+			if (text == "ThridPart")
+				result.fiction = Fiction::ThridPart;
+		}
+
+		if (value == "ReactTarget")
+		{
+			if (text == "Both")
+				result.target = ReactTarget::Both;
+			if (text == "AllyOnly")
+				result.target = ReactTarget::AllyOnly;
+			if (text == "EnemyOnly")
+				result.target = ReactTarget::EnemyOnly;
+		}
+		else if (value == "ReactType")
+		{
+			if (text == "HP")
+				result.type = ReactType::HP;
+			if (text == "Speed")
+				result.type = ReactType::Speed;
+			if (text == "Atk")
+				result.type = ReactType::Atk;
+		}
+		else if (value == "ReactValue")
+		{
+			try
+			{
+				result.reactValue = std::stof(text);
+			}
+			catch (std::exception e)
+			{
+				std::cout << "Set ReactalbAttribute Error: Element " << element->Value() << " is wrong." << std::endl;
+				return false;
+			}
+		}
+	}
+
+	*attr = result;
+	return true;
+}
+
+bool ItemAttributeHandler(ItemAttribute* attr, TiXmlElement* pComponentsRoot) 
+{
+	if (attr == NULL)
+		return false;
+	if (pComponentsRoot == NULL)
+		return true;
+
+	ItemAttribute result;
+
+	for (TiXmlElement* element = pComponentsRoot->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
+	{
+		string value = element->Value();
+
+		if (value == "Vector") 
+		{
+			try
+			{
+				result.vector.Set(std::stof(element->Attribute("x")), std::stof(element->Attribute("y")));
+			}
+			catch (std::exception e)
+			{
+				std::cout << "Set ItemAttribute Error: Element " << element->Value() << " is wrong." << std::endl;
+				return false;
+			}
+		}
+		else 
+		{
+			string text = element->Attribute("val");
+			if (value == "Hp")
+			{
+				try
+				{
+					result.hp = std::stof(text);
+				}
+				catch (std::exception e)
+				{
+					std::cout << "Set ItemAttribute Error: Element " << element->Value() << " is wrong." << std::endl;
+					return false;
+				}
+			}
+			else if (value == "Speed")
+			{
+				try
+				{
+					result.speed = std::stof(text);
+				}
+				catch (std::exception e)
+				{
+					std::cout << "Set ItemAttribute Error: Element " << element->Value() << " is wrong." << std::endl;
+					return false;
+				}
+			}
+			else if (value == "Atk")
+			{
+				try
+				{
+					result.atk = std::stof(text);
+				}
+				catch (std::exception e)
+				{
+					std::cout << "Set ItemAttribute Error: Element " << element->Value() << " is wrong." << std::endl;
+					return false;
+				}
+			}
+		}
+	}
+
+	*attr = result;
+	return true;
+}
+
+bool ObjectChildHandler(TiXmlElement* childElement, Transform* trs)
+{
+	for (TiXmlElement* element = childElement; element != NULL; element = element->NextSiblingElement())
+	{
+		std::string value = element->Value() == 0 ? "" : element->Value();
+		if (value == "")
+		{
+			std::cout << "Load Scene Wrong: Element name not found" << std::endl;
+			continue;
+		}
+
+		if (value == "Transform")
+		{
+			TransformHandler(trs, element);
+		}
+		else
+		{
+			std::cout << "Load Scene Wrong: Not handle element " << value << " in child element\n";
+		}
+	}
+	return true;
+}
+
+
 GameObject* PrefabParser::Parser(std::string prefabName)
 {
 	GameObject* go;
@@ -114,6 +306,8 @@ GameObject* PrefabParser::Parser(std::string prefabName)
 	TiXmlElement* pRoot = xmlDoc.RootElement();
 	TiXmlElement* pComponentElement = NULL;
 	TiXmlElement* pTrsElement = NULL;
+	TiXmlElement* pChildElement = NULL;
+
 	for (TiXmlElement* elememt = pRoot->FirstChildElement(); elememt != NULL; elememt = elememt->NextSiblingElement())
 	{
 		std::string value = elememt->Value()==0 ? "" : elememt->Value();
@@ -128,6 +322,9 @@ GameObject* PrefabParser::Parser(std::string prefabName)
 
 		if (value == "Transform" != NULL && pTrsElement == NULL)
 			pTrsElement = elememt;
+
+		if (value == "Children" != NULL && pChildElement == NULL)
+			pChildElement = elememt;
 	}
 
 	if (ComponentsHandler(go, pComponentElement) == false) 
@@ -144,7 +341,13 @@ GameObject* PrefabParser::Parser(std::string prefabName)
 		return NULL;
 	}
 
-	if(pTrsElement)
+	if (ChildHandler(go, pChildElement) == false)
+	{
+		if (go != NULL)
+			delete go;
+		return NULL;
+	}
+
 	return go;
 }
 
@@ -161,7 +364,28 @@ bool ColliderParser::Parse(GameObject* go, TiXmlElement* componentElement)
 {
 	if (go == NULL)
 		return false;
-	go->AddComponent(new Collider());
+
+	Collider* collider = new Collider();
+
+	for (TiXmlElement* element = componentElement->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
+	{
+		std::string value = element->Value();
+		if (value == "Range") 
+		{
+			try
+			{
+				collider->colliderInfo.detectRange.x = std::stof(element->Attribute("x"));
+				collider->colliderInfo.detectRange.y = std::stof(element->Attribute("y"));
+			}
+			catch (std::exception e)
+			{
+				std::cout << "Set Prefab Transform Error: Element " << element->Value() << " attribute is wrong." << std::endl;
+				return false;
+			}
+		}
+	}
+
+	go->AddComponent(collider);
 	return true;
 }
 
@@ -219,34 +443,108 @@ bool ImageParser::Parse(GameObject* go, TiXmlElement* componentElement)
 	return true;
 }
 
+bool GunParser::Parse(GameObject* go, TiXmlElement* componentElement) 
+{
+	Gun* gun = new Gun();
+	ReactAttribute rectAttr;
+	ItemAttribute attr;
+	int cdTime = 0;
+	std::string projectile, sound;
+
+	for (TiXmlElement* element = componentElement->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
+	{
+		string value = element->Value();
+		if (value == "ReactAttribute") 
+		{
+			ReactAttributeHandler(&rectAttr, element);
+		}
+		else if (value == "ItemAttribute") 
+		{
+			ItemAttributeHandler(&attr, element);
+		}
+		else 
+		{
+			if (element->Attribute("val")) 
+			{
+				if (value == "Projectile")
+				{
+					projectile = element->Attribute("val");
+				}
+				else if(value == "Sound") 
+				{
+					sound = element->Attribute("val");
+				}
+
+				if (value == "CDTime") 
+				{
+					try
+					{
+						cdTime = std::stof(element->Attribute("val"));
+					}
+					catch (std::exception e)
+					{
+						std::cout << "Set Gun Component Error: Element " << element->Value() << " is wrong." << std::endl;
+						return false;
+					}
+				}
+			}
+		}
+	}
+
+	gun->GunAttributeSet(rectAttr, attr);
+	gun->GunTypeSet(projectile, sound);
+	gun->SetCDTime(cdTime);
+	go->AddComponent<Gun>(gun);
+}
+
 bool ReactableItemParser::Parse(GameObject* go, TiXmlElement* componentElement)
 {
-	std::string text = componentElement->GetText();
+	if (!componentElement->Attribute("val"))
+		return false;
+	std::string value = componentElement->Attribute("val");
 	ReactableItem* item = NULL;
 
-	if (text == "PlayerShip")
+	if (value == "PlayerShip")
 		item = new PlayerShip();
-	else if (text == "Enemy1Ship")
-		item = new Enemy1Ship();
-	else if (text == "Enemy2Ship")
-		item = new Enemy2Ship();
-	else if (text == "Turret")
+	else if (value == "BasicShootEnemy")
+		item = new BasicShootEnemy();
+	else if (value == "Turret")
 		item = new Turret();
-	else if (text == "BoostEnemyShip")
+	else if (value == "BoostEnemyShip")
 		item = new BoostEnemyShip();
-	else if (text == "Obstacle")
+	else if (value == "Obstacle")
 		item = new Obstacle();
-	else if (text == "StraightProjectile")
+	else if (value == "StraightProjectile")
 		item = new StraightProjectile();
 	else
-		std::cout << "Load ReactablrItem Wrong: Not handle attribute" << text << std::endl;
+		std::cout << "Load ReactablrItem Wrong: Not handle attribute" << value << std::endl;
 
 	if (item == NULL) 
 	{
-		std::cout << "ReactableItem Component Error: " << text << "script not found." << std::endl;
+		std::cout << "ReactableItem Component Error: " << value << "script not found." << std::endl;
 		return false;
 	}
 
+	ReactAttribute rectAttr;
+	ItemAttribute attr;
+
+	for (TiXmlElement* element = componentElement->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
+	{
+		string value = element->Value();
+		if (value == "ReactAttribute")
+		{
+
+			ReactAttributeHandler(&rectAttr, element);
+		}
+		else if (value == "ItemAttribute")
+		{
+
+			ItemAttributeHandler(&attr, element);
+		}
+	}
+
+	item->itemAttribute = attr;
+	item->reactAttrbute = rectAttr;
 	go->AddComponent<ReactableItem>(item);
 	item->Init();
 }
@@ -380,28 +678,6 @@ Camera* CameraParser::Parser(std::string cameraName)
 		CanvasManager::GetInstance()->TryGetCanvas(layer)->SetCamera(pCam);
 	}
 	return pCam;
-}
-
-void SceneLoader::ObjectChildHandler(TiXmlElement* childElement, Transform* trs)
-{
-	for (TiXmlElement* element = childElement; element != NULL; element = element->NextSiblingElement())
-	{
-		std::string value = element->Value() == 0 ? "" : element->Value();
-		if (value == "")
-		{
-			std::cout << "Load Scene Wrong: Element name not found" << std::endl;
-			continue;
-		}
-
-		if (value == "Transform")
-		{
-			TransformHandler(trs, element);
-		}
-		else
-		{
-			std::cout << "Load Scene Wrong: Not handle element " << value << " in child element\n";
-		}
-	}
 }
 
 void SceneLoader::Load(std::string sceneName) 

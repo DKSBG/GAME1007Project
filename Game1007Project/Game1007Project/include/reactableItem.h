@@ -4,14 +4,13 @@
 #include "game.h"
 #include "image.h"
 
-
 enum class Fiction {Ally, Enemy, ThridPart};
 enum class ReactTarget { Both, AllyOnly, EnemyOnly };
 enum class ReactType { HP, Speed, Atk };
 
 struct ReactAttribute
 {
-	Fiction camp = Fiction::Ally;
+	Fiction fiction = Fiction::Ally;
 	ReactTarget target = ReactTarget::Both;
 	ReactType type = ReactType::HP;
 	int reactValue;
@@ -90,58 +89,6 @@ protected:
 	int m_cdTimer = 0;
 	ShootStrategy *m_shooting = NULL;
 	Image *m_pImg;
-};
-
-class PlayerShip : public Ship 
-{
-public:
-	void Update();
-	void Init();
-	void Attack();
-	void Move();
-private:
-	const Uint8* m_KeyboardStates = SDL_GetKeyboardState(NULL);
-	float m_lastCamPosX;
-	Camera* m_pCam;
-};
-
-class Enemy1Ship : public Ship
-{
-public:
-	void Update();
-	void Init();
-	void Attack();
-	void Move();
-};
-
-class Enemy2Ship : public Ship
-{
-public:
-	void Update();
-	void Init();
-	void Explode();
-	void Attack();
-	void Move();
-};
-
-class BoostEnemyShip : public Ship
-{
-public:
-	void Update();
-	void Init();
-	void Attack();
-	void Move();
-private:
-	float m_acceleration;
-};
-
-
-class Turret : public Ship
-{
-public:
-	void Update();
-	void Init();
-	void Attack();
 };
 
 class Obstacle : public ReactableItem

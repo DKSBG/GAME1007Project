@@ -6,18 +6,18 @@
 void StraightProjectile::Update()
 {
 	Transform camPos;
-	GetCamPosition(m_pImg->GetCanvas()->GetCamera(), this->transform->position, &camPos.position);
+	GetCamPosition(m_pImg->GetCanvas()->GetCamera(), this->transform->globalPosition, &camPos.globalPosition);
 
-	if(camPos.position.x <= -10 || camPos.position.x >= MainGame::screenW || 
-		camPos.position.y <= -10 || camPos.position.y >= MainGame::screenH)
+	if(camPos.globalPosition.x <= -transform->GetWidth() || camPos.globalPosition.x >= MainGame::screenW ||
+		camPos.globalPosition.y <= -transform->GetHeight()  || camPos.globalPosition.y >= MainGame::screenH)
 	{
 		GameObjectManager::GetInstance()->PopGameObject(gameObject);
 	}
 
 	int moveX, moveY;
 	GetMovePixel(&itemAttribute.vector, itemAttribute.speed, &moveX, &moveY);
-	this->transform->position.y += moveY;
-	this->transform->position.x += moveX;
+	this->transform->localPosition.y += moveY;
+	this->transform->localPosition.x += moveX;
 }
 
 

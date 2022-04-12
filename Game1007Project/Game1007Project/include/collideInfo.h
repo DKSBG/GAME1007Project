@@ -4,6 +4,7 @@
 class CollideInfo
 {
 public:
+	CollideInfo();
 	GameObject* pGameObject;
-	Vector2* detectRange;
+	Vector2 detectRange;
 };

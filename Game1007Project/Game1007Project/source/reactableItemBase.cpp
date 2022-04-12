@@ -12,7 +12,7 @@ void ReactableItem::OnCollide(GameObject* go)
 	ReactableItem* giver = go->GetComponent<ReactableItem>();
 	if (giver == NULL)
 		return;
-	if (giver->reactAttrbute.camp == reactAttrbute.camp && giver->reactAttrbute.target == ReactTarget::EnemyOnly)
+	if (giver->reactAttrbute.fiction == reactAttrbute.fiction && giver->reactAttrbute.target == ReactTarget::EnemyOnly)
 		return;
 	Reacting(giver->reactAttrbute);
 };
