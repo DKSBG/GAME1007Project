@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- Our to do list data -->
+<GameObject>
+	<Components>
+		<Gun>
+			<ReactAttribute>
+				<Fiction val="Enemy"></Fiction>
+				<ReactTarget val="EnemyOnly"></ReactTarget>
+				<ReactType val="HP"></ReactType>
+				<ReactValue val="-1"></ReactValue>
+			</ReactAttribute>
+			<ItemAttribute>
+				<Atk val="1"></Atk>
+				<Speed val="450"></Speed>
+				<Hp val="1"></Hp>
+				<Vector x="-1" y="-1"></Vector>
+			</ItemAttribute>
+			<Projectile val="turretBullet.xml"></Projectile>
+			<Sound val="EnemyLaser.mp3"></Sound>
+			<CDTime val="750"></CDTime>
+		</Gun>
+	</Components>
+</GameObject>
