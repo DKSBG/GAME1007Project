@@ -172,6 +172,7 @@
     <ClCompile Include="source\script\projectile\straightProjectile.cpp" />
     <ClCompile Include="source\script\ship\boostEnemyShip.cpp" />
     <ClCompile Include="source\script\ship\basicShootEnemy.cpp" />
+    <ClCompile Include="source\script\ship\bossShip.cpp" />
     <ClCompile Include="source\script\ship\playerShip.cpp" />
     <ClCompile Include="source\script\ship\shipBase.cpp" />
     <ClCompile Include="source\script\ship\turret.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="include\audioPlayer.h" />
     <ClInclude Include="include\basicShootEnemy.h" />
     <ClInclude Include="include\boostEnemyShip.h" />
+    <ClInclude Include="include\bossShip.h" />
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\canvas.h" />
     <ClInclude Include="include\collideInfo.h" />

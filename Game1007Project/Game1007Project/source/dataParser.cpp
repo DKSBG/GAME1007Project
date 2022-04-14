@@ -516,6 +516,8 @@ bool ReactableItemParser::Parse(GameObject* go, TiXmlElement* componentElement)
 		item = new Obstacle();
 	else if (value == "StraightProjectile")
 		item = new StraightProjectile();
+	else if (value == "BossShip")
+		item = new BossShip();
 	else
 		std::cout << "Load ReactablrItem Wrong: Not handle attribute" << value << std::endl;
 

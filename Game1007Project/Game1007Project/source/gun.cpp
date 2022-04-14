@@ -13,14 +13,25 @@ void Gun::Fire()
  	if (m_cdTimer > 0)
 		return;
 
-	GameObject* bulletObject = PrefabParser::GetInstance()->Parser(m_projectile);
-	Transform* pBulletTransform = &bulletObject->transform;
-	pBulletTransform->Clone(*this->transform);
-	ReactableItem* bulletScript = bulletObject->GetComponent<ReactableItem>();
-	bulletScript->itemAttribute = m_attr;
-	bulletScript->reactAttrbute = m_reactAttr;
-	AudioPlayer::GetInstance()->PlaySound(m_fireSound, 0);
+	int base = m_piece / 2;
+	for (int index = 0; index < m_piece; index++)
+	{
+		ItemAttribute attr = m_attr;
+		GameObject* bulletObject = PrefabParser::GetInstance()->Parser(m_projectile);
+		Transform* pBulletTransform = &bulletObject->transform;
+		pBulletTransform->Clone(*this->transform);
 
+		if (attr.vector.x > 0)
+			attr.vector.x += base;
+		else
+			attr.vector.x += -base;
+		attr.vector.y += index - base;
+
+		ReactableItem* bulletScript = bulletObject->GetComponent<ReactableItem>();
+		bulletScript->itemAttribute = attr;
+		bulletScript->reactAttrbute = m_reactAttr;
+	}
+	AudioPlayer::GetInstance()->PlaySound(m_fireSound, 0);
 	m_cdTimer = m_fireCD;
 }
 
@@ -49,6 +60,22 @@ void Gun::GetItemAttribute(ItemAttribute* bulletAttribute)
 void Gun::SetCDTime(int time) 
 {
 	m_fireCD = time;
+}
+
+void Gun::SetVector(const Vector2 vector) 
+{
+	m_attr.vector.x = vector.x;
+	m_attr.vector.y = vector.y;
+}
+
+void Gun::SetSpeed(int speed) 
+{
+	m_attr.speed = speed;
+}
+
+void Gun::SetPiece(int piece)
+{
+	m_piece = piece;
 }
 
 int Gun::GetCDTime() 
