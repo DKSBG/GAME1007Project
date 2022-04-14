@@ -54,6 +54,14 @@ void GameObjectManager::PopGameObject(GameObject* go)
 	}
 }
 
+void GameObjectManager::PopAllGameObject()
+{
+	for (auto go : m_gameObjectListRootList) 
+	{
+		PopGameObject(go);
+	}
+}
+
 void GameObjectManager::UpdateAllGameObject() 
 {
 	for (auto go : this->m_gameObjectListRootList) 

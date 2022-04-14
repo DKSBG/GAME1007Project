@@ -83,6 +83,7 @@ class GameObjectManager {
 public:
 	void PushGameObject(GameObject* go);
 	void PopGameObject(GameObject* go);
+	void PopAllGameObject();
 	void UpdateAllGameObject();
 	void PreDrawAllGameObject();
 	void RefleshGameObjectList();
