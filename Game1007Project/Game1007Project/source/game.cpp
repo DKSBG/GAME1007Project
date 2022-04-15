@@ -131,21 +131,19 @@ bool MainGame::IsRunning() {
 }
 
 void MainGame::EndOfFrame() {
-	long current = SDL_GetTicks();
-	deltaTime = current - m_lastFrameEndTime;
-	if(!m_isPause)
-		deltaGameTime = deltaTime;
-
-	m_accumulateGameTime += deltaGameTime;
-	m_lastFrameEndTime = current;
-
+	deltaTime = SDL_GetTicks() - m_lastFrameEndTime;
 	m_fixedTimer -= deltaTime;
-
-	if (m_fixedTimer >= 0) 
+	if (m_fixedTimer > 0)
 	{
 		SDL_Delay(m_fixedTimer);
-		m_fixedTimer = m_fixedFrameTime;
 	}
+
+	m_fixedTimer = m_fixedFrameTime;
+	m_lastFrameEndTime = SDL_GetTicks();
+	deltaTime = m_fixedFrameTime;
+	if (!m_isPause)
+		deltaGameTime = deltaTime;
+	m_accumulateGameTime += deltaGameTime;
 }
 #pragma endregion
 
