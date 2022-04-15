@@ -71,8 +71,6 @@ void PlayerShip::Move()
 	camPos.x += moveX + (m_lastCamPosX - camPos.x);
 	camPos.y += moveY;
 
-	m_lastCamPosX = camPos.x;
-
 	if (camPos.y < 0)
 	{
 		camPos.y = 0;
@@ -93,6 +91,7 @@ void PlayerShip::Move()
 		camPos.x = Game::screenW - transform->GetWidth();
 	}
 
+	m_lastCamPosX = camPos.x;
 	GetRealPosition(m_pCam, camPos, &this->transform->localPosition);
 }
 
