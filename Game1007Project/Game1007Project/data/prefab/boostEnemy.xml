@@ -5,7 +5,7 @@
 		<Scale x="1.5" y="1.5"></Scale>
 	</Transform>
 	<Components>
-		<Image layer="4" SetNativeSize="true">Enemy1.png</Image>
+		<Image layer="4" SetNativeSize="true">Enemy2.png</Image>
 		<Collider></Collider>
 		<ReactableItem val="BoostEnemyShip">
 			<ReactAttribute>
@@ -18,7 +18,7 @@
 				<Atk val="1"></Atk>
 				<Speed val="200"></Speed>
 				<Hp val="1"></Hp>
-				<Vector x="-1" y="0"></Vector>
+				<Vector x="-2" y="0"></Vector>
 			</ItemAttribute>
 		</ReactableItem>
 	</Components>

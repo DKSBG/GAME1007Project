@@ -17,7 +17,7 @@
 			</ItemAttribute>
 			<Projectile val="enemy1Bullet.xml"></Projectile>
 			<Sound val="EnemyLaser.mp3"></Sound>
-			<CDTime val="750"></CDTime>
+			<CDTime val="2300"></CDTime>
 		</Gun>
 	</Components>
 </GameObject>

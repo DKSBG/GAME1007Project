@@ -1,12 +1,12 @@
-#include "basicShootEnemy.h"
+#include "ShootEnemy2.h"
 #include "tools.h"
 
-void BasicShootEnemy::Init()
+void ShootEnemy2::Init()
 {
 	m_pImg = this->gameObject->GetComponent<Image>();
 }
 
-void BasicShootEnemy::Attack()
+void ShootEnemy2::Attack()
 {
 	if (m_pGun == NULL)
 	{
@@ -17,30 +17,20 @@ void BasicShootEnemy::Attack()
 				break;
 		}
 	}
-	else 
+	else
 	{
 		m_pGun->Fire();
 	}
 }
 
-void BasicShootEnemy::Move()
+void ShootEnemy2::Move()
 {
 	int moveX, moveY;
 	GetMovePixel(&itemAttribute.vector, itemAttribute.speed, &moveX, &moveY);
-	transform->localPosition.x += moveX;
-
-	if ((transform->localPosition.y + moveY <= 0 && moveY < 0) ||
-		(transform->localPosition.y + moveY + (transform->size.y * transform->scale.y) >= Game::screenH && moveY > 0))
-	{
-		moveY = -moveY;
-		itemAttribute.vector.y = -itemAttribute.vector.y;
-	}
-
-	transform->localPosition.y += moveY;
-
+	transform->localPosition.x += .5;
 }
 
-void BasicShootEnemy::Update()
+void ShootEnemy2::Update()
 {
 	Transform camPos;
 	GetCamPosition(m_pImg->GetCanvas()->GetCamera(), this->transform->localPosition, &camPos.localPosition);

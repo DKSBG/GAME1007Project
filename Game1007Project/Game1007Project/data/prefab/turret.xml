@@ -2,7 +2,7 @@
 <!-- Our to do list data -->
 <GameObject>
 	<Transform>
-		<Scale x="3" y="3"></Scale>
+		<Scale x="2.5" y="2.5"></Scale>
 	</Transform>
 	<Components>
 		<Image layer="4" SetNativeSize="true">Turret.png</Image>

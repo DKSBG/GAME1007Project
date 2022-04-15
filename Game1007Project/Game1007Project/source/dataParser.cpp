@@ -508,6 +508,8 @@ bool ReactableItemParser::Parse(GameObject* go, TiXmlElement* componentElement)
 		item = new PlayerShip();
 	else if (value == "BasicShootEnemy")
 		item = new BasicShootEnemy();
+	else if (value == "ShootEnemy2")
+		item = new ShootEnemy2;
 	else if (value == "Turret")
 		item = new Turret();
 	else if (value == "BoostEnemyShip")

@@ -13,27 +13,242 @@
 	<Prefab name="backgroundMountainScroll.xml"></Prefab>
 	<Prefab name="enemy1.xml">
 		<Transform>
-			<Position x="500" y="100"></Position>
-		</Transform>
-	</Prefab>
-	<Prefab name="boostEnemy.xml">
-		<Transform>
-			<Position x="1000" y="150"></Position>
+			<Position x="1000" y="280"></Position>
 		</Transform>
 	</Prefab>
 	<Prefab name="enemy1.xml">
 		<Transform>
-			<Position x="1500" y="200"></Position>
+			<Position x="1030" y="300"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1060" y="320"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1090" y="340"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1120" y="360"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1150" y="380"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1180" y="400"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1210" y="420"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1240" y="440"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1270" y="460"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1300" y="480"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1330" y="500"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="1360" y="520"></Position>
 		</Transform>
 	</Prefab>
 	<Prefab name="enemy2.xml">
 		<Transform>
-			<Position x="2000" y="200"></Position>
+			<Position x="2500" y="0"></Position>
 		</Transform>
 	</Prefab>
-	<Prefab name="boostEnemy2.xml">
+	<Prefab name="enemy2.xml">
 		<Transform>
-			<Position x="2200" y="300"></Position>
+			<Position x="2430" y="30"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy2.xml">
+		<Transform>
+			<Position x="2360" y="60"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy2.xml">
+		<Transform>
+			<Position x="2290" y="90"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy2.xml">
+		<Transform>
+			<Position x="2220" y="120"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy2.xml">
+		<Transform>
+			<Position x="2150" y="150"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy2.xml">
+		<Transform>
+			<Position x="2220" y="180"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy2.xml">
+		<Transform>
+			<Position x="2290" y="210"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy2.xml">
+		<Transform>
+			<Position x="2360" y="240"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy2.xml">
+		<Transform>
+			<Position x="2430" y="270"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy2.xml">
+		<Transform>
+			<Position x="2500" y="300"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3400" y="0"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3410" y="30"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3420" y="60"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3430" y="90"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3440" y="120"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3450" y="150"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3460" y="180"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3470" y="210"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3480" y="240"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3490" y="270"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="boostEnemy.xml">
+		<Transform>
+			<Position x="3500" y="300"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4000" y="40"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4030" y="60"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4060" y="80"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4090" y="100"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4120" y="120"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4150" y="140"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4180" y="160"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4210" y="180"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4240" y="200"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4270" y="220"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4300" y="240"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4330" y="260"></Position>
+		</Transform>
+	</Prefab>
+		<Prefab name="enemy1.xml">
+		<Transform>
+			<Position x="4360" y="280"></Position>
 		</Transform>
 	</Prefab>
 	<Prefab name="foregroundCloud.xml"></Prefab>
@@ -54,14 +269,64 @@
 			<Position x="1516" y="340"></Position>
 		</Transform>
 	</Prefab>
-	<Prefab name="turret.xml">
+		<Prefab name="snowGround.xml">
 		<Transform>
-			<Position x="545" y="317"></Position>
+			<Position x="2516" y="340"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="snowGround.xml">
+		<Transform>
+			<Position x="3516" y="340"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="snowGround.xml">
+		<Transform>
+			<Position x="4516" y="340"></Position>
 		</Transform>
 	</Prefab>
 	<Prefab name="turret.xml">
 		<Transform>
-			<Position x="1545" y="317"></Position>
+			<Position x="545" y="308"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="turret.xml">
+		<Transform>
+			<Position x="895" y="308"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="turret.xml">
+		<Transform>
+			<Position x="1545" y="308"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="turret.xml">
+		<Transform>
+			<Position x="1895" y="308"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="turret.xml">
+		<Transform>
+			<Position x="2745" y="308"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="turret.xml">
+		<Transform>
+			<Position x="3545" y="308"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="turret.xml">
+		<Transform>
+			<Position x="3895" y="308"></Position>
+		</Transform>
+	</Prefab>
+<Prefab name="turret.xml">
+		<Transform>
+			<Position x="4545" y="308"></Position>
+		</Transform>
+	</Prefab>
+	<Prefab name="turret.xml">
+		<Transform>
+			<Position x="4895" y="308"></Position>
 		</Transform>
 	</Prefab>
 	<Prefab name="gameController.xml"></Prefab>
