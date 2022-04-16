@@ -14,4 +14,4 @@ void Projectile::OnDie()
 	GameObjectManager::GetInstance()->PopGameObject(this->gameObject);
 }
 
-void Projectile::SpecificReact(GameObject* go) {}
+void Projectile::SpecificReact(ReactableItem* giver) {}

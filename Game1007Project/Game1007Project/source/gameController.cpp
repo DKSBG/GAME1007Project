@@ -10,6 +10,7 @@ PlayerUI* ui;
 void GameController::Init() 
 {
 	m_pMainCam = CameraManager::GetInstance()->GetCamera("MainCam");
+	m_pUICam = CameraManager::GetInstance()->GetCamera("UICam");
 	AudioPlayer::GetInstance()->PlayMusic("level1.ogg");
 	GameObject* go = new GameObject();
 	ui = new PlayerUI();
@@ -17,8 +18,8 @@ void GameController::Init()
 
 	m_player = (Ship*) PrefabParser::GetInstance()->Parser("mainShip.xml")->GetComponent<ReactableItem>();
 	m_player->transform->localPosition.y = MainGame::screenH/2 - m_player->transform->GetHeight() / 2;
-	m_player->transform->localPosition.x = m_pMainCam->transform.globalPosition.x + 30;
-
+	//m_player->transform->localPosition.x = m_pMainCam->transform.globalPosition.x + 150;
+	//m_player->transform->globalPosition.x = m_player->transform->localPosition.x;
 	GameObject* result = new GameObject();
 	m_resultPage = new Image("win.png", 10);
 	result->AddComponent<Image>(m_resultPage);
@@ -29,6 +30,7 @@ void GameController::Init()
 void GameController::Update() 
 {
 	m_pMainCam->transform.globalPosition.x += (float)100 / 1000 * MainGame::deltaGameTime;
+
 	if(m_isResult)
 		m_resultDelay -= MainGame::deltaGameTime;
 
@@ -38,9 +40,10 @@ void GameController::Update()
 		{
 			m_player = (Ship*)PrefabParser::GetInstance()->Parser("mainShip.xml")->GetComponent<ReactableItem>();
 			m_player->transform->localPosition.y = MainGame::screenH / 2 - m_player->transform->GetHeight() / 2;
-			m_player->transform->localPosition.x = m_pMainCam->transform.globalPosition.x + 30;
+			//m_player->transform->localPosition.x = m_pMainCam->transform.globalPosition.x + 500;
 			MainGame::GetInstance()->GetPlayerInfo()->playTimes--;
 			ui->SetUIPlayTimes(MainGame::GetInstance()->GetPlayerInfo()->playTimes);
+			m_pUICam->transform.globalPosition.Set(0, 0);
 		}
 		else 
 		{
@@ -60,6 +63,10 @@ void GameController::Update()
 	}
 	else 
 	{
+		if (m_player->transform->globalPosition.y < 100)
+			m_pUICam->transform.globalPosition.Set(0, -(MainGame::screenH - 50));
+		else
+			m_pUICam->transform.globalPosition.Set(0, 0);
 		if (m_pMainCam->transform.globalPosition.x > m_mapWeight)
 		{
 			ui->UIProgressEnable(false);

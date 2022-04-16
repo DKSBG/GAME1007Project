@@ -7,7 +7,6 @@
 
 void BossShip::Update() 
 {
-
 	Vector2 camPos;
 	GetCamPosition(m_pImg->GetCanvas()->GetCamera(), this->transform->globalPosition, &camPos);
 	if (camPos.x > 500 && !m_start)
@@ -33,7 +32,6 @@ void BossShip::Update()
 		else
 			m_currentIndex = rand() % 3 + 1;
 		m_actionCount = 0;
-		//std::cout << m_currentIndex << std::endl;
 	}
 	else 
 	{
@@ -305,8 +303,17 @@ void BossShip::MMove()
 	GetRealPosition(m_pCam, camPos, &this->transform->localPosition);
 }
 
-void BossShip::SpecificReact(GameObject* go)
+void BossShip::SpecificReact(ReactableItem* giver)
 {
+	if (giver->itemAttribute.hp > 5)
+		return;
+
+	if (giver->reactAttrbute.type != ReactType::HP)
+		return;
+
+	if (giver->reactAttrbute.reactValue > 0)
+		return;
+
 	Image* pImg;
 	GameObject* pGoExplosion = new GameObject();
 	pImg = new Image("Explosion1.png", 4);
@@ -316,8 +323,8 @@ void BossShip::SpecificReact(GameObject* go)
 	Transform* explosionTrs = &pGoExplosion->transform;
 	explosionTrs->scale.Set(2, 2);
 
-	explosionTrs->localPosition.x = go->transform.globalPosition.x;
-	explosionTrs->localPosition.y = go->transform.globalPosition.y;
+	explosionTrs->localPosition.x = giver->gameObject->transform.globalPosition.x;
+	explosionTrs->localPosition.y = giver->gameObject->transform.globalPosition.y;
 
 	pGoExplosion->SetParent(gameObject);
 	Explode* explode = new Explode();

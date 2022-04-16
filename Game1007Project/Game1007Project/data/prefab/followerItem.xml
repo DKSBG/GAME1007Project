@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- Our to do list data -->
+<GameObject>
+	<Transform>
+		<Scale x="0.4" y="0.4"></Scale>
+	</Transform>
+	<Components>
+		<Image layer="4" SetNativeSize="true">follower.png</Image>
+ 		<Collider>
+			<Range x="0.8" y="0.8"></Range>
+		</Collider>
+		<ReactableItem val='SupportItem'>
+			<ReactAttribute>
+				<Fiction val="Ally"></Fiction>
+				<ReactTarget val="AllyOnly"></ReactTarget>
+				<ReactType val="Follower"></ReactType>
+				<ReactValue val="0"></ReactValue>
+			</ReactAttribute>
+			<ItemAttribute>
+				<Atk val="0"></Atk>
+				<Speed val="0"></Speed>
+				<Hp val="500"></Hp>
+				<Vector x="0" y="0"></Vector>
+			</ItemAttribute>
+		</ReactableItem>
+	</Components>
+</GameObject>

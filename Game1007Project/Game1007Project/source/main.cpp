@@ -26,6 +26,7 @@ int main(int argc, char* argv[])
 		SDL_WINDOW_OPENGL);
 
 	SceneLoader::GetInstance()->Load("Scene1.xml");
+	std::srand(time(0));
 
 	pGame->Start();
 	while(!pGame->quit)

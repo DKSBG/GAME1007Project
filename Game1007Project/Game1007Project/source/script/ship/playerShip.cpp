@@ -2,6 +2,7 @@
 #include "tools.h"
 #include "gun.h"
 #include "dataParser.h"
+#include "audioPlayer.h"
 
 void PlayerShip::Init()
 {
@@ -98,23 +99,98 @@ void PlayerShip::Move()
 
 void PlayerShip::Invincible() 
 {
-	//if (m_protector == NULL) 
-	//{
-	//	m_protector = PrefabParser::GetInstance()->Parser("protector.xml");
-	//	m_protector->SetParent(gameObject);
-	//	m_protector->transform.size.Set(transform->GetWidth(), transform->GetWidth());
-	//	m_protector->transform.localPosition.x = transform->GetWidth() / 2 - m_protector->transform.GetWidth() / 2;
-	//	m_protector->transform.localPosition.y = transform->GetHeight() / 2 - m_protector->transform.GetHeight() / 2;
-	//}
-	this->gameObject->GetComponent<Collider>()->colliderInfo.enable = false;
+	if (m_protector == NULL) 
+	{
+		m_protector = PrefabParser::GetInstance()->Parser("protector.xml");
+		m_protector->SetParent(gameObject);
+		m_protector->transform.size.Set(transform->GetWidth(), transform->GetWidth());
+		m_protector->transform.scale.Set(4, 4);
+		m_protector->transform.localPosition.x = transform->GetWidth() / 2 - m_protector->transform.GetWidth() / 2 + 8;
+		m_protector->transform.localPosition.y = transform->GetHeight() / 2 - m_protector->transform.GetHeight() / 2 + 5;
+	}
 	m_invincibleTimer = 1500;
+	itemAttribute.hp = 10000;
+	reactAttrbute.reactValue = 0;
+}
+
+void PlayerShip::SpecificReact(ReactableItem* giver)
+{
+	if (giver->reactAttrbute.type == ReactType::Follower) 
+	{
+		if (m_follower[0] == NULL) 
+		{
+			m_follower[0] = PrefabParser::GetInstance()->Parser("follower.xml");
+			m_follower[0]->SetParent(gameObject);
+			m_follower[0]->transform.localPosition.Set(0, -60);
+			m_follower[0]->transform.globalPosition.Set(transform->globalPosition.x, transform->globalPosition.y - 60);
+		}
+		else if (m_follower[1] == NULL)
+		{
+			m_follower[1] = PrefabParser::GetInstance()->Parser("follower.xml");
+			m_follower[1]->SetParent(gameObject);
+			m_follower[1]->transform.localPosition.Set(0, 60);
+			m_follower[1]->transform.globalPosition.Set(transform->globalPosition.x, transform->globalPosition.y + 60);
+		}
+		AudioPlayer::GetInstance()->PlaySound("Pickup_Coin.wav");
+		GameObjectManager::GetInstance()->PopGameObject(giver->gameObject);
+	}
+
+	if (giver->reactAttrbute.type == ReactType::Piece) 
+	{
+		if (m_pGun == NULL)
+		{
+			for (auto child : gameObject->GetChildren())
+			{
+				m_pGun = child->GetComponent<Gun>();
+				if (m_pGun != NULL)
+					break;
+			}
+		}
+
+		if (piece < 7) 
+		{
+			piece += 2;
+			m_pGun->SetPiece(piece);
+		}
+		AudioPlayer::GetInstance()->PlaySound("Pickup_Coin.wav");
+		GameObjectManager::GetInstance()->PopGameObject(giver->gameObject);
+	}
 }
 
 void PlayerShip::Update()
 {
 	m_invincibleTimer -= MainGame::deltaGameTime;
-	if (m_invincibleTimer < 0)
-		this->gameObject->GetComponent<Collider>()->colliderInfo.enable = true;
+	if (m_invincibleTimer < 0) 
+	{
+		m_protector->isActive = false;
+		itemAttribute.hp = 1;
+		reactAttrbute.reactValue = -1;
+	}
+
 	Move();
 	Attack();
+}
+
+
+void Follower::Update() 
+{
+	Attack();
+}
+
+void Follower::Attack() 
+{
+	if (m_pGun == NULL)
+	{
+		for (auto child : gameObject->GetChildren())
+		{
+			m_pGun = child->GetComponent<Gun>();
+			if (m_pGun != NULL)
+				break;
+		}
+		m_pGun->SetCDTime(500);
+	}
+	else
+	{
+		m_pGun->Fire();
+	}
 }

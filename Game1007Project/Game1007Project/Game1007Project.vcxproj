@@ -178,6 +178,7 @@
     <ClCompile Include="source\script\ship\shipBase.cpp" />
     <ClCompile Include="source\script\ship\ShootEnemy2.cpp" />
     <ClCompile Include="source\script\ship\turret.cpp" />
+    <ClCompile Include="source\script\supportItem.cpp" />
     <ClCompile Include="source\shootingStrategy\singleLineShootingStrategy.cpp" />
     <ClCompile Include="source\tools.cpp" />
     <ClCompile Include="source\transform.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="include\resource.h" />
     <ClInclude Include="include\script.h" />
     <ClInclude Include="include\ShootEnemy2.h" />
+    <ClInclude Include="include\supportItem.h" />
     <ClInclude Include="include\tools.h" />
     <ClInclude Include="include\transform.h" />
     <ClInclude Include="include\turret.h" />

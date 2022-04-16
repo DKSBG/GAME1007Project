@@ -6,7 +6,7 @@
 
 enum class Fiction {Ally, Enemy, ThridPart};
 enum class ReactTarget { Both, AllyOnly, EnemyOnly };
-enum class ReactType { HP, Speed, Atk };
+enum class ReactType { HP, Speed, Atk, Piece, Follower };
 
 struct ReactAttribute
 {
@@ -35,7 +35,7 @@ public:
 	void OnCollide(GameObject* go);
 	void Reacting(ReactAttribute giverAttr);
 	virtual void OnDie() = 0;
-	virtual void SpecificReact(GameObject* go) = 0;
+	virtual void SpecificReact(ReactableItem* giver) = 0;
 };
 
 class Projectile : public ReactableItem
@@ -44,7 +44,7 @@ public:
 	void Init();
 	void Update();
 	void OnDie();
-	void SpecificReact(GameObject* go);
+	void SpecificReact(ReactableItem* giver);
 protected:
 	Image* m_pImg;
 };
@@ -90,7 +90,7 @@ public:
 	void Attack() {}
 	void Move() {}
 	void OnExplode();
-	void SpecificReact(GameObject* go) {}
+	void SpecificReact(ReactableItem* giver) {}
 protected:
 	int m_attackCD = 450;
 	int m_cdTimer = 0;
@@ -102,5 +102,5 @@ class Obstacle : public ReactableItem
 {
 	void Init();
 	void OnDie();
-	void SpecificReact(GameObject* go);
+	void SpecificReact(ReactableItem* giver) {}
 };

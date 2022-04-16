@@ -15,7 +15,7 @@ void ReactableItem::OnCollide(GameObject* go)
 	if (giver->reactAttrbute.fiction == reactAttrbute.fiction && giver->reactAttrbute.target == ReactTarget::EnemyOnly)
 		return;
 	Reacting(giver->reactAttrbute);
-	SpecificReact(go);
+	SpecificReact(giver);
 };
 
 void ReactableItem::Reacting(ReactAttribute reactAttr)

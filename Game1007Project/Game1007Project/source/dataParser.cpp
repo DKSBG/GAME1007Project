@@ -5,6 +5,7 @@
 #include "reactableItem.h"
 #include "playerShip.h"
 #include "enemyShip.h"
+#include "supportItem.h"
 #include "infinityScrollMap.h"
 #include "dataParser.h"
 
@@ -177,6 +178,10 @@ bool ReactAttributeHandler(ReactAttribute* attr, TiXmlElement* pComponentsRoot)
 				result.type = ReactType::Speed;
 			if (text == "Atk")
 				result.type = ReactType::Atk;
+			if (text == "Piece")
+				result.type = ReactType::Piece;
+			if (text == "Follower")
+				result.type = ReactType::Follower;
 		}
 		else if (value == "ReactValue")
 		{
@@ -516,6 +521,12 @@ bool ReactableItemParser::Parse(GameObject* go, TiXmlElement* componentElement)
 		item = new BoostEnemyShip();
 	else if (value == "Obstacle")
 		item = new Obstacle();
+	else if (value == "PlayerProtector")
+		item = new PlayerProtector();
+	else if (value == "SupportItem")
+		item = new SupportItem();
+	else if (value == "Follower")
+		item = new Follower();
 	else if (value == "StraightProjectile")
 		item = new StraightProjectile();
 	else if (value == "BossShip")

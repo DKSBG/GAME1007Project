@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- Our to do list data -->
+<GameObject>
+	<Transform>
+		<Scale x="1.5" y="1.5"></Scale>
+	</Transform>
+	<Components>
+		<Image layer="4" SetNativeSize="true">protector.png</Image>
+ 		<Collider>
+			<Range x="0.8" y="0.8"></Range>
+		</Collider>
+		<ReactableItem val='PlayerProtector'>
+			<ReactAttribute>
+				<Fiction val="Ally"></Fiction>
+				<ReactTarget val="EnemyOnly"></ReactTarget>
+				<ReactType val="HP"></ReactType>
+				<ReactValue val="-1"></ReactValue>
+			</ReactAttribute>
+			<ItemAttribute>
+				<Atk val="1"></Atk>
+				<Speed val="0"></Speed>
+				<Hp val="500"></Hp>
+				<Vector x="0" y="0"></Vector>
+			</ItemAttribute>
+		</ReactableItem>
+	</Components>
+</GameObject>

@@ -48,6 +48,8 @@ bool Transform::IsGloblePositionModified()
 
 void Transform::ParentUpdatePostion(const Vector2 parentMove)
 {
+	//globalPosition.x += parentMove.x;
+	//globalPosition.y += parentMove.y;
 	globalPosition.x += parentMove.x;
 	globalPosition.y += parentMove.y;
 }

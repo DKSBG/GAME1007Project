@@ -10,6 +10,7 @@ public:
 	void Update();
 private:
 	Camera* m_pMainCam;
+	Camera* m_pUICam;
 	BossShip* m_boss = NULL;
 	Ship* m_player = NULL;
 	float m_bossMaxHp;

@@ -3,9 +3,26 @@
 #include "audioPlayer.h"
 #include "explode.h"
 #include "audioPlayer.h"
+#include "dataParser.h"
 
 void Ship::OnDie()
 {
+	if (reactAttrbute.fiction == Fiction::Enemy)
+	{
+		int rand = std::rand() % 100;
+		if (rand >= 10 && rand <= 15) 
+		{
+			AudioPlayer::GetInstance()->PlaySound("Randomize2.wav");
+			PrefabParser::GetInstance()->Parser("pieceItem.xml")->transform.globalPosition.Set(transform->globalPosition.x, transform->globalPosition.y);
+		}
+			
+		if (rand >= 75 && rand <= 80) 
+		{
+			AudioPlayer::GetInstance()->PlaySound("Randomize2.wav");
+			PrefabParser::GetInstance()->Parser("followerItem.xml")->transform.globalPosition.Set(transform->globalPosition.x, transform->globalPosition.y);
+		}
+			
+	}
 	OnExplode();
 }
 

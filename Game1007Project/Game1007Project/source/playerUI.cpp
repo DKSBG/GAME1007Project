@@ -44,7 +44,7 @@ void PlayerUI::InitUIBossHP()
 void PlayerUI::InitPlayerProgress()
 {
 	GameObject* go = PrefabParser::GetInstance()->Parser("progressArea.xml");
-	go->transform.localPosition.Set(400, 10);
+	go->transform.localPosition.Set(480, 13);
 	m_pPlayerShipIcon = go->GetChildren()[0];
 }
 
