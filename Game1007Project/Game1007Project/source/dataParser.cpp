@@ -63,7 +63,7 @@ bool PrefabParser::ChildHandler(GameObject* go, TiXmlElement* pComponentsRoot)
 			GameObject* child = PrefabParser::GetInstance()->Parser(element->Attribute("name"));
 			Transform* transform = &child->transform;
  			ObjectChildHandler(element->FirstChildElement(), transform);
-			child->SetParent(go);
+			child->_SetParentImmediately(go);
 		}
 	}
 
@@ -607,7 +607,7 @@ bool GameControllerParser::Parse(GameObject* go, TiXmlElement* componentElement)
 {
 	if (go == NULL)
 		return false;
-	go->AddComponent(new GameController())->Init();
+	go->AddComponent(new GameController());
 	return true;
 }
 

@@ -11,4 +11,8 @@ public:
 private:
 	Camera* m_pMainCam;
 	BossShip* m_boss = NULL;
+	Ship* m_player = NULL;
+	float m_bossMaxHp;
+	float m_mapWeight = 100;
+	//PlayerUI* ui = NULL;
 };

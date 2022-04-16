@@ -33,11 +33,12 @@ void BossShip::Update()
 		else
 			m_currentIndex = rand() % 3 + 1;
 		m_actionCount = 0;
-		std::cout << m_currentIndex << std::endl;
+		m_currentIndex = 1;
+		//std::cout << m_currentIndex << std::endl;
 	}
 	else 
 	{
-		float hpRate = itemAttribute.hp / m_maxHp;
+		float hpRate = (float) itemAttribute.hp / m_maxHp;
 		switch(m_currentIndex)
 		{
 		case 0:
@@ -47,24 +48,32 @@ void BossShip::Update()
 			if (hpRate > 0.75) 
 			{
 				m_actionTimes = 3;
+				m_cdTime = 260;
+				m_basicGun->SetCDTime(250);
 				m_basicGun->SetPiece(3);
 			}
 			else if (hpRate > 0.5) 
 			{
 				m_actionTimes = 4;
+				m_cdTime = 160;
+				m_basicGun->SetCDTime(150);
 				m_basicGun->SetPiece(5);
 			}
 			else if (hpRate > 0.25)
 			{
 				m_actionTimes = 5;
+				m_cdTime = 110;
+				m_basicGun->SetCDTime(100);
 				m_basicGun->SetPiece(7);
 			}
 			else
 			{
 				m_actionTimes = 6;
+				m_cdTime = 60;
+				m_basicGun->SetCDTime(50);
 				m_basicGun->SetPiece(9);
 			}
-			m_cdTime = 160;
+
 			itemAttribute.speed = 500;
 			Fire();
 			break;
@@ -90,10 +99,7 @@ void BossShip::Update()
 				m_cdTime = 10;
 			}
 
-			m_actionTimes = 5;
-			m_cdTime = 75;
 			itemAttribute.speed = 500;
-
 			CallShip();
 			break;
 		case 3:
@@ -119,13 +125,10 @@ void BossShip::Init()
 		GameObject* pGo = PrefabParser::GetInstance()->Parser("enemyGun1.xml");
 		pGo->SetParent(gameObject);
 		m_basicGun = pGo->GetComponent<Gun>();
-		m_basicGun->SetCDTime(150);
 		ItemAttribute attribute;
 		m_basicGun->GetItemAttribute(&attribute);
 		m_basicGun->SetVector(attribute.vector);
-		m_basicGun->SetSpeed(250);
-		m_basicGun->SetPiece(5);
-		pGo->transform.localPosition.Set(-5, gameObject->transform.GetHeight() * 8 / 9);
+		pGo->transform.localPosition.Set(-5, transform->GetHeight() / 2);
 	}
 }
 

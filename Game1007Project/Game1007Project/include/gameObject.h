@@ -19,6 +19,7 @@ private:
 class GameObject{
 public:
 	GameObject();
+	GameObject(GameObject* pParent);
 	template<typename T>
 	T* GetComponent();
 	template<typename T>
@@ -35,7 +36,8 @@ public:
 	GameObject* GetChild(std::string, GameObject* go);
 	std::vector<GameObject*> GetChildren();
 
-	// PushChild and PopChild only for GameObjectMamager use.
+	// SetParentImmediately, PushChild and PopChild only framework can use.
+	void _SetParentImmediately(GameObject* parent);
 	void _PushChild(GameObject* child);
 	void _PopChild(GameObject* parent);
 
@@ -90,12 +92,12 @@ public:
 	void ModifiedGameObjectRelationship(ParentModifiedInfo info);
 	void RefleshGameObjectRelationship();
 	static GameObjectManager* GetInstance();
+	void _PopGameObjectRoot(GameObject* rootObject);
 private:
 	vector<GameObject*> m_gameObjectListRootList;
 	vector<GameObject*> m_newGameObjectList;
 	vector<GameObject*> m_deleteGameObjectList;
 	vector<ParentModifiedInfo> m_parentModifiedList;
-	void PopGameObjectRoot(GameObject* rootObject);
 	static GameObjectManager* s_pInstance;
 };
 

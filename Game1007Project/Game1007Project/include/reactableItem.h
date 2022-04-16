@@ -75,13 +75,20 @@ public:
 	void Fire(const Transform attacker, ItemAttribute attr, ReactAttribute reactAttr);
 };
 
-class Ship : public ReactableItem
+class ShipInterface
+{
+	virtual void Attack() = 0;
+	virtual void Move() = 0;
+	virtual void OnExplode() = 0;
+};
+
+class Ship : public ReactableItem, public ShipInterface
 {
 public:
 	ShootStrategy* fire;
 	void OnDie();
-	void Attack();
-	void Move();
+	void Attack() {}
+	void Move() {}
 	void OnExplode();
 	void SpecificReact(ReactAttribute giverAttr) {}
 protected:
