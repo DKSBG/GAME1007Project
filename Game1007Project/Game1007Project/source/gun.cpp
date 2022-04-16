@@ -31,7 +31,7 @@ void Gun::Fire()
 		bulletScript->itemAttribute = attr;
 		bulletScript->reactAttrbute = m_reactAttr;
 	}
-	AudioPlayer::GetInstance()->PlaySound(m_fireSound, 0);
+	AudioPlayer::GetInstance()->PlaySound(1, m_fireSound, 1, 2.0);
 	m_cdTimer = m_fireCD;
 }
 

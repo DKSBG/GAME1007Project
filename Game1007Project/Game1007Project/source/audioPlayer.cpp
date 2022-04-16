@@ -2,22 +2,22 @@
 #include "audioPlayer.h"
 #include "resource.h"
 
-void AudioPlayer::PlaySound(std::string sound)
+void AudioPlayer::PlaySound(int channel, std::string sound, float volume)
 {
-	PlaySound(sound, 0, NULL);
+	PlaySound(channel, sound, 0, NULL, Mix_Volume (channel, volume));
 }
 
-void AudioPlayer::PlaySound(std::string sound, std::function<void(void)> callback)
+void AudioPlayer::PlaySound(int channel, std::string sound, std::function<void(void)> callback, float volume)
 {
-	PlaySound(sound, 0, callback);
+	PlaySound(channel, sound, 0, callback, Mix_Volume(channel, volume));
 }
 
-void AudioPlayer::PlaySound(std::string sound, int times)
+void AudioPlayer::PlaySound(int channel, std::string sound, int times, float volume)
 {
-	PlaySound(sound, times, NULL);
+	PlaySound(channel, sound, times, NULL, Mix_Volume(channel, volume));
 }
 
-void AudioPlayer::PlaySound(std::string sound, int times, std::function<void(void)> callback)
+void AudioPlayer::PlaySound(int channel, std::string sound, int times, std::function<void(void)> callback, float volume)
 {
 	SoundResource* resource = ResourceManager::GetInstance()->LoadSoundResource(sound);
 	if (resource == NULL)
@@ -26,7 +26,7 @@ void AudioPlayer::PlaySound(std::string sound, int times, std::function<void(voi
 		return;
 	}
 
-	Mix_PlayChannel(-1, resource->GetSoundChunk(), times);
+	Mix_PlayChannel(channel, resource->GetSoundChunk(), times);
 
 	if (callback != NULL)
 		callback();
@@ -40,6 +40,7 @@ void AudioPlayer::PlayMusic(std::string music)
 		std::cout << "Play Music Error: " << music << " can not play because load music fail." << std::endl;;
 		return;
 	}
+	Mix_VolumeMusic(40);
 	Mix_PlayMusic(resource->GetMusic(), -1);
 }
 

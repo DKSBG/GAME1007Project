@@ -5,7 +5,7 @@
 		<Scale x="1.5" y="1.5"></Scale>
 	</Transform>
 	<Components>
-		<Image layer="4" SetNativeSize="true">Enemy2.png</Image>
+		<Image layer="4" SetNativeSize="true">Enemy3.png</Image>
 		<Collider>
 			<Range x="0.8" y="0.3"></Range>
 		</Collider>

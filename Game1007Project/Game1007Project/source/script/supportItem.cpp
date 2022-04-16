@@ -22,5 +22,5 @@ void PlayerProtector::SpecificReact(ReactableItem* giver)
 	pGoExplosion->SetParent(gameObject);
 	Explode* explode = new Explode();
 	pGoExplosion->AddComponent<Explode>(explode);
-	AudioPlayer::GetInstance()->PlaySound("Explosion.wav");
+	AudioPlayer::GetInstance()->PlaySound(1, "Explosion.wav", 1, 5.0);
 }
