@@ -7,6 +7,7 @@ void PlayerShip::Init()
 {
 	m_pImg = this->gameObject->GetComponent<Image>();
 	m_pCam = m_pImg->GetCanvas()->GetCamera();
+	Invincible();
 }
 
 void PlayerShip::Attack() 
@@ -96,8 +97,25 @@ void PlayerShip::Move()
 	GetRealPosition(m_pCam, camPos, &this->transform->localPosition);
 }
 
+void PlayerShip::Invincible() 
+{
+	//if (m_protector == NULL) 
+	//{
+	//	m_protector = PrefabParser::GetInstance()->Parser("protector.xml");
+	//	m_protector->SetParent(gameObject);
+	//	m_protector->transform.size.Set(transform->GetWidth(), transform->GetWidth());
+	//	m_protector->transform.localPosition.x = transform->GetWidth() / 2 - m_protector->transform.GetWidth() / 2;
+	//	m_protector->transform.localPosition.y = transform->GetHeight() / 2 - m_protector->transform.GetHeight() / 2;
+	//}
+	this->gameObject->GetComponent<Collider>()->colliderInfo.enable = false;
+	m_invincibleTimer = 1500;
+}
+
 void PlayerShip::Update()
 {
+	m_invincibleTimer -= MainGame::deltaGameTime;
+	if (m_invincibleTimer < 0)
+		this->gameObject->GetComponent<Collider>()->colliderInfo.enable = true;
 	Move();
 	Attack();
 }

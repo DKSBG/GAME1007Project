@@ -14,5 +14,8 @@ private:
 	Ship* m_player = NULL;
 	float m_bossMaxHp;
 	float m_mapWeight = 100;
+	Image* m_resultPage;
+	int m_resultDelay = 1000;
+	bool m_isResult = false;
 	//PlayerUI* ui = NULL;
 };

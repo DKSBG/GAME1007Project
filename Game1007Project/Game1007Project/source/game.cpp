@@ -122,7 +122,11 @@ void MainGame::EventHandler()
 {
 	//Handle events on queue
 	SDL_Event event;
-	while (SDL_PollEvent(&event) != 0) {}
+	while (SDL_PollEvent(&event) != 0) 
+	{
+		if (event.type == SDL_QUIT)
+			quit = true;
+	}
 }
 
 void MainGame::Clean() {}

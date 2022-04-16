@@ -39,11 +39,6 @@
 	</Prefab>
 	<Prefab name="foregroundCloud.xml"></Prefab>
 	<Prefab name="foregroundCloudScroll.xml"></Prefab>
-<!-- 	<Prefab name="mainShip.xml">
-		<Transform>
-			<Position x="50" y="200"></Position>
-		</Transform>
-	</Prefab> -->
 	<Prefab name="moon.xml"></Prefab>
 	<Prefab name="snowGround.xml">
 		<Transform>

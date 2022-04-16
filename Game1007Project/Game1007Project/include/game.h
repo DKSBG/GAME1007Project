@@ -29,6 +29,7 @@ public:
 	void Pause();
 	void Resume();
 	void Start();
+	bool quit;
 protected:
 	static bool m_running;
 	static bool m_isPause;
@@ -37,6 +38,7 @@ protected:
 	static Game* s_pInstance;
 	long m_lastFrameEndTime;
 	long m_accumulateGameTime;
+
 };
 
 class MainGame : public Game {

@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
 
 	//int count = 0;
 	pGame->Start();
-	while(1)
+	while(!pGame->quit)
 	{
 		pGame->EventHandler();
 		pGame->Update();
@@ -58,7 +58,6 @@ int main(int argc, char* argv[])
 		pGame->Render();
 		pGame->Reflesh();
 		pGame->EndOfFrame();
-		SDL_Delay(16);
 	}
 
 	return 0;

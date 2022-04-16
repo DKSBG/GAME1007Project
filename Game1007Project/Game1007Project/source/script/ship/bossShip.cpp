@@ -33,7 +33,6 @@ void BossShip::Update()
 		else
 			m_currentIndex = rand() % 3 + 1;
 		m_actionCount = 0;
-		m_currentIndex = 1;
 		//std::cout << m_currentIndex << std::endl;
 	}
 	else 
@@ -128,7 +127,7 @@ void BossShip::Init()
 		ItemAttribute attribute;
 		m_basicGun->GetItemAttribute(&attribute);
 		m_basicGun->SetVector(attribute.vector);
-		pGo->transform.localPosition.Set(-5, transform->GetHeight() / 2);
+		pGo->transform.localPosition.Set(-5, transform->GetHeight() *9 / 26);
 	}
 }
 
@@ -251,23 +250,23 @@ void BossShip::MMove()
 	switch (m_actionCount) 
 	{
 	case 0:
-		pathNode.x = MainGame::screenW *2 / 3;
+		pathNode.x = MainGame::screenW *4 /5;
 		pathNode.y = 0;
 		break;
 	case 1:
-		pathNode.x = MainGame::screenW / 3;
-		pathNode.y = MainGame::screenH * 1 / 4 - transform->GetHeight();
+		pathNode.x = MainGame::screenW / 5;
+		pathNode.y = MainGame::screenH * 1 / 4;
 		break;
 	case 2:
 		pathNode.x = MainGame::screenW / 2;
-		pathNode.y = MainGame::screenH / 2 - transform->GetHeight();
+		pathNode.y = MainGame::screenH / 2;
 		break;
 	case 3:
-		pathNode.x = MainGame::screenW / 3;
-		pathNode.y = MainGame::screenH * 3 / 4 - transform->GetHeight();
+		pathNode.x = MainGame::screenW / 5;
+		pathNode.y = MainGame::screenH * 3 / 4;
 		break;
 	case 4:
-		pathNode.x = MainGame::screenW * 2 / 3;
+		pathNode.x = MainGame::screenW * 4 / 5;
 		pathNode.y = MainGame::screenH - transform->GetHeight();
 		break;
 	}
