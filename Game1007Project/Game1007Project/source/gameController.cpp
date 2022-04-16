@@ -55,6 +55,7 @@ void GameController::Update()
 
 			if (m_resultDelay < 0)
 			{
+				m_pUICam->transform.globalPosition.Set(0, 0);
 				m_resultPage->ChangeSprite("lose.png");
 				m_resultPage->gameObject->isActive = true;
 				MainGame::GetInstance()->Pause();
@@ -92,6 +93,7 @@ void GameController::Update()
 
 					if (m_resultDelay < 0) 
 					{
+						m_pUICam->transform.globalPosition.Set(0, 0);
 						m_resultPage->ChangeSprite("win.png");
 						m_resultPage->gameObject->isActive = true;
 						MainGame::GetInstance()->Pause();
