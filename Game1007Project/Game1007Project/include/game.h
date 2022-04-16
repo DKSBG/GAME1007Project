@@ -4,6 +4,11 @@
 #include "resource.h"
 using namespace std;
 
+struct PlayerInfo
+{
+	int playTimes;
+};
+
 class Game {
 public:
 	virtual bool Init(const char* title,
@@ -15,6 +20,7 @@ public:
 	virtual void Clean() = NULL;
 	virtual bool IsRunning() = NULL;
 	virtual void EndOfFrame() = NULL;
+	virtual PlayerInfo* GetPlayerInfo() = NULL;
 	SDL_Renderer* GetRenderer();
 	static Game* GetInstance();
 	static long deltaGameTime;
@@ -23,14 +29,16 @@ public:
 	void Pause();
 	void Resume();
 	void Start();
+	bool quit;
 protected:
 	static bool m_running;
-	bool m_isPause = false;
+	static bool m_isPause;
 	static SDL_Window* m_pWindow;
 	static SDL_Renderer* m_pRenderer;
 	static Game* s_pInstance;
 	long m_lastFrameEndTime;
 	long m_accumulateGameTime;
+
 };
 
 class MainGame : public Game {
@@ -45,7 +53,9 @@ public:
 	void Clean();
 	bool IsRunning();
 	void EndOfFrame();
+	PlayerInfo* GetPlayerInfo();
 private:
+	PlayerInfo m_playerInfo{ 3 };
 	long m_fixedFrameTime = 16;
 	long m_fixedTimer = 0;
 };

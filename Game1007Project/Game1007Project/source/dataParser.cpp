@@ -63,7 +63,7 @@ bool PrefabParser::ChildHandler(GameObject* go, TiXmlElement* pComponentsRoot)
 			GameObject* child = PrefabParser::GetInstance()->Parser(element->Attribute("name"));
 			Transform* transform = &child->transform;
  			ObjectChildHandler(element->FirstChildElement(), transform);
-			child->SetParent(go);
+			child->_SetParentImmediately(go);
 		}
 	}
 
@@ -518,6 +518,8 @@ bool ReactableItemParser::Parse(GameObject* go, TiXmlElement* componentElement)
 		item = new Obstacle();
 	else if (value == "StraightProjectile")
 		item = new StraightProjectile();
+	else if (value == "BossShip")
+		item = new BossShip();
 	else
 		std::cout << "Load ReactablrItem Wrong: Not handle attribute" << value << std::endl;
 
@@ -607,7 +609,7 @@ bool GameControllerParser::Parse(GameObject* go, TiXmlElement* componentElement)
 {
 	if (go == NULL)
 		return false;
-	go->AddComponent(new GameController())->Init();
+	go->AddComponent(new GameController());
 	return true;
 }
 

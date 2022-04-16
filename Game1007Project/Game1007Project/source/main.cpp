@@ -26,10 +26,23 @@ int main(int argc, char* argv[])
 		SDL_WINDOW_OPENGL);
 
 	SceneLoader::GetInstance()->Load("Scene1.xml");
-	//Camera* cam = CameraParser::GetInstance()->Parser("MainCam.xml");
-	//GameObject* go = PrefabParser::GetInstance()->Parser("mainShip.xml");
-	//GameObject* go1 = PrefabParser::GetInstance()->Parser("Turret.xml");
 
+	//Camera* cam = CameraParser::GetInstance()->Parser("mainCam.xml");
+	//GameObject* go = PrefabParser::GetInstance()->Parser("mainShip.xml");
+	//GameObject* go1 = PrefabParser::GetInstance()->Parser("snowground.xml");
+
+	//delete go;
+	//GameObject* m_pPlayerTimesArea = PrefabParser::GetInstance()->Parser("playTimesArea.xml");
+	//m_pPlayerTimesArea->transform.localPosition.Set(10, 10);
+	//std::vector<GameObject*> m_pPlayerTimeIcons;
+	//std::vector<GameObject*> pChildren = m_pPlayerTimesArea->GetChildren();
+	//for (int index = 0; index < pChildren.size(); index++)
+	//{
+	//	m_pPlayerTimeIcons.push_back(pChildren[index]);
+	//}
+	//m_pPlayerTimeIcons[0]->isActive = true;
+	//m_pPlayerTimeIcons[1]->isActive = false;
+	//m_pPlayerTimeIcons[2]->isActive = true;
 	//go1->SetParent(go);
 	//go1->transform.localPosition.Set(60, 60);
 
@@ -37,7 +50,7 @@ int main(int argc, char* argv[])
 
 	//int count = 0;
 	pGame->Start();
-	while(1)
+	while(!pGame->quit)
 	{
 		pGame->EventHandler();
 		pGame->Update();
@@ -45,7 +58,6 @@ int main(int argc, char* argv[])
 		pGame->Render();
 		pGame->Reflesh();
 		pGame->EndOfFrame();
-		SDL_Delay(16);
 	}
 
 	return 0;

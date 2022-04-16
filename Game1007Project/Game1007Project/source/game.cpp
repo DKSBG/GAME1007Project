@@ -43,6 +43,7 @@ int Game::screenW = 0;
 long Game::deltaGameTime = 0;
 long Game::deltaTime = 0;
 bool Game::m_running = false;
+bool Game::m_isPause = false;
 SDL_Window* Game::m_pWindow = 0;
 SDL_Renderer* Game::m_pRenderer = 0;
 Game* Game::s_pInstance = nullptr;
@@ -121,7 +122,11 @@ void MainGame::EventHandler()
 {
 	//Handle events on queue
 	SDL_Event event;
-	while (SDL_PollEvent(&event) != 0) {}
+	while (SDL_PollEvent(&event) != 0) 
+	{
+		if (event.type == SDL_QUIT)
+			quit = true;
+	}
 }
 
 void MainGame::Clean() {}
@@ -141,9 +146,15 @@ void MainGame::EndOfFrame() {
 	m_fixedTimer = m_fixedFrameTime;
 	m_lastFrameEndTime = SDL_GetTicks();
 	deltaTime = m_fixedFrameTime;
+	deltaGameTime = 0;
 	if (!m_isPause)
 		deltaGameTime = deltaTime;
 	m_accumulateGameTime += deltaGameTime;
+}
+
+PlayerInfo* MainGame::GetPlayerInfo() 
+{
+	return &m_playerInfo;
 }
 #pragma endregion
 

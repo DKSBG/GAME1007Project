@@ -41,4 +41,13 @@ Camera* CameraManager::GetCamera(std::string name)
 	return pCamera;
 }
 
+void CameraManager::ClearCamera() 
+{
+	for (auto cam : m_cameraMap) 
+	{
+		delete cam.second;
+	}
+	m_cameraMap.clear();
+}
+
 CameraManager* CameraManager::m_instance = NULL;

@@ -5,11 +5,11 @@
 		<Scale x="1.5" y="1.5"></Scale>
 	</Transform>
 	<Components>
-		<Image layer="4" SetNativeSize="true">Enemy2.png</Image>
+		<Image layer="4" SetNativeSize="true">boss.png</Image>
 		<Collider>
-			<Range x="0.8" y="0.3"></Range>
+			<Range x="0.9" y="0.9"></Range>
 		</Collider>
-		<ReactableItem val="BasicShootEnemy">
+		<ReactableItem val="BossShip">
 			<ReactAttribute>
 				<Fiction val="Enemy"></Fiction>
 				<ReactTarget val="EnemyOnly"></ReactTarget>
@@ -18,17 +18,10 @@
 			</ReactAttribute>
 			<ItemAttribute>
 				<Atk val="1"></Atk>
-				<Speed val="200"></Speed>
-				<Hp val="1"></Hp>
+				<Speed val="500"></Speed>
+				<Hp val="150"></Hp>
 				<Vector x="0" y="-1"></Vector>
 			</ItemAttribute>
 		</ReactableItem>
 	</Components>
-	<Children>
-		<Prefab name="enemyGun2.xml">
-			<Transform>
-				<Position x="0" y="5"></Position>
-			</Transform>
-		</Prefab>
-	</Children>
 </GameObject>

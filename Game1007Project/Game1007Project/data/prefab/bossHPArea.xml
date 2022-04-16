@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- Our to do list data -->
+<GameObject>
+	<Transform>
+		<Scale x="1" y="1"></Scale>
+	</Transform>
+	<Components>
+		<Image layer="10" SetNativeSize="true">bossHpBar.png</Image>
+	</Components>
+	<Children>
+		<Prefab name="bossHP.xml">
+			<Transform>
+				<Position x="4" y="2"></Position>
+			</Transform>
+		</Prefab>
+	</Children>
+</GameObject>

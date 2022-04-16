@@ -54,6 +54,14 @@ void GameObjectManager::PopGameObject(GameObject* go)
 	}
 }
 
+void GameObjectManager::PopAllGameObject()
+{
+	for (auto go : m_gameObjectListRootList) 
+	{
+		PopGameObject(go);
+	}
+}
+
 void GameObjectManager::UpdateAllGameObject() 
 {
 	for (auto go : this->m_gameObjectListRootList) 
@@ -69,7 +77,7 @@ void GameObjectManager::PreDrawAllGameObject()
 	}
 }
 
-void GameObjectManager::PopGameObjectRoot(GameObject* rootObject)
+void GameObjectManager::_PopGameObjectRoot(GameObject* rootObject)
 {
 	auto it = std::find(m_gameObjectListRootList.begin(), m_gameObjectListRootList.end(), rootObject);
 	if (it != m_gameObjectListRootList.end())
@@ -88,7 +96,7 @@ void GameObjectManager::RefleshGameObjectRelationship()
 		if (info.currentParent != NULL)
 			info.currentParent->_PopChild(info.child);
 		else
-			PopGameObjectRoot(info.child);
+			_PopGameObjectRoot(info.child);
 
 		if (info.newParent != NULL)
 			info.newParent->_PushChild(info.child);
@@ -103,7 +111,8 @@ void GameObjectManager::RefleshGameObjectList()
 {
 	for (auto go : m_newGameObjectList) 
 	{
-		m_gameObjectListRootList.push_back(go);
+		if(go->GetParent() == NULL)
+			m_gameObjectListRootList.push_back(go);
 	}
 
 	for (int index = m_deleteGameObjectList.size() - 1; index >= 0; index --)
@@ -111,6 +120,7 @@ void GameObjectManager::RefleshGameObjectList()
 		auto it = std::find(m_gameObjectListRootList.begin(), m_gameObjectListRootList.end(), m_deleteGameObjectList[index]);
 		m_gameObjectListRootList.erase(it);
 		delete m_deleteGameObjectList[index];
+		m_deleteGameObjectList[index] == NULL;
 	}
 
 	m_deleteGameObjectList.clear();
@@ -211,6 +221,16 @@ GameObject* GameObject::GetChild(std::string childName, GameObject* go)
 std::vector<GameObject*> GameObject::GetChildren() 
 {
 	return m_pChildren;
+}
+
+void GameObject::_SetParentImmediately(GameObject* parent) 
+{
+	if(m_pParent != NULL)
+		m_pParent->_PopChild(this);
+	else
+		GameObjectManager::GetInstance()->_PopGameObjectRoot(this);
+	m_pParent = parent;
+	m_pParent->_PushChild(this);
 }
 
 void GameObject::_PushChild(GameObject* child)

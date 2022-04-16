@@ -42,9 +42,15 @@ void CollideManager::DetectColliding()
 		if (m_colliderList[srcIdx]->pGameObject->isActive == false)
 			continue;
 
+		if (m_colliderList[srcIdx]->enable == false)
+			continue;
+
 		for (int tarIdx = srcIdx + 1; tarIdx < m_colliderList.size(); tarIdx++) 
 		{
 			if (m_colliderList[tarIdx]->pGameObject->isActive == false)
+				continue;
+
+			if (m_colliderList[tarIdx]->enable == false)
 				continue;
 
 			collide = false;

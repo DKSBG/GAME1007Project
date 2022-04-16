@@ -14,7 +14,7 @@ void StraightProjectile::Update()
 		GameObjectManager::GetInstance()->PopGameObject(gameObject);
 	}
 
-	int moveX, moveY;
+	float moveX, moveY;
 	GetMovePixel(&itemAttribute.vector, itemAttribute.speed, &moveX, &moveY);
 	this->transform->localPosition.y += moveY;
 	this->transform->localPosition.x += moveX;
