@@ -46,6 +46,7 @@ void GameObjectManager::PopGameObject(GameObject* go)
 	if (find(m_deleteGameObjectList.begin(), m_deleteGameObjectList.end(), go) == m_deleteGameObjectList.end())
 	{
 		m_deleteGameObjectList.push_back(go);
+		go->SetParent(NULL);
 		Collider* collider = go->GetComponent<Collider>();
 
 		if(collider!= NULL)
@@ -117,10 +118,13 @@ void GameObjectManager::RefleshGameObjectList()
 
 	for (int index = m_deleteGameObjectList.size() - 1; index >= 0; index --)
 	{
-		auto it = std::find(m_gameObjectListRootList.begin(), m_gameObjectListRootList.end(), m_deleteGameObjectList[index]);
-		m_gameObjectListRootList.erase(it);
+		if (m_deleteGameObjectList[index]->GetParent() == NULL) 
+		{
+			auto it = std::find(m_gameObjectListRootList.begin(), m_gameObjectListRootList.end(), m_deleteGameObjectList[index]);
+			if(it != m_gameObjectListRootList.end())
+				m_gameObjectListRootList.erase(it);
+		}
 		delete m_deleteGameObjectList[index];
-		m_deleteGameObjectList[index] == NULL;
 	}
 
 	m_deleteGameObjectList.clear();

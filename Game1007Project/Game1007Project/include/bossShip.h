@@ -9,6 +9,7 @@ public:
 	void Update();
 	void Init();
 	void OnExplode();
+	void SpecificReact(GameObject* go);
 private:
 	void Idle();
 	void Fire();

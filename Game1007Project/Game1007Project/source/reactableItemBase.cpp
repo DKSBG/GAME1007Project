@@ -15,6 +15,7 @@ void ReactableItem::OnCollide(GameObject* go)
 	if (giver->reactAttrbute.fiction == reactAttrbute.fiction && giver->reactAttrbute.target == ReactTarget::EnemyOnly)
 		return;
 	Reacting(giver->reactAttrbute);
+	SpecificReact(go);
 };
 
 void ReactableItem::Reacting(ReactAttribute reactAttr)
@@ -41,5 +42,4 @@ void ReactableItem::Reacting(ReactAttribute reactAttr)
 
 	if (itemAttribute.hp <= 0)
 		OnDie();
-	SpecificReact(reactAttr);
 }

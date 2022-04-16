@@ -114,8 +114,9 @@ void MainGame::Render()
 void MainGame::Reflesh() 
 {
 	CollideManager::GetInstanse()->RefleshCollideList();
-	GameObjectManager::GetInstance()->RefleshGameObjectList();
 	GameObjectManager::GetInstance()->RefleshGameObjectRelationship();
+	GameObjectManager::GetInstance()->RefleshGameObjectList();
+
 }
 
 void MainGame::EventHandler() 

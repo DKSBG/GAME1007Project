@@ -20,4 +20,4 @@ void Obstacle::OnDie()
 	GameObjectManager::GetInstance()->PopGameObject(this->gameObject);
 }
 
-void Obstacle::SpecificReact(ReactAttribute giverAttr) {}
+void Obstacle::SpecificReact(GameObject* go) {}

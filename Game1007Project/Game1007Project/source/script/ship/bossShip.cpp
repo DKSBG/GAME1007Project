@@ -305,6 +305,25 @@ void BossShip::MMove()
 	GetRealPosition(m_pCam, camPos, &this->transform->localPosition);
 }
 
+void BossShip::SpecificReact(GameObject* go)
+{
+	Image* pImg;
+	GameObject* pGoExplosion = new GameObject();
+	pImg = new Image("Explosion1.png", 4);
+	pGoExplosion->AddComponent<Image>(pImg);
+	pGoExplosion->GetComponent<Image>()->SetNativeSize();
+
+	Transform* explosionTrs = &pGoExplosion->transform;
+	explosionTrs->scale.Set(2, 2);
+
+	explosionTrs->localPosition.x = go->transform.globalPosition.x;
+	explosionTrs->localPosition.y = go->transform.globalPosition.y;
+
+	pGoExplosion->SetParent(gameObject);
+	Explode* explode = new Explode();
+	pGoExplosion->AddComponent<Explode>(explode);
+	AudioPlayer::GetInstance()->PlaySound("Explosion.wav");
+}
 
 void BossShip::OnExplode()
 {
