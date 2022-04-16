@@ -2,6 +2,7 @@
 <!-- Our to do list data -->
 <Scene>
 	<Camera name="mainCam.xml"></Camera>
+	<Camera name="uiCam.xml"></Camera>
 	<Camera name="backgroundCloudCam.xml"></Camera>
 	<Camera name="backgroundMountainCam.xml"></Camera>
 	<Camera name="foregroundCloudCam.xml"></Camera>
@@ -38,11 +39,11 @@
 	</Prefab>
 	<Prefab name="foregroundCloud.xml"></Prefab>
 	<Prefab name="foregroundCloudScroll.xml"></Prefab>
-	<Prefab name="mainShip.xml">
+<!-- 	<Prefab name="mainShip.xml">
 		<Transform>
 			<Position x="50" y="200"></Position>
 		</Transform>
-	</Prefab>
+	</Prefab> -->
 	<Prefab name="moon.xml"></Prefab>
 	<Prefab name="snowGround.xml">
 		<Transform>

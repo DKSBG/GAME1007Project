@@ -20,7 +20,7 @@
 				<Atk val="1"></Atk>
 				<Speed val="200"></Speed>
 				<Hp val="1"></Hp>
-				<Vector x="-1" y="0"></Vector>
+				<Vector x="0" y="-1"></Vector>
 			</ItemAttribute>
 		</ReactableItem>
 	</Components>
