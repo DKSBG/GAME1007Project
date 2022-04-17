@@ -59,7 +59,7 @@ void GameObjectManager::PopAllGameObject()
 {
 	for (auto go : m_gameObjectListRootList) 
 	{
-		PopGameObject(go);
+		go->_PopSelf();
 	}
 }
 
@@ -247,6 +247,15 @@ void GameObject::_PopChild(GameObject* child)
 	auto it = std::find(m_pChildren.begin(), m_pChildren.end(), child);
 	if (it != m_pChildren.end())
 		m_pChildren.erase(it);
+}
+
+void GameObject::_PopSelf()
+{
+	for (auto child : m_pChildren) 
+	{
+		child->_PopSelf();
+	}
+	GameObjectManager::GetInstance()->PopGameObject(this);
 }
 
 void GameObject::OnCollide(GameObject* go)

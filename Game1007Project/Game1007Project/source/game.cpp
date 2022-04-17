@@ -4,7 +4,7 @@
 #include "SDL.h"
 #include "colliderManager.h"
 #include "SDL_mixer.h"
-
+#include "dataParser.h"
 using namespace std;
 
 #pragma region Game Implement
@@ -32,6 +32,24 @@ void Game::Resume()
 	m_isPause = false;
 }
 
+void Game::Reload(std::string sceneName)
+{
+	m_isReloading = true;
+	m_sceneName = sceneName;
+}
+
+void Game::Reloading()
+{
+	if (m_isReloading) 
+	{
+		CameraManager::GetInstance()->ClearCamera();
+		GameObjectManager::GetInstance()->PopAllGameObject();
+		MainGame::GetInstance()->GetPlayerInfo()->playTimes = 3;
+		SceneLoader::GetInstance()->Load(m_sceneName);
+		MainGame::GetInstance()->Start();
+	}
+}
+
 void Game::Start() 
 {
 	m_isPause = false;
@@ -44,6 +62,8 @@ long Game::deltaGameTime = 0;
 long Game::deltaTime = 0;
 bool Game::m_running = false;
 bool Game::m_isPause = false;
+bool Game::m_isReloading = false;
+std::string Game::m_sceneName = "";
 SDL_Window* Game::m_pWindow = 0;
 SDL_Renderer* Game::m_pRenderer = 0;
 Game* Game::s_pInstance = nullptr;
@@ -151,6 +171,7 @@ void MainGame::EndOfFrame() {
 	if (!m_isPause)
 		deltaGameTime = deltaTime;
 	m_accumulateGameTime += deltaGameTime;
+	m_isReloading = false;
 }
 
 PlayerInfo* MainGame::GetPlayerInfo() 

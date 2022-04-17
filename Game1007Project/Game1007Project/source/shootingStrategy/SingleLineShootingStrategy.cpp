@@ -21,5 +21,5 @@ void SingleLineShooting::Fire(const Transform attacker, ItemAttribute attr, Reac
 	bulletScript->reactAttrbute.target = reactAttr.target;
 	bulletScript->reactAttrbute.type = reactAttr.type;
 
-	AudioPlayer::GetInstance()->PlaySound(1, fireSound, 1, 2.0);
+	AudioPlayer::GetInstance()->PlaySound(-1, fireSound, 1, 2);
 }

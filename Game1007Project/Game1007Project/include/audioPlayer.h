@@ -6,10 +6,10 @@
 class AudioPlayer
 {
 public:
-	void PlaySound(int channel, std::string sound, float volume);
-	void PlaySound(int channel, std::string sound, int times, float volume);
-	void PlaySound(int channel, std::string sound, std::function<void(void)> callback, float volume);
-	void PlaySound(int channel, std::string sound, int times, std::function<void(void)> callback, float volume);
+	void PlaySound(int channel, std::string sound, int volume);
+	void PlaySound(int channel, std::string sound, int times, int volume);
+	void PlaySound(int channel, std::string sound, std::function<void(void)> callback, int volume);
+	void PlaySound(int channel, std::string sound, int times, std::function<void(void)> callback, int volume);
 	void PlayMusic(std::string music);
 	static AudioPlayer* GetInstance();
 private:

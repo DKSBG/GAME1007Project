@@ -12,13 +12,13 @@ void Ship::OnDie()
 		int rand = std::rand() % 100;
 		if (rand >= 10 && rand <= 15) 
 		{
-			AudioPlayer::GetInstance()->PlaySound(1, "Randomize2.wav", 1, 5.0);
+			AudioPlayer::GetInstance()->PlaySound(-1, "Randomize2.wav", 1, 5);
 			PrefabParser::GetInstance()->Parser("pieceItem.xml")->transform.globalPosition.Set(transform->globalPosition.x, transform->globalPosition.y);
 		}
 			
 		if (rand >= 75 && rand <= 80) 
 		{
-			AudioPlayer::GetInstance()->PlaySound(1, "Randomize2.wav", 1, 5.0);
+			AudioPlayer::GetInstance()->PlaySound(-1, "Randomize2.wav", 1, 5);
 			PrefabParser::GetInstance()->Parser("followerItem.xml")->transform.globalPosition.Set(transform->globalPosition.x, transform->globalPosition.y);
 		}
 			
@@ -48,5 +48,5 @@ void Ship::OnExplode()
 
 	Explode *explode = new Explode();
 	pGoExplosion->AddComponent<Explode>(explode);
-	AudioPlayer::GetInstance()->PlaySound(1, "Explosion.wav", 1, 5.0);
+	AudioPlayer::GetInstance()->PlaySound(-1, "Explosion.wav", 1, 5);
 }

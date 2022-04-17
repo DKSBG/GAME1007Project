@@ -35,6 +35,7 @@ int main(int argc, char* argv[])
 		pGame->Update();
 		CollideManager::GetInstanse()->DetectColliding();
 		pGame->Render();
+		pGame->Reloading();
 		pGame->Reflesh();
 		pGame->EndOfFrame();
 	}

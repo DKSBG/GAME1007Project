@@ -40,6 +40,7 @@ public:
 	void _SetParentImmediately(GameObject* parent);
 	void _PushChild(GameObject* child);
 	void _PopChild(GameObject* parent);
+	void _PopSelf();
 
 	Transform transform;
 	std::string name;

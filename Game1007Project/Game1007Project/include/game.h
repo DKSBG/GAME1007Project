@@ -28,11 +28,15 @@ public:
 	static int screenH, screenW;
 	void Pause();
 	void Resume();
+	void Reloading();
+	void Reload(std::string scene);
 	void Start();
 	bool quit;
 protected:
 	static bool m_running;
 	static bool m_isPause;
+	static bool m_isReloading;
+	static std::string m_sceneName;
 	static SDL_Window* m_pWindow;
 	static SDL_Renderer* m_pRenderer;
 	static Game* s_pInstance;

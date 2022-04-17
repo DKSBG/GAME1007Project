@@ -329,7 +329,7 @@ void BossShip::SpecificReact(ReactableItem* giver)
 	pGoExplosion->SetParent(gameObject);
 	Explode* explode = new Explode();
 	pGoExplosion->AddComponent<Explode>(explode);
-	AudioPlayer::GetInstance()->PlaySound(1, "Explosion.wav", 1, 5.0);
+	AudioPlayer::GetInstance()->PlaySound(-1, "Explosion.wav", 1, 5);
 }
 
 void BossShip::OnExplode()
@@ -354,5 +354,5 @@ void BossShip::OnExplode()
 
 	Explode* explode = new Explode();
 	pGoExplosion->AddComponent<Explode>(explode);
-	AudioPlayer::GetInstance()->PlaySound(1, "Explosion.wav", 1, 5.0);
+	AudioPlayer::GetInstance()->PlaySound(-1, "Explosion.wav", 1, 5);
 }

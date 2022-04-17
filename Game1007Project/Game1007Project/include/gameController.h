@@ -18,4 +18,5 @@ private:
 	Image* m_resultPage;
 	int m_resultDelay = 1500;
 	bool m_isResult = false;
+	int m_restartDelay = 3000;
 };

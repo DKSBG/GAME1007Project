@@ -2,22 +2,22 @@
 #include "audioPlayer.h"
 #include "resource.h"
 
-void AudioPlayer::PlaySound(int channel, std::string sound, float volume)
+void AudioPlayer::PlaySound(int channel, std::string sound, int volume)
 {
-	PlaySound(channel, sound, 0, NULL, Mix_Volume (channel, volume));
+	PlaySound(channel, sound, 0, NULL, volume);
 }
 
-void AudioPlayer::PlaySound(int channel, std::string sound, std::function<void(void)> callback, float volume)
+void AudioPlayer::PlaySound(int channel, std::string sound, std::function<void(void)> callback, int volume)
 {
-	PlaySound(channel, sound, 0, callback, Mix_Volume(channel, volume));
+	PlaySound(channel, sound, 0, callback, volume);
 }
 
-void AudioPlayer::PlaySound(int channel, std::string sound, int times, float volume)
+void AudioPlayer::PlaySound(int channel, std::string sound, int times, int volume)
 {
-	PlaySound(channel, sound, times, NULL, Mix_Volume(channel, volume));
+	PlaySound(channel, sound, times, NULL,  volume);
 }
 
-void AudioPlayer::PlaySound(int channel, std::string sound, int times, std::function<void(void)> callback, float volume)
+void AudioPlayer::PlaySound(int channel, std::string sound, int times, std::function<void(void)> callback, int volume)
 {
 	SoundResource* resource = ResourceManager::GetInstance()->LoadSoundResource(sound);
 	if (resource == NULL)
@@ -26,7 +26,9 @@ void AudioPlayer::PlaySound(int channel, std::string sound, int times, std::func
 		return;
 	}
 
-	Mix_PlayChannel(channel, resource->GetSoundChunk(), times);
+	int usingChannel = Mix_PlayChannel(channel, resource->GetSoundChunk(), times);
+	if (usingChannel != -1)
+		Mix_Volume(usingChannel, volume);
 
 	if (callback != NULL)
 		callback();

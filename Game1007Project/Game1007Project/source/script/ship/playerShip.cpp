@@ -131,7 +131,7 @@ void PlayerShip::SpecificReact(ReactableItem* giver)
 			m_follower[1]->transform.localPosition.Set(0, 60);
 			m_follower[1]->transform.globalPosition.Set(transform->globalPosition.x, transform->globalPosition.y + 60);
 		}
-		AudioPlayer::GetInstance()->PlaySound(1, "Pickup_Coin.wav", 1, 10.0);
+		AudioPlayer::GetInstance()->PlaySound(-1, "Pickup_Coin.wav", 1, 10);
 		GameObjectManager::GetInstance()->PopGameObject(giver->gameObject);
 	}
 
@@ -152,7 +152,7 @@ void PlayerShip::SpecificReact(ReactableItem* giver)
 			piece += 2;
 			m_pGun->SetPiece(piece);
 		}
-		AudioPlayer::GetInstance()->PlaySound(1, "Pickup_Coin.wav", 1, 10.0);
+		AudioPlayer::GetInstance()->PlaySound(-1, "Pickup_Coin.wav", 1, 10);
 		GameObjectManager::GetInstance()->PopGameObject(giver->gameObject);
 	}
 }

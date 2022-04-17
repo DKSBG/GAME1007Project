@@ -59,6 +59,12 @@ void GameController::Update()
 				m_resultPage->ChangeSprite("lose.png");
 				m_resultPage->gameObject->isActive = true;
 				MainGame::GetInstance()->Pause();
+				m_restartDelay -= MainGame::deltaTime;
+				if (m_restartDelay <= 0)
+				{
+					MainGame::GetInstance()->GetPlayerInfo()->playTimes = 3;
+					MainGame::GetInstance()->Reload("Scene1.xml");
+				}
 			}
 		}
 	}
@@ -83,7 +89,7 @@ void GameController::Update()
 			else 
 			{
 				ui->SetBossHP(((float)m_boss->itemAttribute.hp) / m_bossMaxHp);
-				if (m_boss->itemAttribute.hp == 0)
+				if (m_boss->itemAttribute.hp <= 0)
 				{
 					if (m_isResult == false) 
 					{
@@ -97,6 +103,12 @@ void GameController::Update()
 						m_resultPage->ChangeSprite("win.png");
 						m_resultPage->gameObject->isActive = true;
 						MainGame::GetInstance()->Pause();
+						m_restartDelay -= MainGame::deltaTime;
+						if (m_restartDelay <= 0)
+						{
+							MainGame::GetInstance()->GetPlayerInfo()->playTimes = 3;
+							MainGame::GetInstance()->Reload("Scene1.xml");
+						}
 					}
 				}
 			}
