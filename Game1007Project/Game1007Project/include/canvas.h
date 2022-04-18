@@ -14,6 +14,9 @@ public:
 	Vector2 ScreenPos;
 	SDL_Texture* pTexture;
 	SDL_Rect srcRect;
+	double rotation;
+	SDL_RendererFlip flip;
+	int alpha;
 };
 
 class Canvas {

@@ -18,6 +18,12 @@ void Image::Draw()
 	unit->tranform.Clone(*this->transform);
 	unit->pTexture = this->m_pResource->GetTexture();
 	unit->srcRect = this->m_pResource->GetRect();
+	if (isFlip)
+		unit->flip = SDL_FLIP_HORIZONTAL;
+	else
+		unit->flip = SDL_FLIP_NONE;
+	unit->alpha = alpah;
+	unit->rotation = transform->rotation;
 	m_pCanvas->SetDrawUnit(unit);
 }
 

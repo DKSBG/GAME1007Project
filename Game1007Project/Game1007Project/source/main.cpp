@@ -25,8 +25,11 @@ int main(int argc, char* argv[])
 		432,
 		SDL_WINDOW_OPENGL);
 
-	SceneLoader::GetInstance()->Load("Scene1.xml");
-	std::srand(time(0));
+	//SceneLoader::GetInstance()->Load("Scene1.xml");
+	//std::srand(time(0));
+
+	CameraParser::GetInstance()->Parser("MainCam.xml");
+	PrefabParser::GetInstance()->Parser("MainShip.xml");
 
 	pGame->Start();
 	while(!pGame->quit)

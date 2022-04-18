@@ -16,6 +16,8 @@ public:
 	void Draw();
 	void SetNativeSize();
 	Canvas* GetCanvas();
+	bool isFlip = false;
+	int alpah = 255;
 private:
 	TextureResource* m_pResource;
 	Canvas* m_pCanvas;

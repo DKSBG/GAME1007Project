@@ -8,6 +8,7 @@ public:
 	Vector2 globalPosition;
 	Vector2 size;
 	Vector2 scale;
+	double rotation;
 	bool IsLocalPositionModified();
 	bool IsGloblePositionModified();
 	//bool IsScaleRateModified(Vector2* rate);

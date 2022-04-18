@@ -38,6 +38,22 @@ void PlayerShip::Move()
 
 	m_cdTimer -= Game::deltaGameTime;
 
+	if (m_KeyboardStates[SDL_SCANCODE_LEFTBRACKET])
+		transform->rotation--;
+	else if (m_KeyboardStates[SDL_SCANCODE_RIGHTBRACKET])
+		transform->rotation++;
+
+	if (m_KeyboardStates[SDL_SCANCODE_F])
+		m_pImg->isFlip = true;
+	else if(m_KeyboardStates[SDL_SCANCODE_G])
+		m_pImg->isFlip = false;
+
+	if (m_KeyboardStates[SDL_SCANCODE_N] && m_pImg->alpah > 0)
+		m_pImg->alpah--;
+	else if (m_KeyboardStates[SDL_SCANCODE_M] && m_pImg->alpah < 255)
+		m_pImg->alpah++;
+
+
 	if (m_KeyboardStates[SDL_SCANCODE_W])
 		itemAttribute.vector.y = -1;
 	if (m_KeyboardStates[SDL_SCANCODE_S])

@@ -75,7 +75,8 @@ void Canvas::Draw()
 		dstRect->y = unit->ScreenPos.y;
 		dstRect->w = unit->tranform.size.x * unit->tranform.scale.x;
 		dstRect->h = unit->tranform.size.y * unit->tranform.scale.y;
-		SDL_RenderCopy(Game::GetInstance()->GetRenderer(), pTexture, &unit->srcRect, dstRect);
+		SDL_SetTextureAlphaMod(pTexture, unit->alpha);
+		SDL_RenderCopyEx(Game::GetInstance()->GetRenderer(), pTexture, &unit->srcRect, dstRect, unit->rotation, NULL, unit->flip);
 		delete m_drawUnitList[index];
 	}
 	m_drawUnitList.clear();
